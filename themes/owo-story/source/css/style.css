@@ -249,6 +249,21 @@ a:hover {
   /* 确保文字在 SVG 上方 */
 }
 
+.nav-item.active .nav-link::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ffffff;
+  z-index: 3;
+  pointer-events: none;
+  /* 精确匹配蓝色三角形的边界：
+     顶点 A(10, 20)  -> 相对于文字(-15px, -15px)
+     顶点 B(10, 110) -> 相对于文字(-15px, 75px)
+     顶点 C(180, 110)-> 相对于文字(155px, 75px) */
+  clip-path: polygon(-15px -15px, -15px 75px, 155px 75px);
+}
+
 /* 4. 右侧文章区域 */
 .main-content {
   flex: 1;
