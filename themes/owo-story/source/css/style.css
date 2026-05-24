@@ -11,6 +11,7 @@
 
 body {
   font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  overflow-x: hidden;
   /* 背景白色地板 */
   background-color: #ffffff;
   color: #222222;
@@ -72,7 +73,8 @@ a:hover {
   left: 0;
   width: 20vw;
   height: 50vh;
-  background: #dce1e6; /* 稍微深一点增加折角立体感 */
+  background: #dce1e6;
+  /* 稍微深一点增加折角立体感 */
   /* 右上(100%, 0), 右下(100%, 60% -> 30vh), 左下(0, 100% -> 50vh), 左上(0, 40% -> 20vh) */
   clip-path: polygon(100% 0, 100% 60%, 0 100%, 0 40%);
 }
@@ -84,7 +86,8 @@ a:hover {
   top: 0;
   left: 0;
   width: 20vw;
-  height: 20vh; /* 正好衔接到左墙正面的左上角 20vh 处 */
+  height: 20vh;
+  /* 正好衔接到左墙正面的左上角 20vh 处 */
   background: #0099ff;
   /* 蓝色的 ◤ 三角形: 左上(0,0), 右上(100%, 0), 左下(0, 100%) */
   clip-path: polygon(0 0, 100% 0, 0 100%);
@@ -106,17 +109,23 @@ a:hover {
   top: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 垂直居中 */
-  align-items: flex-end; /* 未选中的靠右排列 */
-  padding-right: 2vw; /* 距离中线一点距离 */
-  z-index: 10; /* 确保不被右侧文章区域遮挡 */
+  justify-content: center;
+  /* 垂直居中 */
+  align-items: flex-end;
+  /* 未选中的靠右排列 */
+  padding-right: 2vw;
+  /* 距离中线一点距离 */
+  z-index: 10;
+  /* 确保不被右侧文章区域遮挡 */
 }
 
 /* 右墙面上的 Logo (在鲸鱼的左侧) */
 .site-title-container {
   position: absolute;
-  top: 10vh; /* 与导航差不多高度 */
-  left: 2vw; /* 距离右墙的左边缘 */
+  top: 10vh;
+  /* 与导航差不多高度 */
+  left: 2vw;
+  /* 距离右墙的左边缘 */
   z-index: 10;
   /* 文字透视，与右侧墙面底边 \ 的倾斜度一致 */
   /* 右墙底边 slope: dy=20vh, dx=80vw. 约 8度角 */
@@ -133,9 +142,20 @@ a:hover {
   align-items: baseline;
   letter-spacing: -1px;
 }
-.title-miao { color: #222222; }
-.title-zhai { color: #0099ff; font-size: 2.8rem; margin: 0 4px; }
-.title-houyuan { color: #333333; }
+
+.title-miao {
+  color: #222222;
+}
+
+.title-zhai {
+  color: #0099ff;
+  font-size: 4.0rem;
+  margin: 0 4px;
+}
+
+.title-houyuan {
+  color: #333333;
+}
 
 /* 阶梯导航菜单 */
 .nav-menu {
@@ -147,7 +167,8 @@ a:hover {
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* 整体靠右 */
+  align-items: flex-end;
+  /* 整体靠右 */
   width: 100%;
 }
 
@@ -158,9 +179,11 @@ a:hover {
 
 /* ----------------未选中状态 (排在右侧，无修饰)---------------- */
 .nav-item:not(.active) {
-  margin-right: 2vw; /* 右侧留一点空隙 */
+  margin-right: 2vw;
+  /* 右侧留一点空隙 */
   transition: transform 0.3s ease;
 }
+
 .nav-item:not(.active):hover {
   transform: translateX(-10px);
 }
@@ -176,21 +199,31 @@ a:hover {
   display: inline-block;
   padding: 0;
 }
+
 .nav-item:not(.active) .nav-link:hover {
   color: #0099ff;
 }
 
 /* ----------------选中状态 (居左变大，完整 SVG 3D 楔形底座)---------------- */
 @keyframes slideIn3D {
-  from { opacity: 0; transform: translateX(30px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .nav-item.active {
-  align-self: flex-start; /* 靠左排列 */
+  align-self: flex-start;
+  /* 靠左排列 */
   width: 250px;
   height: 150px;
-  margin-left: 2vw; /* 左侧留一点空隙 */
+  margin-left: 2vw;
+  /* 左侧留一点空隙 */
   animation: slideIn3D 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
@@ -200,19 +233,23 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* 在文字下方 */
+  z-index: 1;
+  /* 在文字下方 */
 }
 
 .nav-item.active .nav-link {
   position: absolute;
-  top: 35px; /* 放在蓝色三角形内部 */
+  top: 35px;
+  /* 放在蓝色三角形内部 */
   left: 25px;
-  color: #000000; /* 设计图黑字 */
+  color: #000000;
+  /* 设计图黑字 */
   font-size: 3.2rem;
   font-weight: 900;
   padding: 0;
   display: inline-block;
-  z-index: 2; /* 确保文字在 SVG 上方 */
+  z-index: 2;
+  /* 确保文字在 SVG 上方 */
 }
 
 /* 4. 右侧文章区域 */
@@ -244,44 +281,61 @@ a:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-left: 20px;
 }
+
 /* 锐利的镜面反光条纹 */
 .post-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   /* 带有陡峭边缘的锐利线性渐变，模拟镜面反光 */
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    transparent 30%,
-    rgba(255, 255, 255, 0.05) 30%,
-    rgba(255, 255, 255, 0.3) 35%,
-    rgba(255, 255, 255, 0) 35.1%, /* 锐利边缘突变 */
-    transparent 37%,
-    rgba(255, 255, 255, 0.05) 37.1%, /* 锐利边缘突变 */
-    rgba(255, 255, 255, 0.15) 39%,
-    rgba(255, 255, 255, 0) 39.1%, /* 锐利边缘突变 */
-    transparent 100%
-  );
-  z-index: 1; /* 在文字（z-index: 2）下方 */
+  background: linear-gradient(105deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(255, 255, 255, 0.05) 30%,
+      rgba(255, 255, 255, 0.3) 35%,
+      rgba(255, 255, 255, 0) 35.1%,
+      /* 锐利边缘突变 */
+      transparent 37%,
+      rgba(255, 255, 255, 0.05) 37.1%,
+      /* 锐利边缘突变 */
+      rgba(255, 255, 255, 0.15) 39%,
+      rgba(255, 255, 255, 0) 39.1%,
+      /* 锐利边缘突变 */
+      transparent 100%);
+  z-index: 1;
+  /* 在文字（z-index: 2）下方 */
   pointer-events: none;
 }
+
 /* 用伪元素绘制玻璃边框，z-index: 1 确保它在桌面梯形上方 */
 .post-card::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border: 3px solid #0099ff;
   z-index: 1;
-  pointer-events: none; /* 穿透点击 */
+  pointer-events: none;
+  /* 穿透点击 */
 }
+
 .post-card:hover {
   transform: translate(-3px, -3px);
   box-shadow: 15px 15px 0 rgba(0, 153, 255, 0.08);
 }
 
-.post-card:nth-child(odd) { margin-left: 0; }
-.post-card:nth-child(even) { margin-left: 5vw; }
+.post-card:nth-child(odd) {
+  margin-left: 0;
+}
+
+.post-card:nth-child(even) {
+  margin-left: 5vw;
+}
 
 /* 玻璃展柜内部的白色地板！ */
 /* 右墙底边是向右下 \ 倾斜的，所以这里的地板顶边必须向右下倾斜！ */
@@ -293,23 +347,21 @@ a:hover {
   bottom: -30px;
   left: -100px;
   right: -200px;
-  background: #f0f2f5; /* 灰色梯形桌面 */
+  background: #f0f2f5;
+  /* 灰色梯形桌面 */
   /*
-    玻璃坐标 X:[100px, 100%-200px] Y:[0, 100%-30px]
-    梯形高度要略高于玻璃高度的一半 (40%)
-    1. 左下：超出左侧40px, 低于底部30px -> (60px, 100%)
-    2. 左上：大倾角，高度降至一半略上 -> (300px, 40%)
-    3. 右上：较缓倾角，顺沿向下 -> (calc(100% - 120px), calc(40% + 80px))
-    4. 右下：超出右侧40px -> (calc(100% - 160px), 100%)
+    使用距底部的固定高度，避免过长文章拉伸：
+    假定桌面深度 (高度) 为 160px。
+    Top-Left Y = calc(100% - 160px)
+    Top-Right Y 下沉 50px = calc(100% - 110px)
   */
-  clip-path: polygon(
-    60px 100%, 
-    300px 40%, 
-    calc(100% - 120px) calc(40% + 80px), 
-    calc(100% - 160px) 100%
-  );
+  clip-path: polygon(60px 100%,
+      300px calc(100% - 160px),
+      calc(100% - 120px) calc(100% - 110px),
+      calc(100% - 160px) 100%);
   z-index: 0;
 }
+
 /* 玻璃反光线 */
 .glass-reflection {
   position: absolute;
@@ -317,83 +369,204 @@ a:hover {
   right: 25px;
   width: 60px;
   height: 60px;
-  z-index: 2; /* 确保在边框和桌面之上 */
+  z-index: 2;
+  /* 确保在边框和桌面之上 */
   pointer-events: none;
 }
+
 .glass-reflection::before,
 .glass-reflection::after {
   content: '';
   position: absolute;
   background-color: #0099ff;
   border-radius: 2px;
-  transform: rotate(-40deg); /* 倾斜角度稍微平缓一点 */
+  transform: rotate(-40deg);
+  /* 倾斜角度稍微平缓一点 */
 }
+
 /* 左侧长反光线 */
-.glass-reflection::before { 
-  top: 0; 
-  right: 25px; 
-  width: 4px; 
-  height: 40px; 
+.glass-reflection::before {
+  top: 0;
+  right: 25px;
+  width: 4px;
+  height: 40px;
 }
+
 /* 右侧短反光线 */
-.glass-reflection::after { 
-  top: 15px; 
-  right: 5px; 
-  width: 4px; 
-  height: 20px; 
+.glass-reflection::after {
+  top: 15px;
+  right: 5px;
+  width: 4px;
+  height: 20px;
 }
 
 /* 6. 文章内容排版 */
-.post-card-body { position: relative; z-index: 2; }
-.post-card-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem; }
-.post-card-title a { color: #111111; }
-.post-card-title a:hover { color: #0099ff; }
-
-.post-card-meta { display: flex; gap: 1.5rem; font-size: 0.95rem; color: #666; margin-bottom: 2rem; }
-.post-card-meta i { color: #0099ff; margin-right: 5px; }
-.post-card-meta a { color: #666; }
-
-.post-card-excerpt, .post-card-desc { 
-  font-size: 1.05rem; 
-  color: #444; 
-  line-height: 1.8; 
-  margin-bottom: 2rem; 
-  text-align: justify; 
+.post-card-body {
+  position: relative;
+  z-index: 2;
 }
+
+.post-card-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.post-card-title a {
+  color: #111111;
+}
+
+.post-card-title a:hover {
+  color: #0099ff;
+}
+
+.post-card-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.post-card-meta i {
+  color: #0099ff;
+  margin-right: 5px;
+}
+
+.post-card-meta a {
+  color: #666;
+}
+
+.post-card-excerpt,
+.post-card-desc {
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  text-align: justify;
+}
+
 /* 限制首页文章卡片的高度，并隐藏溢出，防止图片和长文撑爆卡片 */
 .post-card-excerpt {
   max-height: 150px;
   overflow: hidden;
   position: relative;
 }
+
 /* 限制卡片内的图片最大宽度，防止横向溢出 */
-.post-card-excerpt img, .post-content img {
+.post-card-excerpt img,
+.post-content img {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
 }
-.read-more { font-weight: 800; color: #0099ff; }
-.read-more-arrow { display: inline-block; transition: transform 0.2s; }
-.read-more:hover .read-more-arrow { transform: translateX(5px); }
+
+.read-more {
+  font-weight: 800;
+  color: #0099ff;
+}
+
+.read-more-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.read-more:hover .read-more-arrow {
+  transform: translateX(5px);
+}
 
 /* Markdown 页面 */
-.post-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
-.post-content { font-size: 1.1rem; color: #333; line-height: 1.8; }
-.post-content h2 { font-size: 1.8rem; margin: 2.5rem 0 1.2rem; border-left: 5px solid #0099ff; padding-left: 15px; }
-.post-content img { max-width: 100%; border: 2px solid #0099ff; margin: 1.5rem 0; }
-.post-content pre { background: rgba(255,255,255,0.4); border: 1px solid rgba(0,153,255,0.3); padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.post-content {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.8;
+}
+
+.post-content h2 {
+  font-size: 1.8rem;
+  margin: 2.5rem 0 1.2rem;
+  border-left: 5px solid #0099ff;
+  padding-left: 15px;
+}
+
+.post-content img {
+  max-width: 100%;
+  border: 2px solid #0099ff;
+  margin: 1.5rem 0;
+}
+
+.post-content pre {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 153, 255, 0.3);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
 
 /* 归档分页 */
-.archive-title { font-size: 2.2rem; margin-bottom: 2rem; }
-.archive-year { font-size: 1.6rem; margin: 2rem 0 1rem; color: #0099ff; font-weight: 700; }
-.archive-item { margin: 1.5rem 0; display: flex; align-items: center; }
-.archive-date { font-size: 0.95rem; color: #666; margin-right: 1.5rem; }
-.archive-post-title { font-size: 1.1rem; color: #222; font-weight: 600; }
-.pagination { display: flex; justify-content: center; gap: 0.5rem; margin-top: 4rem; }
-.pagination a, .pagination span { padding: 0.5rem 1rem; border: 2px solid #0099ff; color: #0099ff; font-weight: 700; }
-.pagination span.current { background: #0099ff; color: white; }
-.footer { padding: 3rem 0; font-size: 0.9rem; color: #777; text-align: left; }
+.archive-title {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.archive-year {
+  font-size: 1.6rem;
+  margin: 2rem 0 1rem;
+  color: #0099ff;
+  font-weight: 700;
+}
+
+.archive-item {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.archive-date {
+  font-size: 0.95rem;
+  color: #666;
+  margin-right: 1.5rem;
+}
+
+.archive-post-title {
+  font-size: 1.1rem;
+  color: #222;
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 4rem;
+}
+
+.pagination a,
+.pagination span {
+  padding: 0.5rem 1rem;
+  border: 2px solid #0099ff;
+  color: #0099ff;
+  font-weight: 700;
+}
+
+.pagination span.current {
+  background: #0099ff;
+  color: white;
+}
+
+.footer {
+  padding: 3rem 0;
+  font-size: 0.9rem;
+  color: #777;
+  text-align: left;
+}
 
 /* =========================================
    响应式设计与交互
@@ -408,6 +581,7 @@ a:hover {
   padding: 15px;
   margin-top: 15px;
 }
+
 .hamburger-line {
   width: 30px;
   height: 4px;
@@ -417,53 +591,72 @@ a:hover {
 
 @media screen and (max-width: 768px) {
   .isometric-container {
-    flex-direction: row; /* 保持左右分栏 */
+    flex-direction: row;
+    /* 保持左右分栏 */
   }
-  
+
   /* 左侧侧边栏折叠为白色条状，支持悬浮展开 */
   .sidebar-wall {
-    position: fixed; /* 手机端强制固定在左侧 */
+    position: fixed;
+    /* 手机端强制固定在左侧 */
     top: 0;
     left: 0;
     width: 60px;
     height: 100vh;
-    background: #ffffff; /* 白色背景 */
+    background: #ffffff;
+    /* 白色背景 */
     padding: 0;
-    justify-content: flex-start; /* 按钮靠上 */
+    justify-content: flex-start;
+    /* 按钮靠上 */
     align-items: center;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    z-index: 100; /* 确保在最上方 */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    /* 确保在最上方 */
     transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    overflow: hidden; /* 收起时隐藏内容 */
+    overflow: hidden;
+    /* 收起时隐藏内容 */
   }
+
   .sidebar-wall.expanded {
-    width: 250px; /* 展开后的宽度 */
+    width: 250px;
+    /* 展开后的宽度 */
   }
+
   .mobile-menu-btn {
-    display: flex; /* 显示汉堡按钮 */
+    display: flex;
+    /* 显示汉堡按钮 */
     position: absolute;
     top: 15px;
-    left: 0; /* 修正居中：padding加上内容刚好60px，所以设为0即完美居中 */
+    left: 0;
+    /* 修正居中：padding加上内容刚好60px，所以设为0即完美居中 */
     z-index: 101;
   }
+
   .nav-menu {
-    display: block; /* 结构保留 */
-    opacity: 0; /* 默认不可见 */
+    display: block;
+    /* 结构保留 */
+    opacity: 0;
+    /* 默认不可见 */
     visibility: hidden;
-    margin-top: 80px; /* 给按钮留出空间 */
+    margin-top: 80px;
+    /* 给按钮留出空间 */
     transition: opacity 0.3s ease;
   }
+
   .sidebar-wall.expanded .nav-menu {
     opacity: 1;
     visibility: visible;
   }
 
   /* 3D 墙角适配：隐藏左墙，保留并铺满右墙 */
-  .left-wall-front, .left-wall-top {
+  .left-wall-front,
+  .left-wall-top {
     display: none;
   }
+
   .right-wall-front {
-    left: 60px; /* 从白色侧边栏右侧开始 */
+    left: 60px;
+    /* 从白色侧边栏右侧开始 */
     width: calc(100vw - 60px);
     /* 恢复墙壁底部的正确高度，防止内部元素被过度裁切 */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
@@ -471,14 +664,18 @@ a:hover {
 
   /* 调整 Logo 在右墙面上的位置 */
   .site-title-container {
-    top: 12vh; /* 向上移动一点，确保在可视区 */
-    left: 20px; /* 相对于 right-wall-front 的左边缘 */
+    top: 12vh;
+    /* 向上移动一点，确保在可视区 */
+    left: 20px;
+    /* 相对于 right-wall-front 的左边缘 */
     transform: rotate(8deg) skewX(-15deg) scale(0.7);
     transform-origin: left top;
   }
+
   .whale-bg-container {
     left: auto;
-    right: 5vw; /* 靠右对齐 */
+    right: 5vw;
+    /* 靠右对齐 */
     top: 5vh;
     width: 65vw;
     height: 35vh;
@@ -488,12 +685,33 @@ a:hover {
 
   /* 文章主区域让出左侧固定的 60px */
   .main-content {
-    flex: 1; /* 继续占满剩余空间 */
-    margin-left: 60px; /* 避开 position:fixed 的 60px 侧边栏 */
-    padding: 25vh 5vw 10vh 5vw; /* 调整上边距以避开斜边 */
+    flex: 1;
+    /* 继续占满剩余空间 */
+    margin-left: 60px;
+    /* 避开 position:fixed 的 60px 侧边栏 */
+    padding: 25vh 5vw 10vh 5vw;
+    /* 调整上边距以避开斜边 */
   }
-  .post-card { margin-left: 0 !important; padding: 2rem; background: #ffffff; }
-  .post-card::before { display: none; }
-  .card-floor { top: 0; bottom: 0; left: 0; right: 0; transform: none; height: 100%; background: #ffffff; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-  .glass-reflection { display: none; }
+
+  .post-card {
+    margin-left: 0 !important;
+    padding: 2rem;
+    background: transparent;
+  }
+
+  .post-card::before {
+    display: none;
+  }
+
+  /* 在手机端保留桌面效果，但缩小左侧 X 坐标防止过于侵占屏幕 */
+  .card-floor {
+    clip-path: polygon(80px 100%,
+        180px calc(100% - 120px),
+        calc(100% - 120px) calc(100% - 80px),
+        calc(100% - 160px) 100%);
+  }
+
+  .glass-reflection {
+    display: none;
+  }
 }
