@@ -1,8 +1,8 @@
 <%
   var icons = {
-    '首页': '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>',
-    '归档': '<polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5" rx="1"></rect><line x1="10" y1="12" x2="14" y2="12"></line>',
-    '关于': '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>'
+    '首页': '<g transform="translate(0, 2)"><polygon points="50,90 80,75 80,45 50,60" fill="currentColor" opacity="0.8"/><polygon points="50,90 20,75 20,45 35,32.5 50,60" fill="currentColor" opacity="0.6"/><polygon points="35,32.5 50,60 80,45 65,17.5" fill="currentColor" opacity="1"/><polygon points="35,32.5 20,45 50,30 65,17.5" fill="currentColor" opacity="0.4"/></g>',
+    '归档': '<g transform="translate(0, 6)"><polygon points="50,80 20,65 20,35 50,50" fill="currentColor" opacity="0.6"/><polygon points="50,80 80,65 80,35 50,50" fill="currentColor" opacity="0.8"/><polygon points="50,50 80,35 50,20 20,35" fill="currentColor" opacity="0.2"/><polygon points="20,35 50,20 35,5 5,20" fill="currentColor" opacity="1"/><polygon points="80,35 50,20 65,5 95,20" fill="currentColor" opacity="0.7"/></g>',
+    '关于': '<g transform="translate(0, 0)"><polygon points="50,20 60,15 50,10 40,15" fill="currentColor" opacity="1"/><polygon points="50,30 60,25 60,15 50,20" fill="currentColor" opacity="0.8"/><polygon points="50,30 40,25 40,15 50,20" fill="currentColor" opacity="0.6"/><polygon points="50,45 60,40 50,35 40,40" fill="currentColor" opacity="1"/><polygon points="50,85 60,80 60,40 50,45" fill="currentColor" opacity="0.8"/><polygon points="50,85 40,80 40,40 50,45" fill="currentColor" opacity="0.6"/></g>'
   };
 %>
 
@@ -24,7 +24,7 @@
          var iconSvg = icons[name] || '<circle cx="12" cy="12" r="10"></circle>';
       %>
       <a href="<%= url_for(link) %>" class="bottom-nav-item <%= isActive ? 'active' : '' %>">
-        <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
           <%- iconSvg %>
         </svg>
         <span class="bottom-nav-text"><%= name %></span>
