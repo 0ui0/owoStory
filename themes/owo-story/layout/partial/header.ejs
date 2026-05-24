@@ -1,6 +1,13 @@
-<header class="sidebar-wall">
+<header class="sidebar-wall" id="sidebar-wall">
   <div class="sidebar-inner">
-    <!-- 导航菜单 (跨越内凹墙角与左侧地板) -->
+    <!-- 移动端迷你菜单按钮 -->
+    <div class="mobile-menu-btn" id="mobile-menu-btn">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    
+    <!-- 导航菜单 -->
     <nav class="nav-menu">
       <ul class="nav-list">
         <% if (theme.menu) { %>
@@ -18,8 +25,21 @@
                  }
                }
             %>
-            <li class="nav-item">
-              <a href="<%= url_for(link) %>" class="nav-link <%= isActive ? 'active' : '' %>">
+            <li class="nav-item <%= isActive ? 'active' : '' %>">
+              <% if (isActive) { %>
+                <!-- 内联 SVG 确保 100% 渲染立体三角形，避免被背景色或URL转义影响 -->
+                <div class="nav-3d-wedge-bg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" width="100%" height="100%">
+                    <!-- 顶部灰色细线 -->
+                    <line x1="10" y1="20" x2="160" y2="40" stroke="#cccccc" stroke-width="1"/>
+                    <!-- 蓝色实心正面 (直角三角形 ◣) -->
+                    <polygon points="10,20 10,110 180,110" fill="#0099ff"/>
+                    <!-- 底部蓝色镂空底面 -->
+                    <polyline points="10,110 50,140 220,140 180,110" fill="none" stroke="#0099ff" stroke-width="2"/>
+                  </svg>
+                </div>
+              <% } %>
+              <a href="<%= url_for(link) %>" class="nav-link">
                 <span class="link-text"><%= name %></span>
               </a>
             </li>
@@ -29,3 +49,15 @@
     </nav>
   </div>
 </header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var wall = document.getElementById('sidebar-wall');
+    if(btn && wall) {
+      btn.addEventListener('click', function() {
+        wall.classList.toggle('expanded');
+      });
+    }
+  });
+</script>

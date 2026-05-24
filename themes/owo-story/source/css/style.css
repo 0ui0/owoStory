@@ -101,11 +101,15 @@ a:hover {
 /* 3. 左侧导航区域 (在左边 20vw 的区域内) */
 .sidebar-wall {
   width: 20vw;
+  height: 100vh;
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
-  /* 使得 首页(偏上)能落在墙面上，关于(偏下)能落在地板上 */
-  padding-top: 15vh; 
-  padding-left: 2vw;
+  justify-content: center; /* 垂直居中 */
+  align-items: flex-end; /* 未选中的靠右排列 */
+  padding-right: 2vw; /* 距离中线一点距离 */
+  z-index: 10; /* 确保不被右侧文章区域遮挡 */
 }
 
 /* 右墙面上的 Logo (在鲸鱼的左侧) */
@@ -121,6 +125,7 @@ a:hover {
 }
 
 .site-title {
+  font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
   font-size: 2.2rem;
   font-weight: 800;
   color: #1a1a1a;
@@ -135,62 +140,79 @@ a:hover {
 /* 阶梯导航菜单 */
 .nav-menu {
   position: relative;
+  width: 100%;
 }
 
 .nav-list {
   list-style: none;
   display: flex;
   flex-direction: column;
+  align-items: flex-end; /* 整体靠右 */
+  width: 100%;
 }
 
 .nav-item {
   position: relative;
-  margin-bottom: 1.5rem;
-  /* 修复：保证阶梯感 */
-}
-.nav-item:nth-child(1) { margin-left: 0; }
-.nav-item:nth-child(2) { margin-left: 1.5rem; }
-.nav-item:nth-child(3) { margin-left: 3rem; }
-
-
-/* 极简折线阴影，表示地板上的台阶 */
-.nav-item:nth-child(2)::before,
-.nav-item:nth-child(3)::before {
-  content: '';
-  position: absolute;
-  left: -15px;
-  top: 15px;
-  width: 2px;
-  height: 30px;
-  background: rgba(0,0,0,0.1);
-}
-.nav-item:nth-child(2)::after,
-.nav-item:nth-child(3)::after {
-  content: '';
-  position: absolute;
-  left: -15px;
-  top: 15px;
-  width: 15px;
-  height: 2px;
-  background: rgba(0,0,0,0.1);
+  margin-bottom: 2.5rem;
 }
 
-.nav-link {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #222222;
-  position: relative;
+/* ----------------未选中状态 (排在右侧，无修饰)---------------- */
+.nav-item:not(.active) {
+  margin-right: 2vw; /* 右侧留一点空隙 */
+  transition: transform 0.3s ease;
+}
+.nav-item:not(.active):hover {
+  transform: translateX(-10px);
+}
+
+.nav-item .nav-link {
+  font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+}
+
+.nav-item:not(.active) .nav-link {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #000000;
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0;
+}
+.nav-item:not(.active) .nav-link:hover {
+  color: #0099ff;
 }
 
-.nav-link:hover { color: #0099ff; }
-.nav-link.active {
-  color: #ffffff;
-  background: #0099ff;
-  /* 既然左墙已经是 3D 三角形，首页本身作为墙上的海报/贴片即可 */
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+/* ----------------选中状态 (居左变大，完整 SVG 3D 楔形底座)---------------- */
+@keyframes slideIn3D {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.nav-item.active {
+  align-self: flex-start; /* 靠左排列 */
+  width: 250px;
+  height: 150px;
+  margin-left: 2vw; /* 左侧留一点空隙 */
+  animation: slideIn3D 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.nav-3d-wedge-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* 在文字下方 */
+}
+
+.nav-item.active .nav-link {
+  position: absolute;
+  top: 35px; /* 放在蓝色三角形内部 */
+  left: 25px;
+  color: #000000; /* 设计图黑字 */
+  font-size: 3.2rem;
+  font-weight: 900;
+  padding: 0;
+  display: inline-block;
+  z-index: 2; /* 确保文字在 SVG 上方 */
 }
 
 /* 4. 右侧文章区域 */
@@ -215,61 +237,89 @@ a:hover {
 
 .post-card {
   position: relative;
-  border: 3px solid #0099ff;
+  /* 移除原有的 border，改用伪元素绘制，以解决 stacking context 遮挡的 bug */
   background-color: transparent;
-  padding: 3.5rem 3.5rem 4.5rem 3.5rem;
-  margin-bottom: 5rem;
-  transition: transform 0.3s ease;
-  width: 100%;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-left: 20px;
 }
-
-.post-card:nth-child(odd) { margin-left: 0; }
-.post-card:nth-child(even) { margin-left: 5vw; }
-
+/* 用伪元素绘制玻璃边框，z-index: 1 确保它在桌面梯形上方 */
+.post-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 3px solid #0099ff;
+  z-index: 1;
+  pointer-events: none; /* 穿透点击 */
+}
 .post-card:hover {
   transform: translate(-3px, -3px);
   box-shadow: 15px 15px 0 rgba(0, 153, 255, 0.08);
 }
+
+.post-card:nth-child(odd) { margin-left: 0; }
+.post-card:nth-child(even) { margin-left: 5vw; }
 
 /* 玻璃展柜内部的白色地板！ */
 /* 右墙底边是向右下 \ 倾斜的，所以这里的地板顶边必须向右下倾斜！ */
 /* 使用 transform: skewY(正角度) 可以完美产生向右下的斜面 */
 .card-floor {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 75%; /* 不占满，露出右上角作为透明玻璃区域 */
-  background: #ffffff;
-  transform-origin: left bottom;
-  transform: skewY(8deg); /* 与右侧墙壁下边缘 \ 平行 */
-  z-index: -1;
-  box-shadow: 0 0 10px rgba(0,0,0,0.02);
+  /* 恢复自由多边形，扩展容器以绘制超出边界的形状 */
+  top: 0;
+  bottom: -30px;
+  left: -100px;
+  right: -200px;
+  background: #f0f2f5; /* 灰色梯形桌面 */
+  /*
+    玻璃坐标 X:[100px, 100%-200px] Y:[0, 100%-30px]
+    梯形高度要略高于玻璃高度的一半 (40%)
+    1. 左下：超出左侧40px, 低于底部30px -> (60px, 100%)
+    2. 左上：大倾角，高度降至一半略上 -> (300px, 40%)
+    3. 右上：较缓倾角，顺沿向下 -> (calc(100% - 120px), calc(40% + 80px))
+    4. 右下：超出右侧40px -> (calc(100% - 160px), 100%)
+  */
+  clip-path: polygon(
+    60px 100%, 
+    300px 40%, 
+    calc(100% - 120px) calc(40% + 80px), 
+    calc(100% - 160px) 100%
+  );
+  z-index: 0;
 }
-
-/* 展柜右上角透明区域的高光折射线 */
-/* 根据设计图，反光方向也是 \ */
+/* 玻璃反光线 */
 .glass-reflection {
   position: absolute;
   top: 15px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  z-index: 0;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  z-index: 2; /* 确保在边框和桌面之上 */
   pointer-events: none;
 }
-
 .glass-reflection::before,
 .glass-reflection::after {
   content: '';
   position: absolute;
   background-color: #0099ff;
-  transform: rotate(-45deg); /* \ 倾斜方向 */
-  width: 3px;
+  border-radius: 2px;
+  transform: rotate(-40deg); /* 倾斜角度稍微平缓一点 */
 }
-
-.glass-reflection::before { top: 0; right: 15px; height: 25px; }
-.glass-reflection::after { top: 8px; right: 5px; height: 25px; }
+/* 左侧长反光线 */
+.glass-reflection::before { 
+  top: 0; 
+  right: 25px; 
+  width: 4px; 
+  height: 40px; 
+}
+/* 右侧短反光线 */
+.glass-reflection::after { 
+  top: 15px; 
+  right: 5px; 
+  width: 4px; 
+  height: 20px; 
+}
 
 /* 6. 文章内容排版 */
 .post-card-body { position: relative; z-index: 2; }
@@ -281,7 +331,26 @@ a:hover {
 .post-card-meta i { color: #0099ff; margin-right: 5px; }
 .post-card-meta a { color: #666; }
 
-.post-card-excerpt, .post-card-desc { font-size: 1.05rem; color: #444; line-height: 1.8; margin-bottom: 2rem; text-align: justify; }
+.post-card-excerpt, .post-card-desc { 
+  font-size: 1.05rem; 
+  color: #444; 
+  line-height: 1.8; 
+  margin-bottom: 2rem; 
+  text-align: justify; 
+}
+/* 限制首页文章卡片的高度，并隐藏溢出，防止图片和长文撑爆卡片 */
+.post-card-excerpt {
+  max-height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+/* 限制卡片内的图片最大宽度，防止横向溢出 */
+.post-card-excerpt img, .post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
 .read-more { font-weight: 800; color: #0099ff; }
 .read-more-arrow { display: inline-block; transition: transform 0.2s; }
 .read-more:hover .read-more-arrow { transform: translateX(5px); }
@@ -304,12 +373,104 @@ a:hover {
 .pagination span.current { background: #0099ff; color: white; }
 .footer { padding: 3rem 0; font-size: 0.9rem; color: #777; text-align: left; }
 
+/* =========================================
+   响应式设计与交互
+========================================= */
+
+/* 移动端菜单按钮 (默认隐藏，仅手机端显示) */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  padding: 15px;
+  margin-top: 15px;
+}
+.hamburger-line {
+  width: 30px;
+  height: 4px;
+  background: #0099ff;
+  border-radius: 2px;
+}
+
 @media screen and (max-width: 768px) {
-  .room-3d-corner { display: none; }
-  .sidebar-wall { width: 100%; padding: 5vh 5vw; }
-  .site-title-container { transform: none; margin-bottom: 2rem; }
-  .main-content { padding: 2vh 5vw; }
+  .isometric-container {
+    flex-direction: row; /* 保持左右分栏 */
+  }
+  
+  /* 左侧侧边栏折叠为白色条状，支持悬浮展开 */
+  .sidebar-wall {
+    position: fixed; /* 手机端强制固定在左侧 */
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100vh;
+    background: #ffffff; /* 白色背景 */
+    padding: 0;
+    justify-content: flex-start; /* 按钮靠上 */
+    align-items: center;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    z-index: 100; /* 确保在最上方 */
+    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden; /* 收起时隐藏内容 */
+  }
+  .sidebar-wall.expanded {
+    width: 250px; /* 展开后的宽度 */
+  }
+  .mobile-menu-btn {
+    display: flex; /* 显示汉堡按钮 */
+    position: absolute;
+    top: 15px;
+    left: 0; /* 修正居中：padding加上内容刚好60px，所以设为0即完美居中 */
+    z-index: 101;
+  }
+  .nav-menu {
+    display: block; /* 结构保留 */
+    opacity: 0; /* 默认不可见 */
+    visibility: hidden;
+    margin-top: 80px; /* 给按钮留出空间 */
+    transition: opacity 0.3s ease;
+  }
+  .sidebar-wall.expanded .nav-menu {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* 3D 墙角适配：隐藏左墙，保留并铺满右墙 */
+  .left-wall-front, .left-wall-top {
+    display: none;
+  }
+  .right-wall-front {
+    left: 60px; /* 从白色侧边栏右侧开始 */
+    width: calc(100vw - 60px);
+    /* 恢复墙壁底部的正确高度，防止内部元素被过度裁切 */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
+  }
+
+  /* 调整 Logo 在右墙面上的位置 */
+  .site-title-container {
+    top: 12vh; /* 向上移动一点，确保在可视区 */
+    left: 20px; /* 相对于 right-wall-front 的左边缘 */
+    transform: rotate(8deg) skewX(-15deg) scale(0.7);
+    transform-origin: left top;
+  }
+  .whale-bg-container {
+    left: auto;
+    right: 5vw; /* 靠右对齐 */
+    top: 5vh;
+    width: 65vw;
+    height: 35vh;
+    transform: scale(0.7);
+    transform-origin: right top;
+  }
+
+  /* 文章主区域让出左侧固定的 60px */
+  .main-content {
+    flex: 1; /* 继续占满剩余空间 */
+    margin-left: 60px; /* 避开 position:fixed 的 60px 侧边栏 */
+    padding: 25vh 5vw 10vh 5vw; /* 调整上边距以避开斜边 */
+  }
   .post-card { margin-left: 0 !important; padding: 2rem; }
-  .card-floor { transform: none; height: 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+  .card-floor { top: 0; bottom: 0; left: 0; right: 0; transform: none; height: 100%; background: #ffffff; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
   .glass-reflection { display: none; }
 }
