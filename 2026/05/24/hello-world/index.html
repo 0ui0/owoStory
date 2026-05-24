@@ -7,6 +7,11 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 
+<!-- Google Fonts Outfit & Noto Sans SC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="/owoStory/css/style.css">
 
@@ -16,26 +21,64 @@
 
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  <header class="header">
-  <div class="header-inner container">
-    <a href="/owoStory/" class="site-title">owoStory</a>
-    <button class="nav-toggle" id="navToggle" aria-label="menu">
-      <i class="fas fa-bars"></i>
-    </button>
-    <nav class="nav" id="navMenu">
+  <!-- 3D 内凹墙角 /|\ 架构背景 -->
+  <div class="room-3d-corner">
+    <!-- 右墙正面 (灰色梯形) -->
+    <div class="right-wall-front">
+      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
+      <div class="site-title-container">
+        <a href="/owoStory/" class="site-title">
+          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
+        </a>
+      </div>
+      <!-- 鲸鱼背景 -->
+      <div class="whale-bg-container"></div>
+    </div>
+    
+    <!-- 左墙正面 (灰色平行四边形) -->
+    <div class="left-wall-front"></div>
+    <!-- 左墙顶部 (蓝色三角形) -->
+    <div class="left-wall-top"></div>
+  </div>
+
+  <div class="isometric-container">
+    <!-- 导航栏区域 (位于左半部分) -->
+    <header class="sidebar-wall" id="sidebar-wall">
+  <div class="sidebar-inner">
+    <!-- 移动端迷你菜单按钮 -->
+    <div class="mobile-menu-btn" id="mobile-menu-btn">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
       <ul class="nav-list">
         
           
-            <li class="nav-item">
-              <a href="/owoStory/">首页</a>
+            
+            <li class="nav-item ">
+              
+              <a href="/owoStory/" class="nav-link">
+                <span class="link-text">首页</span>
+              </a>
             </li>
           
-            <li class="nav-item">
-              <a href="/owoStory/archives/">归档</a>
+            
+            <li class="nav-item ">
+              
+              <a href="/owoStory/archives/" class="nav-link">
+                <span class="link-text">归档</span>
+              </a>
             </li>
           
-            <li class="nav-item">
-              <a href="/owoStory/about/">关于</a>
+            
+            <li class="nav-item ">
+              
+              <a href="/owoStory/about/" class="nav-link">
+                <span class="link-text">关于</span>
+              </a>
             </li>
           
         
@@ -44,12 +87,30 @@
   </div>
 </header>
 
-  <main class="main">
-    <div class="container main-container">
-      <article class="post-article">
-  <header class="post-header">
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var wall = document.getElementById('sidebar-wall');
+    if(btn && wall) {
+      btn.addEventListener('click', function() {
+        wall.classList.toggle('expanded');
+      });
+    }
+  });
+</script>
+
+    
+    <!-- 文章区域 (位于右半部分) -->
+    <main class="main-content">
+      <div class="content-container">
+        <article class="post-card post-detail">
+  <div class="glass-reflection"></div>
+  <div class="card-floor"></div>
+  
+  <div class="post-card-body">
     <h1 class="post-title">Hello World</h1>
-    <div class="post-meta">
+    
+    <div class="post-card-meta">
       <span class="post-date">
         <i class="far fa-calendar-alt"></i>
         2026-05-24
@@ -57,9 +118,9 @@
       
       
     </div>
-  </header>
-  <div class="post-content">
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    
+    <div class="post-content">
+      <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -73,34 +134,20 @@
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
+    </div>
   </div>
-  
-    <nav class="post-nav">
-      
-        <a href="/owoStory/2026/05/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%97%A5%E5%BF%97/" class="post-nav-prev">
-          <i class="fas fa-chevron-left"></i>
-          <span>二项式定理图</span>
-        </a>
-      
-      
-    </nav>
-  
 </article>
 
-    </div>
-  </main>
-  <footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <p class="footer-text">二次元小窝 · 温暖如初</p>
-      <p class="footer-meta">
-        &copy; 2024 <a href="https://0ui0.github.io/owoStory">0ui0</a>.
-        Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>.
-      </p>
-    </div>
+      </div>
+      <footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 - 2026 0ui0</p>
+    <p class="footer-text">喵宅后院 · 温暖如初</p>
+    <p class="power-by">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> &amp; Theme <a href="#">owo-story</a></p>
   </div>
 </footer>
 
-  <script src="/owoStory/js/main.js"></script>
+    </main>
+  </div>
 </body>
 </html>

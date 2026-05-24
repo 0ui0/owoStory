@@ -7,6 +7,11 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 
+<!-- Google Fonts Outfit & Noto Sans SC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="/owoStory/css/style.css">
 
@@ -16,26 +21,76 @@
 
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  <header class="header">
-  <div class="header-inner container">
-    <a href="/owoStory/" class="site-title">owoStory</a>
-    <button class="nav-toggle" id="navToggle" aria-label="menu">
-      <i class="fas fa-bars"></i>
-    </button>
-    <nav class="nav" id="navMenu">
+  <!-- 3D 内凹墙角 /|\ 架构背景 -->
+  <div class="room-3d-corner">
+    <!-- 右墙正面 (灰色梯形) -->
+    <div class="right-wall-front">
+      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
+      <div class="site-title-container">
+        <a href="/owoStory/" class="site-title">
+          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
+        </a>
+      </div>
+      <!-- 鲸鱼背景 -->
+      <div class="whale-bg-container"></div>
+    </div>
+    
+    <!-- 左墙正面 (灰色平行四边形) -->
+    <div class="left-wall-front"></div>
+    <!-- 左墙顶部 (蓝色三角形) -->
+    <div class="left-wall-top"></div>
+  </div>
+
+  <div class="isometric-container">
+    <!-- 导航栏区域 (位于左半部分) -->
+    <header class="sidebar-wall" id="sidebar-wall">
+  <div class="sidebar-inner">
+    <!-- 移动端迷你菜单按钮 -->
+    <div class="mobile-menu-btn" id="mobile-menu-btn">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
       <ul class="nav-list">
         
           
-            <li class="nav-item">
-              <a href="/owoStory/">首页</a>
+            
+            <li class="nav-item active">
+              
+                <!-- 内联 SVG 确保 100% 渲染立体三角形，避免被背景色或URL转义影响 -->
+                <div class="nav-3d-wedge-bg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" width="100%" height="100%">
+                    <!-- 顶部灰色细线 -->
+                    <line x1="10" y1="20" x2="160" y2="40" stroke="#cccccc" stroke-width="1"/>
+                    <!-- 蓝色实心正面 (直角三角形 ◣) -->
+                    <polygon points="10,20 10,110 180,110" fill="#0099ff"/>
+                    <!-- 底部蓝色镂空底面 -->
+                    <polyline points="10,110 50,140 220,140 180,110" fill="none" stroke="#0099ff" stroke-width="2"/>
+                  </svg>
+                </div>
+              
+              <a href="/owoStory/" class="nav-link">
+                <span class="link-text">首页</span>
+              </a>
             </li>
           
-            <li class="nav-item">
-              <a href="/owoStory/archives/">归档</a>
+            
+            <li class="nav-item ">
+              
+              <a href="/owoStory/archives/" class="nav-link">
+                <span class="link-text">归档</span>
+              </a>
             </li>
           
-            <li class="nav-item">
-              <a href="/owoStory/about/">关于</a>
+            
+            <li class="nav-item ">
+              
+              <a href="/owoStory/about/" class="nav-link">
+                <span class="link-text">关于</span>
+              </a>
             </li>
           
         
@@ -44,15 +99,36 @@
   </div>
 </header>
 
-  <main class="main">
-    <div class="container main-container">
-      <section class="post-list">
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var wall = document.getElementById('sidebar-wall');
+    if(btn && wall) {
+      btn.addEventListener('click', function() {
+        wall.classList.toggle('expanded');
+      });
+    }
+  });
+</script>
+
+    
+    <!-- 文章区域 (位于右半部分) -->
+    <main class="main-content">
+      <div class="content-container">
+        <section class="post-list">
   
     <article class="post-card">
+      <!-- 玻璃反光条组件 (右上角透明区域) -->
+      <div class="glass-reflection"></div>
+      
+      <!-- 玻璃容器内的 3D 地板 -->
+      <div class="card-floor"></div>
+      
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/owoStory/2026/05/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%97%A5%E5%BF%97/">二项式定理图</a>
         </h2>
+        
         <div class="post-card-meta">
           <span class="post-date">
             <i class="far fa-calendar-alt"></i>
@@ -62,15 +138,31 @@
           
         </div>
         
-        <a href="/owoStory/2026/05/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%97%A5%E5%BF%97/" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+        
+          <div class="post-card-excerpt">
+            <img src="/owoStory/2026/05/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%97%A5%E5%BF%97/psc.webp" class="" title="二项式定理图示">
+...
+          </div>
+        
+        
+        <a href="/owoStory/2026/05/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%97%A5%E5%BF%97/" class="read-more">
+          阅读全文 <span class="read-more-arrow">→</span>
+        </a>
       </div>
     </article>
   
     <article class="post-card">
+      <!-- 玻璃反光条组件 (右上角透明区域) -->
+      <div class="glass-reflection"></div>
+      
+      <!-- 玻璃容器内的 3D 地板 -->
+      <div class="card-floor"></div>
+      
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/owoStory/2026/05/24/hello-world/">Hello World</a>
         </h2>
+        
         <div class="post-card-meta">
           <span class="post-date">
             <i class="far fa-calendar-alt"></i>
@@ -80,7 +172,15 @@
           
         </div>
         
-        <a href="/owoStory/2026/05/24/hello-world/" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+        
+          <div class="post-card-excerpt">
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info...
+          </div>
+        
+        
+        <a href="/owoStory/2026/05/24/hello-world/" class="read-more">
+          阅读全文 <span class="read-more-arrow">→</span>
+        </a>
       </div>
     </article>
   
@@ -89,20 +189,16 @@
 
 
 
-    </div>
-  </main>
-  <footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <p class="footer-text">二次元小窝 · 温暖如初</p>
-      <p class="footer-meta">
-        &copy; 2024 <a href="https://0ui0.github.io/owoStory">0ui0</a>.
-        Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>.
-      </p>
-    </div>
+      </div>
+      <footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 - 2026 0ui0</p>
+    <p class="footer-text">喵宅后院 · 温暖如初</p>
+    <p class="power-by">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> &amp; Theme <a href="#">owo-story</a></p>
   </div>
 </footer>
 
-  <script src="/owoStory/js/main.js"></script>
+    </main>
+  </div>
 </body>
 </html>
