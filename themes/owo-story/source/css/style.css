@@ -9,15 +9,17 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Outfit', 'Noto Sans SC', sans-serif;
-  overflow-x: hidden;
   /* 背景白色地板 */
   background-color: #ffffff;
   color: #222222;
   min-height: 100vh;
   line-height: 1.6;
-  overflow-x: hidden;
   position: relative;
 }
 
@@ -36,7 +38,7 @@ a:hover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   z-index: 0;
   pointer-events: none;
@@ -625,7 +627,7 @@ a:hover {
 
   .right-wall-front {
     left: 0;
-    width: 100vw;
+    width: 100%;
     /* 恢复墙壁底部的正确高度，防止内部元素被过度裁切 */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
   }
