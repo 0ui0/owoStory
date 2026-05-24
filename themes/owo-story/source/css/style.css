@@ -239,7 +239,7 @@ a:hover {
 
 .nav-item.active .nav-link {
   position: absolute;
-  top: 35px;
+  top: 25px;
   /* 放在蓝色三角形内部 */
   left: 25px;
   color: #000000;
@@ -261,10 +261,10 @@ a:hover {
   z-index: 3;
   pointer-events: none;
   /* 精确匹配蓝色三角形的边界：
-     顶点 A(10, 20)  -> 相对于文字(-15px, -15px)
-     顶点 B(10, 110) -> 相对于文字(-15px, 75px)
-     顶点 C(180, 110)-> 相对于文字(155px, 75px) */
-  clip-path: polygon(-15px -15px, -15px 75px, 155px 75px);
+     顶点 A(10, 20)  -> 相对于文字(-15px, -5px)
+     顶点 B(10, 110) -> 相对于文字(-15px, 85px)
+     顶点 C(180, 110)-> 相对于文字(155px, 85px) */
+  clip-path: polygon(-15px -5px, -15px 85px, 155px 85px);
 }
 
 /* 4. 右侧文章区域 */
