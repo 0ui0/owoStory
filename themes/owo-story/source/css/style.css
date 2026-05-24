@@ -237,12 +237,34 @@ a:hover {
 
 .post-card {
   position: relative;
-  /* 移除原有的 border，改用伪元素绘制，以解决 stacking context 遮挡的 bug */
+  /* 完全透明，去除模糊，仅靠高光表现镜面材质 */
   background-color: transparent;
   padding: 2rem;
   margin-bottom: 4rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-left: 20px;
+}
+/* 锐利的镜面反光条纹 */
+.post-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  /* 带有陡峭边缘的锐利线性渐变，模拟镜面反光 */
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 255, 255, 0.3) 35%,
+    rgba(255, 255, 255, 0) 35.1%, /* 锐利边缘突变 */
+    transparent 37%,
+    rgba(255, 255, 255, 0.05) 37.1%, /* 锐利边缘突变 */
+    rgba(255, 255, 255, 0.15) 39%,
+    rgba(255, 255, 255, 0) 39.1%, /* 锐利边缘突变 */
+    transparent 100%
+  );
+  z-index: 1; /* 在文字（z-index: 2）下方 */
+  pointer-events: none;
 }
 /* 用伪元素绘制玻璃边框，z-index: 1 确保它在桌面梯形上方 */
 .post-card::after {
@@ -470,7 +492,8 @@ a:hover {
     margin-left: 60px; /* 避开 position:fixed 的 60px 侧边栏 */
     padding: 25vh 5vw 10vh 5vw; /* 调整上边距以避开斜边 */
   }
-  .post-card { margin-left: 0 !important; padding: 2rem; }
+  .post-card { margin-left: 0 !important; padding: 2rem; background: #ffffff; }
+  .post-card::before { display: none; }
   .card-floor { top: 0; bottom: 0; left: 0; right: 0; transform: none; height: 100%; background: #ffffff; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
   .glass-reflection { display: none; }
 }
