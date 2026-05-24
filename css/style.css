@@ -586,75 +586,31 @@ a:hover {
   border-radius: 2px;
 }
 
+.bottom-nav {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .isometric-container {
-    flex-direction: row;
-    /* 保持左右分栏 */
+    flex-direction: column;
+    /* 手机端改回垂直排列 */
   }
 
-  /* 左侧侧边栏折叠为白色条状，支持悬浮展开 */
-  .sidebar-wall {
-    position: fixed;
-    /* 手机端强制固定在左侧 */
-    top: 0;
-    left: 0;
-    width: 60px;
-    height: 100vh;
-    background: #ffffff;
-    /* 白色背景 */
-    padding: 0;
-    justify-content: flex-start;
-    /* 按钮靠上 */
-    align-items: center;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    /* 确保在最上方 */
-    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    overflow: hidden;
-    /* 收起时隐藏内容 */
-  }
-
-  .sidebar-wall.expanded {
-    width: 250px;
-    /* 展开后的宽度 */
-  }
-
+  /* 隐藏左侧侧边栏和按钮 */
+  .sidebar-wall,
   .mobile-menu-btn {
-    display: flex;
-    /* 显示汉堡按钮 */
-    position: absolute;
-    top: 15px;
-    left: 0;
-    /* 修正居中：padding加上内容刚好60px，所以设为0即完美居中 */
-    z-index: 101;
+    display: none !important;
   }
 
-  .nav-menu {
-    display: block;
-    /* 结构保留 */
-    opacity: 0;
-    /* 默认不可见 */
-    visibility: hidden;
-    margin-top: 80px;
-    /* 给按钮留出空间 */
-    transition: opacity 0.3s ease;
-  }
-
-  .sidebar-wall.expanded .nav-menu {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* 3D 墙角适配：隐藏左墙，保留并铺满右墙 */
+  /* 3D 墙角适配：隐藏左墙，保留并铺满整个屏幕宽度 */
   .left-wall-front,
   .left-wall-top {
     display: none;
   }
 
   .right-wall-front {
-    left: 60px;
-    /* 从白色侧边栏右侧开始 */
-    width: calc(100vw - 60px);
+    left: 0;
+    width: 100vw;
     /* 恢复墙壁底部的正确高度，防止内部元素被过度裁切 */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
   }
@@ -680,14 +636,11 @@ a:hover {
     transform-origin: right top;
   }
 
-  /* 文章主区域让出左侧固定的 60px */
+  /* 文章主区域占满屏幕宽度，并在底部留出给底栏的 padding */
   .main-content {
     flex: 1;
-    /* 继续占满剩余空间 */
-    margin-left: 60px;
-    /* 避开 position:fixed 的 60px 侧边栏 */
-    padding: 25vh 5vw 10vh 5vw;
-    /* 调整上边距以避开斜边 */
+    margin-left: 0;
+    padding: 25vh 5vw 120px 5vw;
   }
 
   .post-card {
@@ -710,5 +663,62 @@ a:hover {
 
   .glass-reflection {
     display: none;
+  }
+
+  /* 移动端底部导航栏样式 */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 999;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .bottom-nav {
+      height: calc(65px + env(safe-area-inset-bottom));
+    }
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    color: #888888;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .bottom-nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    transition: transform 0.2s ease;
+  }
+
+  .bottom-nav-text {
+    font-weight: 500;
+  }
+
+  .bottom-nav-item.active {
+    color: #0099ff;
+  }
+
+  .bottom-nav-item.active .bottom-nav-icon {
+    transform: translateY(-2px);
   }
 }
