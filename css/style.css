@@ -690,7 +690,7 @@ a:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 65px;
+    height: 49px;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -704,7 +704,7 @@ a:hover {
 
   @supports (padding-bottom: env(safe-area-inset-bottom)) {
     .bottom-nav {
-      height: calc(65px + env(safe-area-inset-bottom));
+      height: calc(49px + env(safe-area-inset-bottom));
     }
   }
 
@@ -717,14 +717,14 @@ a:hover {
     height: 100%;
     color: #888888;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.65rem;
     transition: all 0.2s ease;
   }
 
   .bottom-nav-icon {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 4px;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 1px;
     transition: transform 0.2s ease;
   }
 
