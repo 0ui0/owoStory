@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+  <%- partial('partial/head') %>
+</head>
+<body>
+  <!-- 3D 内凹墙角 /|\ 架构背景 -->
+  <div class="room-3d-corner">
+    <!-- 右墙正面 (灰色梯形) -->
+    <div class="right-wall-front">
+      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
+      <div class="site-title-container">
+        <a href="<%= url_for('/') %>" class="site-title">
+          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
+        </a>
+      </div>
+      <!-- 鲸鱼背景 -->
+      <div class="whale-bg-container"></div>
+    </div>
+    
+    <!-- 左墙正面 (灰色平行四边形) -->
+    <div class="left-wall-front"></div>
+    <!-- 左墙顶部 (蓝色三角形) -->
+    <div class="left-wall-top"></div>
+  </div>
+
+  <div class="isometric-container">
+    <!-- 导航栏区域 (位于左半部分) -->
+    <%- partial('partial/header') %>
+    
+    <!-- 文章区域 (位于右半部分) -->
+    <main class="main-content">
+      <div class="content-container">
+        <%- body %>
+      </div>
+      <%- partial('partial/footer') %>
+    </main>
+  </div>
+</body>
+</html>

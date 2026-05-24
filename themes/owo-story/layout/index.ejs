@@ -1,0 +1,61 @@
+---
+layout: layout
+---
+<section class="post-list">
+  <% page.posts.each(function(post) { %>
+    <article class="post-card">
+      <!-- 玻璃反光条组件 (右上角透明区域) -->
+      <div class="glass-reflection"></div>
+      
+      <!-- 玻璃容器内的 3D 地板 -->
+      <div class="card-floor"></div>
+      
+      <div class="post-card-body">
+        <h2 class="post-card-title">
+          <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+        </h2>
+        
+        <div class="post-card-meta">
+          <span class="post-date">
+            <i class="far fa-calendar-alt"></i>
+            <%= date(post.date, 'YYYY-MM-DD') %>
+          </span>
+          <% if (post.categories && post.categories.length) { %>
+            <span class="post-categories">
+              <i class="far fa-folder-open"></i>
+              <% post.categories.each(function(cat) { %>
+                <a href="<%= url_for(cat.path) %>"><%= cat.name %></a>
+              <% }) %>
+            </span>
+          <% } %>
+          <% if (post.tags && post.tags.length) { %>
+            <span class="post-tags">
+              <i class="fas fa-tags"></i>
+              <% post.tags.each(function(tag) { %>
+                <a href="<%= url_for(tag.path) %>"><%= tag.name %></a>
+              <% }) %>
+            </span>
+          <% } %>
+        </div>
+        
+        <% if (post.excerpt) { %>
+          <div class="post-card-excerpt">
+            <%- post.excerpt %>
+          </div>
+        <% } else if (post.description) { %>
+          <p class="post-card-desc"><%= post.description %></p>
+        <% } else { %>
+          <div class="post-card-excerpt">
+            <%- post.content.substring(0, 150) %>...
+          </div>
+        <% } %>
+        
+        <a href="<%= url_for(post.path) %>" class="read-more">
+          阅读全文 <span class="read-more-arrow">→</span>
+        </a>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- partial('partial/pagination') %>

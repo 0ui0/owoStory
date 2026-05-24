@@ -1,0 +1,13 @@
+# owo-story 主题配置
+# 3D Glass origami theme
+
+favicon: 
+since: 2026
+
+menu:
+  首页: /
+  归档: /archives/
+  关于: /about/
+
+footer:
+  text: 喵宅后院 · 温暖如初

@@ -1,0 +1,31 @@
+<header class="sidebar-wall">
+  <div class="sidebar-inner">
+    <!-- 导航菜单 (跨越内凹墙角与左侧地板) -->
+    <nav class="nav-menu">
+      <ul class="nav-list">
+        <% if (theme.menu) { %>
+          <% for (var name in theme.menu) { %>
+            <% 
+               var link = theme.menu[name];
+               var isActive = false;
+               if (link === '/' && is_home()) {
+                 isActive = true;
+               } else if (link !== '/') {
+                 var cleanPath = page.path.replace(/index\.html$/, '');
+                 var cleanLink = link.replace(/^\/|\/$/g, '');
+                 if (cleanPath.startsWith(cleanLink)) {
+                   isActive = true;
+                 }
+               }
+            %>
+            <li class="nav-item">
+              <a href="<%= url_for(link) %>" class="nav-link <%= isActive ? 'active' : '' %>">
+                <span class="link-text"><%= name %></span>
+              </a>
+            </li>
+          <% } %>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>

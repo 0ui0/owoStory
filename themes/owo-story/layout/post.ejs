@@ -1,0 +1,38 @@
+---
+layout: layout
+---
+<article class="post-card post-detail">
+  <div class="glass-reflection"></div>
+  <div class="card-floor"></div>
+  
+  <div class="post-card-body">
+    <h1 class="post-title"><%= page.title %></h1>
+    
+    <div class="post-card-meta">
+      <span class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        <%= date(page.date, 'YYYY-MM-DD') %>
+      </span>
+      <% if (page.categories && page.categories.length) { %>
+        <span class="post-categories">
+          <i class="far fa-folder-open"></i>
+          <% page.categories.each(function(cat) { %>
+            <a href="<%= url_for(cat.path) %>"><%= cat.name %></a>
+          <% }) %>
+        </span>
+      <% } %>
+      <% if (page.tags && page.tags.length) { %>
+        <span class="post-tags">
+          <i class="fas fa-tags"></i>
+          <% page.tags.each(function(tag) { %>
+            <a href="<%= url_for(tag.path) %>"><%= tag.name %></a>
+          <% }) %>
+        </span>
+      <% } %>
+    </div>
+    
+    <div class="post-content">
+      <%- page.content %>
+    </div>
+  </div>
+</article>

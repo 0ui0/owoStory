@@ -1,0 +1,315 @@
+/* 
+  owo-story - 100% Exact 3D Inward Corner Theme
+  Created by Antigravity (MikaKa) for Lambda
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  /* 背景白色地板 */
+  background-color: #ffffff;
+  color: #222222;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+a {
+  color: #0099ff;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: #0077cc;
+}
+
+/* 1. 3D 内凹墙角架构 /|\ (固定背景) */
+.room-3d-corner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 右墙正面 (灰色梯形) */
+/* 交点在中轴线 X=20vw, Y=30vh 处。向右下方延伸 \ */
+.right-wall-front {
+  position: absolute;
+  top: 0;
+  left: 20vw;
+  width: 80vw;
+  height: 50vh;
+  background: #e2e6ea;
+  /* 顶点坐标：左上(0,0)，右上(100%,0)，右下(100%, 100% -> 50vh)，左中(0, 60% -> 30vh) */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
+}
+
+.whale-bg-container {
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+  width: 50vw;
+  height: 35vh;
+  background: url('../images/bg-whale.svg') no-repeat right center;
+  background-size: contain;
+}
+
+/* 左墙正面 (灰色平行四边形) */
+/* 从交点 (X=20vw, Y=30vh) 向左下方延伸 / */
+.left-wall-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20vw;
+  height: 50vh;
+  background: #dce1e6; /* 稍微深一点增加折角立体感 */
+  /* 右上(100%, 0), 右下(100%, 60% -> 30vh), 左下(0, 100% -> 50vh), 左上(0, 40% -> 20vh) */
+  clip-path: polygon(100% 0, 100% 60%, 0 100%, 0 40%);
+}
+
+/* 左墙顶部 (蓝色三角形) */
+/* 完美衔接在左墙正面的上方，构成完整的 3D 墙壁厚度 */
+.left-wall-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20vw;
+  height: 20vh; /* 正好衔接到左墙正面的左上角 20vh 处 */
+  background: #0099ff;
+  /* 蓝色的 ◤ 三角形: 左上(0,0), 右上(100%, 0), 左下(0, 100%) */
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+/* 2. 等距透视内容容器 */
+.isometric-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 3. 左侧导航区域 (在左边 20vw 的区域内) */
+.sidebar-wall {
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  /* 使得 首页(偏上)能落在墙面上，关于(偏下)能落在地板上 */
+  padding-top: 15vh; 
+  padding-left: 2vw;
+}
+
+/* 右墙面上的 Logo (在鲸鱼的左侧) */
+.site-title-container {
+  position: absolute;
+  top: 10vh; /* 与导航差不多高度 */
+  left: 2vw; /* 距离右墙的左边缘 */
+  z-index: 10;
+  /* 文字透视，与右侧墙面底边 \ 的倾斜度一致 */
+  /* 右墙底边 slope: dy=20vh, dx=80vw. 约 8度角 */
+  transform: rotate(8deg) skewX(-15deg);
+  transform-origin: left top;
+}
+
+.site-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  display: flex;
+  align-items: baseline;
+  letter-spacing: -1px;
+}
+.title-miao { color: #222222; }
+.title-zhai { color: #0099ff; font-size: 2.8rem; margin: 0 4px; }
+.title-houyuan { color: #333333; }
+
+/* 阶梯导航菜单 */
+.nav-menu {
+  position: relative;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  /* 修复：保证阶梯感 */
+}
+.nav-item:nth-child(1) { margin-left: 0; }
+.nav-item:nth-child(2) { margin-left: 1.5rem; }
+.nav-item:nth-child(3) { margin-left: 3rem; }
+
+
+/* 极简折线阴影，表示地板上的台阶 */
+.nav-item:nth-child(2)::before,
+.nav-item:nth-child(3)::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 15px;
+  width: 2px;
+  height: 30px;
+  background: rgba(0,0,0,0.1);
+}
+.nav-item:nth-child(2)::after,
+.nav-item:nth-child(3)::after {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 15px;
+  width: 15px;
+  height: 2px;
+  background: rgba(0,0,0,0.1);
+}
+
+.nav-link {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #222222;
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover { color: #0099ff; }
+.nav-link.active {
+  color: #ffffff;
+  background: #0099ff;
+  /* 既然左墙已经是 3D 三角形，首页本身作为墙上的海报/贴片即可 */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 4. 右侧文章区域 */
+.main-content {
+  flex: 1;
+  /* 距离顶部一段距离，让卡片悬浮在右墙的下方边界处交错 */
+  padding: 30vh 5vw 10vh 5vw;
+  position: relative;
+  z-index: 5;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 850px;
+}
+
+/* 5. 3D 玻璃展柜卡片 */
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card {
+  position: relative;
+  border: 3px solid #0099ff;
+  background-color: transparent;
+  padding: 3.5rem 3.5rem 4.5rem 3.5rem;
+  margin-bottom: 5rem;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.post-card:nth-child(odd) { margin-left: 0; }
+.post-card:nth-child(even) { margin-left: 5vw; }
+
+.post-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 15px 15px 0 rgba(0, 153, 255, 0.08);
+}
+
+/* 玻璃展柜内部的白色地板！ */
+/* 右墙底边是向右下 \ 倾斜的，所以这里的地板顶边必须向右下倾斜！ */
+/* 使用 transform: skewY(正角度) 可以完美产生向右下的斜面 */
+.card-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75%; /* 不占满，露出右上角作为透明玻璃区域 */
+  background: #ffffff;
+  transform-origin: left bottom;
+  transform: skewY(8deg); /* 与右侧墙壁下边缘 \ 平行 */
+  z-index: -1;
+  box-shadow: 0 0 10px rgba(0,0,0,0.02);
+}
+
+/* 展柜右上角透明区域的高光折射线 */
+/* 根据设计图，反光方向也是 \ */
+.glass-reflection {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glass-reflection::before,
+.glass-reflection::after {
+  content: '';
+  position: absolute;
+  background-color: #0099ff;
+  transform: rotate(-45deg); /* \ 倾斜方向 */
+  width: 3px;
+}
+
+.glass-reflection::before { top: 0; right: 15px; height: 25px; }
+.glass-reflection::after { top: 8px; right: 5px; height: 25px; }
+
+/* 6. 文章内容排版 */
+.post-card-body { position: relative; z-index: 2; }
+.post-card-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem; }
+.post-card-title a { color: #111111; }
+.post-card-title a:hover { color: #0099ff; }
+
+.post-card-meta { display: flex; gap: 1.5rem; font-size: 0.95rem; color: #666; margin-bottom: 2rem; }
+.post-card-meta i { color: #0099ff; margin-right: 5px; }
+.post-card-meta a { color: #666; }
+
+.post-card-excerpt, .post-card-desc { font-size: 1.05rem; color: #444; line-height: 1.8; margin-bottom: 2rem; text-align: justify; }
+.read-more { font-weight: 800; color: #0099ff; }
+.read-more-arrow { display: inline-block; transition: transform 0.2s; }
+.read-more:hover .read-more-arrow { transform: translateX(5px); }
+
+/* Markdown 页面 */
+.post-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+.post-content { font-size: 1.1rem; color: #333; line-height: 1.8; }
+.post-content h2 { font-size: 1.8rem; margin: 2.5rem 0 1.2rem; border-left: 5px solid #0099ff; padding-left: 15px; }
+.post-content img { max-width: 100%; border: 2px solid #0099ff; margin: 1.5rem 0; }
+.post-content pre { background: rgba(255,255,255,0.4); border: 1px solid rgba(0,153,255,0.3); padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+
+/* 归档分页 */
+.archive-title { font-size: 2.2rem; margin-bottom: 2rem; }
+.archive-year { font-size: 1.6rem; margin: 2rem 0 1rem; color: #0099ff; font-weight: 700; }
+.archive-item { margin: 1.5rem 0; display: flex; align-items: center; }
+.archive-date { font-size: 0.95rem; color: #666; margin-right: 1.5rem; }
+.archive-post-title { font-size: 1.1rem; color: #222; font-weight: 600; }
+.pagination { display: flex; justify-content: center; gap: 0.5rem; margin-top: 4rem; }
+.pagination a, .pagination span { padding: 0.5rem 1rem; border: 2px solid #0099ff; color: #0099ff; font-weight: 700; }
+.pagination span.current { background: #0099ff; color: white; }
+.footer { padding: 3rem 0; font-size: 0.9rem; color: #777; text-align: left; }
+
+@media screen and (max-width: 768px) {
+  .room-3d-corner { display: none; }
+  .sidebar-wall { width: 100%; padding: 5vh 5vw; }
+  .site-title-container { transform: none; margin-bottom: 2rem; }
+  .main-content { padding: 2vh 5vw; }
+  .post-card { margin-left: 0 !important; padding: 2rem; }
+  .card-floor { transform: none; height: 100%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+  .glass-reflection { display: none; }
+}
