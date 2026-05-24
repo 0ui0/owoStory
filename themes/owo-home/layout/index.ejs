@@ -1,0 +1,46 @@
+---
+layout: layout
+---
+<section class="post-list">
+  <% page.posts.each(function(post) { %>
+    <article class="post-card">
+      <div class="post-card-body">
+        <h2 class="post-card-title">
+          <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+        </h2>
+        <div class="post-card-meta">
+          <span class="post-date">
+            <i class="far fa-calendar-alt"></i>
+            <%= date(post.date, 'YYYY-MM-DD') %>
+          </span>
+          <% if (post.categories && post.categories.length) { %>
+            <span class="post-categories">
+              <i class="far fa-folder-open"></i>
+              <% post.categories.each(function(cat) { %>
+                <a href="<%= url_for(cat.path) %>"><%= cat.name %></a>
+              <% }) %>
+            </span>
+          <% } %>
+          <% if (post.tags && post.tags.length) { %>
+            <span class="post-tags">
+              <i class="fas fa-tags"></i>
+              <% post.tags.each(function(tag) { %>
+                <a href="<%= url_for(tag.path) %>"><%= tag.name %></a>
+              <% }) %>
+            </span>
+          <% } %>
+        </div>
+        <% if (post.excerpt) { %>
+          <div class="post-card-excerpt">
+            <%- post.excerpt %>
+          </div>
+        <% } else if (post.description) { %>
+          <p class="post-card-desc"><%= post.description %></p>
+        <% } %>
+        <a href="<%= url_for(post.path) %>" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- partial('partial/pagination') %>

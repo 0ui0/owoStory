@@ -1,0 +1,20 @@
+---
+layout: layout
+---
+<section class="archive-page">
+  <h1 class="archive-title"><i class="far fa-calendar-alt"></i> 归档</h1>
+  <% var year = ''; %>
+  <% page.posts.each(function(post) { %>
+    <% var postYear = date(post.date, 'YYYY'); %>
+    <% if (postYear !== year) { %>
+      <% year = postYear; %>
+      <h2 class="archive-year"><%= year %></h2>
+    <% } %>
+    <div class="archive-item">
+      <span class="archive-date"><%= date(post.date, 'MM-DD') %></span>
+      <a href="<%= url_for(post.path) %>" class="archive-link"><%= post.title %></a>
+    </div>
+  <% }) %>
+</section>
+
+<%- partial('partial/pagination') %>

@@ -1,0 +1,19 @@
+# owo-home 主题配置
+# 蓝白简约 · 二次元小窝
+
+favicon: 
+avatar: 
+since: 2024
+
+menu:
+  首页: /
+  归档: /archives/
+  关于: /about/
+
+social:
+  GitHub: https://github.com/0ui0 || fab fa-github
+
+footer:
+  text: 二次元小窝 · 温暖如初
+
+per_page: 10
