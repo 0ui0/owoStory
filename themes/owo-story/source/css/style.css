@@ -618,6 +618,67 @@ a:hover {
   text-align: left;
 }
 
+/* 7. 文章头部多图九宫格组件 */
+.post-card-thumbs {
+  display: grid;
+  gap: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 320px; /* PC 端限制宽度，不撑满 */
+}
+
+/* 根据图片数量动态调整布局列数 */
+.post-card-thumbs.grid-1 {
+  grid-template-columns: 1fr;
+}
+.post-card-thumbs.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 210px;
+}
+.post-card-thumbs.grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 210px;
+}
+.post-card-thumbs.grid-3,
+.post-card-thumbs.grid-5,
+.post-card-thumbs.grid-6,
+.post-card-thumbs.grid-7,
+.post-card-thumbs.grid-8,
+.post-card-thumbs.grid-9 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* 3D 玻璃风格缩略图 */
+.post-thumb-item {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border: 2px solid #0099ff;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 3px 3px 0 rgba(0, 153, 255, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 1张图时适中的尺寸 */
+.post-card-thumbs.grid-1 .post-thumb-item {
+  width: 150px;
+  height: 150px;
+}
+
+.post-thumb-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(0, 153, 255, 0.15);
+}
+
+.post-thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* =========================================
    响应式设计与交互
 ========================================= */
@@ -753,6 +814,22 @@ a:hover {
 
   .archive-year {
     font-size: 1.3rem;
+  }
+
+  .post-card-thumbs {
+    gap: 6px;
+    margin-bottom: 1.2rem;
+    max-width: 100% !important;
+  }
+
+  .post-card-thumbs.grid-2,
+  .post-card-thumbs.grid-4 {
+    max-width: 100% !important;
+  }
+
+  .post-card-thumbs.grid-1 .post-thumb-item {
+    width: 200px;
+    height: 200px;
   }
 
   /* 移动端底部导航栏样式 */

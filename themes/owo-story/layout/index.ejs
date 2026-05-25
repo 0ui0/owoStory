@@ -38,6 +38,8 @@ layout: layout
           <% } %>
         </div>
         
+        <%- partial('partial/post_thumbs', {post: post}) %>
+        
         <% if (post.excerpt) { %>
           <div class="post-card-excerpt">
             <%- post.excerpt %>
@@ -46,7 +48,7 @@ layout: layout
           <p class="post-card-desc"><%= post.description %></p>
         <% } else { %>
           <div class="post-card-excerpt">
-            <%- post.content.substring(0, 150) %>...
+            <%= strip_html(post.content).substring(0, 150) %>...
           </div>
         <% } %>
         

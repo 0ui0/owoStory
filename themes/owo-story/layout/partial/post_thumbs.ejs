@@ -1,0 +1,24 @@
+<%
+  var getPostImages = function(content, limit) {
+    var imgReg = /<img [^>]*src=['"]([^'"]+)['"]/gi;
+    var images = [];
+    var match;
+    while ((match = imgReg.exec(content)) !== null) {
+      images.push(match[1]);
+      if (images.length >= (limit || 9)) break;
+    }
+    return images;
+  };
+  var postImgs = getPostImages(post.content, 9);
+%>
+<% if (postImgs && postImgs.length > 0) { %>
+  <div class="post-card-thumbs grid-<%= postImgs.length %>">
+    <% postImgs.forEach(function(imgUrl) { %>
+      <div class="post-thumb-item">
+        <a href="<%= url_for(imgUrl) %>" target="_blank" class="post-thumb-link">
+          <img src="<%= url_for(imgUrl) %>" alt="thumbnail" />
+        </a>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
