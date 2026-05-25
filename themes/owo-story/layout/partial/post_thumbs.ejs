@@ -9,14 +9,29 @@
     }
     return images;
   };
+
+  var fixImageUrl = function(imgUrl, p) {
+    if (!imgUrl) return '';
+    if (imgUrl.indexOf('/') === 0 || imgUrl.indexOf('http://') === 0 || imgUrl.indexOf('https://') === 0) {
+      return imgUrl;
+    }
+    var postPath = p.path || '';
+    postPath = postPath.replace(/index\.html$/, '').replace(/\.html$/, '');
+    if (postPath && postPath.charAt(postPath.length - 1) !== '/') {
+      postPath += '/';
+    }
+    return '/' + postPath + imgUrl;
+  };
+
   var postImgs = getPostImages(post.content, 9);
 %>
 <% if (postImgs && postImgs.length > 0) { %>
   <div class="post-card-thumbs grid-<%= postImgs.length %>">
     <% postImgs.forEach(function(imgUrl) { %>
+      <% var realImgUrl = fixImageUrl(imgUrl, post); %>
       <div class="post-thumb-item">
-        <a href="<%= url_for(imgUrl) %>" target="_blank" class="post-thumb-link">
-          <img src="<%= url_for(imgUrl) %>" alt="thumbnail" />
+        <a href="<%= url_for(realImgUrl) %>" target="_blank" class="post-thumb-link">
+          <img src="<%= url_for(realImgUrl) %>" alt="thumbnail" />
         </a>
       </div>
     <% }) %>
