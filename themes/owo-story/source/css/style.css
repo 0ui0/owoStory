@@ -108,8 +108,9 @@ a:hover {
 .sidebar-wall {
   width: 20vw;
   height: 100vh;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -270,6 +271,7 @@ a:hover {
 /* 4. 右侧文章区域 */
 .main-content {
   flex: 1;
+  margin-left: 20vw;
   /* 距离顶部一段距离，让卡片悬浮在右墙的下方边界处交错 */
   padding: 30vh 5vw 10vh 5vw;
   position: relative;
@@ -517,12 +519,45 @@ a:hover {
   margin: 1.5rem 0;
 }
 
-.post-content pre {
+.post-content pre,
+.post-content .highlight {
   background: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(0, 153, 255, 0.3);
   padding: 1.5rem;
   overflow-x: auto;
   margin: 1.5rem 0;
+  max-width: 100%;
+}
+
+.post-content .highlight table {
+  margin: 0;
+  width: auto;
+  border: none;
+}
+
+.post-content .highlight td {
+  border: none;
+  padding: 0;
+}
+
+.post-content .highlight .gutter {
+  user-select: none;
+  padding-right: 15px;
+  border-right: 1px solid rgba(0, 153, 255, 0.2);
+  color: #999;
+  text-align: right;
+}
+
+.post-content .highlight .code {
+  padding-left: 15px;
+}
+
+.post-content .highlight pre {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  overflow: visible;
 }
 
 /* 归档分页 */
@@ -663,7 +698,7 @@ a:hover {
 
   .post-card {
     margin-left: 0 !important;
-    padding: 2rem;
+    padding: 1.2rem;
     background: transparent;
   }
 
@@ -681,6 +716,43 @@ a:hover {
 
   .glass-reflection {
     display: none;
+  }
+
+  /* 移动端字体自适应精致调优 */
+  .post-card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .post-card-meta {
+    gap: 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .post-card-excerpt,
+  .post-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .post-title {
+    font-size: 1.7rem;
+  }
+
+  .post-content {
+    font-size: 1.0rem;
+    line-height: 1.7;
+  }
+
+  .archive-title {
+    font-size: 1.6rem;
+  }
+
+  .archive-year {
+    font-size: 1.3rem;
   }
 
   /* 移动端底部导航栏样式 */
