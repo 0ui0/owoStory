@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从高中物理浅谈经典力学 - 喵宅后院</title>
+<meta name="description" content="">
+<meta name="keywords" content="QQ空间迁移">
+
+<!-- Google Fonts Outfit & Noto Sans SC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+  <!-- 3D 内凹墙角 /|\ 架构背景 -->
+  <div class="room-3d-corner">
+    <!-- 右墙正面 (灰色梯形) -->
+    <div class="right-wall-front">
+      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
+      <div class="site-title-container">
+        <a href="/" class="site-title">
+          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
+        </a>
+      </div>
+      <!-- 鲸鱼背景 -->
+      <div class="whale-bg-container"></div>
+    </div>
+    
+    <!-- 左墙正面 (灰色平行四边形) -->
+    <div class="left-wall-front"></div>
+    <!-- 左墙顶部 (蓝色三角形) -->
+    <div class="left-wall-top"></div>
+  </div>
+
+  <div class="isometric-container">
+    <!-- 导航栏区域 (位于左半部分) -->
+    <header class="sidebar-wall" id="sidebar-wall">
+  <div class="sidebar-inner">
+    <!-- 移动端迷你菜单按钮 -->
+    <div class="mobile-menu-btn" id="mobile-menu-btn">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+      <ul class="nav-list">
+        
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/" class="nav-link" data-text="首页">
+                <span class="link-text">首页</span>
+              </a>
+            </li>
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/archives/" class="nav-link" data-text="归档">
+                <span class="link-text">归档</span>
+              </a>
+            </li>
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/about/" class="nav-link" data-text="关于">
+                <span class="link-text">关于</span>
+              </a>
+            </li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var wall = document.getElementById('sidebar-wall');
+    if(btn && wall) {
+      btn.addEventListener('click', function() {
+        wall.classList.toggle('expanded');
+      });
+    }
+  });
+</script>
+
+    
+    <!-- 文章区域 (位于右半部分) -->
+    <main class="main-content">
+      <div class="content-container">
+        <article class="post-card post-detail">
+  <div class="glass-reflection"></div>
+  <div class="card-floor"></div>
+  
+  <div class="post-card-body">
+    <h1 class="post-title">从高中物理浅谈经典力学</h1>
+    
+    <div class="post-card-meta">
+      <span class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        2023-11-09
+      </span>
+      
+        <span class="post-categories">
+          <i class="far fa-folder-open"></i>
+          
+            <a href="/categories/%E6%9D%A5%E8%87%AAQQ%E7%A9%BA%E9%97%B4/">来自QQ空间</a>
+          
+        </span>
+      
+      
+        <span class="post-tags">
+          <i class="fas fa-tags"></i>
+          
+            <a href="/tags/QQ%E7%A9%BA%E9%97%B4%E8%BF%81%E7%A7%BB/">QQ空间迁移</a>
+          
+        </span>
+      
+    </div>
+    
+    <div class="post-content">
+      <blockquote>
+</blockquote>
+<p>一、基本思路<br>当我们纵观整个理学理论的全貌的时候，我们不得不佩服牛顿老哥天马行空的思维所创造下的这些东西。它们是那么神奇，又是那么相对精确地刻画了这个世界。更重要的是，它们所诞生的逻辑链是那样的清晰。<br>而这一切的起源，都来源于“运动本身”的这一基本现象，这是一切逻辑的起点。这就是一个点，所牵扯出的千丝万缕的“线”。<br>不信？那你不妨看看与之相关的这一系列公式都在说些什么吧（以下公式是简化版，不包括比例系数修正和夹角修正）：<br>力的大小 &#x3D; 质量 * 加速度（牛顿第二定律）功 &#x3D; 力的大小 * 位移动能 &#x3D; 0.5 * 质量 * 速度的平方动量 &#x3D; 质量 * 速度<br>在研究一切公式的时候都我喜欢直接用中文，因为少了字母的转换，我们可以非常方便地看出其中的显而易见的关系。<br>当我们仔细观察上面的物理量，是不是都无不和运动相关？如果我们再加上运动学的位移、时间、速度、加速度这些的基本关系公式，就能够构建起整个力学大厦。<br>我们现在删去三个量，即速度、加速度、和时间。<br>因为速度和加速度能被其它量表示<br>而时间，我在此前的《我们如何抓住时间》的日志中介绍过，时间是运动本身的数字化衡量，用来构建我们观察运动关系的桥梁，即时间就是一个辅助量。<br>那么，便只剩下位移了，而位移这个量很好理解，也算是生活中的基本量……。<br>再加上一些生活中的基本量，比如质量、密度、体积……<br>所谓大道至简，现在有没有一种一生二，二生三，三生万物的感觉？<br>那现在有一个很自然的问题，牛顿是怎么想到这些玩意儿的？<br>其实我此前提过“量化分析”的观点里，用同样的思维能够很好地理解这个思维线索和链条。<br>第一步，给一个生活中（研究中）能够客观感知的抽象的量，想办法用一个数字来表示（例如力这个东西，牛顿试图用一个公式来量化它，我得给它一个值。那么质量显然是首当其冲能够想到的，因为自古以来生活中就一直在用，那么力&#x3D;质量吗？显然不对，因为不符合实际情况，于是牛顿老哥在此基础上进行了探索和思考，结合运动下力的变化情况做了一些实验，给出了力的定义式）<br>第二步，如果凑巧得出的公式比较复杂，给其中的每个部分起一个名字。比如合外力所做的功等于物体动能的改变，这里的功和动能就都是被命名的。因为你如果说功等于一半的质量乘速度的平方的改变这种拗口的话是可能会被掐死的……好了，那就直接给一个名字，就叫动能好了。<br>然后既然力等于质量乘加速度<br>动能等于一半的质量乘速度的平方<br>那……你说牛顿老哥既然想到了把质量乘加速度叫做力，那么力为什么不等于质量乘速度呢？<br>没问题，质量乘速度也有一个新名字，叫做动量……<br> 好了，乱七八糟的名字规定好了<br>第三步，结合客观实际验证新的概念的公式是否成立，是否满足研究的需要。那么用质量乘速度来定义力可能就不满足事实际情况而被否决了……<br>大致上的思路就是这个流程，好了，当我们用代数式构建了一些基本量以后，配合上数学里面等式的性质给它换来换去，就可以玩了……<br>比如 动能 &#x3D; 0.5 * 动量 * 速度 &#x3D; 动量 * 一半的速度 &#x3D;  一半的动量 * 速度……<br>再比如 向心力 &#x3D; 质量 * 线速度 * 角速度……<br>除了发明新的物理概念还不够，还要发明新的数学工具！<br>这个时候向量就登场了。<br>和数字和字母结合的代数式表示“大小关系”的公式比起来，有向量的式子能够很方便的表示上面这些概念的“位置关系”。因为向量存储了“位置信息”，也就是常说的向量又有大小，又有方向。<br>同时也规定了上面的一些量是带有位置信息的，比如力、动量等等……<br>除了上面这些，爱因斯坦还搞了一个质能关系：<br>即 能量 &#x3D; 质量 * 光速的平方（这个下次再聊）<br>二、坐标系、参考系和建模（伽利略变换和洛伦兹变换）<br>当走出经典力学而来到相对论的时候，我们会站在更高的思维角度，当我们变换参考系，把镜头拉远，从更远处、更宏观的角度观察，我们会发现牛顿的力学公式开始不准了。实际上牛顿定律提出的概念，以及牛顿力学公式本身，是宏观高速现象在微观低速情况下的特殊情况（注意这里的微观不是微观粒子那种尺度的微观，而是相对高速而言的），如果要回归到宏观，还要加上被省略掉的一部分量。这也是现实中物理实验存在的瓶颈，会受制于宏观大环境的影响而造成结论的信息丢失。<br>那么，唯一的办法就是，在更复杂的宏观环境下，重新研究相同的概念，而最优情况下，应该能够找到二者相互转化的关系。<br>我们前面提到，后续的公式都是由基本公式生成的，如果基本公式变了的话，后续的公式也就要做相应的调整。<br>那么谁变了？<br>是时间。这个在我们前面提到的作为比较运动状态的辅助量，它也并不是始终不变的。因为地球上的时间实际上是天体运动来刻画的。天体对我们而言超级大，它们的运动误差可以忽略不计，但是但我们在研究类似天体这么大同等级别或者更高基本的东西的时候（天体的误差可能还不够明显，高速运动的粒子比较明显），传统时间概念产生的运动误差就不能被忽略了。<br>那么，时间差了多少？<br>根据洛伦兹变换，在两个不同惯性参考系下（比如微观和宏观状态下的不同参考系之间），有这样的时间关系：(v是B参考系现对于A参考系的速度)<br> A参考系的时间 &#x3D; 根号下（1-v平方&#x2F;光速平方）的倒数 * (B参考系时间 + v* b参考系位置&#x2F;光速的平方)<br>……<br>好了暂且不管这一串复杂恶心的变换公式，简单起见，不如记成<br>T &#x3D; f(t)好了<br>因为时间变了，所以跟时间有关的所有公式在两个参考系互通的时候，都要用到这个转化公式，乘上变化的系数。于是，原有的一切，至少在计算上，就开始复杂了起来。</p>
+
+    </div>
+  </div>
+</article>
+
+      </div>
+      <footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 - 2026 0ui0</p>
+    <p class="footer-text">喵宅后院 · 温暖如初</p>
+    <p class="power-by">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> &amp; Theme <a href="#">owo-story</a></p>
+  </div>
+</footer>
+
+    </main>
+  </div>
+  
+
+<nav class="bottom-nav">
+  
+    
+      
+      <a href="/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 2)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,90 20,75 20,45 35,32.5 65,17.5 80,45 80,75" /><polyline points="35,32.5 50,60 80,45" /><line x1="50" y1="60" x2="50" y2="90" /><line x1="20" y1="45" x2="50" y2="60" /></g>
+        </svg>
+        <span class="bottom-nav-text">首页</span>
+      </a>
+    
+      
+      <a href="/archives/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 6)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,80 20,65 20,35 50,50 80,35 80,65" /><line x1="50" y1="80" x2="50" y2="50" /><polyline points="20,35 50,20 80,35" /><polyline points="20,35 5,20 35,5 50,20" /><polyline points="50,20 65,5 95,20 80,35" /></g>
+        </svg>
+        <span class="bottom-nav-text">归档</span>
+      </a>
+    
+      
+      <a href="/about/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 0)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,10 40,15 40,25 50,30 60,25 60,15" /><polyline points="40,15 50,20 60,15" /><line x1="50" y1="20" x2="50" y2="30" /><polygon points="50,35 40,40 40,80 50,85 60,80 60,40" /><polyline points="40,40 50,45 60,40" /><line x1="50" y1="45" x2="50" y2="85" /></g>
+        </svg>
+        <span class="bottom-nav-text">关于</span>
+      </a>
+    
+  
+</nav>
+
+</body>
+</html>

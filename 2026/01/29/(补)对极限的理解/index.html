@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>(补)对极限的理解 - 喵宅后院</title>
+<meta name="description" content="">
+<meta name="keywords" content="QQ空间迁移">
+
+<!-- Google Fonts Outfit & Noto Sans SC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+  <!-- 3D 内凹墙角 /|\ 架构背景 -->
+  <div class="room-3d-corner">
+    <!-- 右墙正面 (灰色梯形) -->
+    <div class="right-wall-front">
+      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
+      <div class="site-title-container">
+        <a href="/" class="site-title">
+          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
+        </a>
+      </div>
+      <!-- 鲸鱼背景 -->
+      <div class="whale-bg-container"></div>
+    </div>
+    
+    <!-- 左墙正面 (灰色平行四边形) -->
+    <div class="left-wall-front"></div>
+    <!-- 左墙顶部 (蓝色三角形) -->
+    <div class="left-wall-top"></div>
+  </div>
+
+  <div class="isometric-container">
+    <!-- 导航栏区域 (位于左半部分) -->
+    <header class="sidebar-wall" id="sidebar-wall">
+  <div class="sidebar-inner">
+    <!-- 移动端迷你菜单按钮 -->
+    <div class="mobile-menu-btn" id="mobile-menu-btn">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+      <ul class="nav-list">
+        
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/" class="nav-link" data-text="首页">
+                <span class="link-text">首页</span>
+              </a>
+            </li>
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/archives/" class="nav-link" data-text="归档">
+                <span class="link-text">归档</span>
+              </a>
+            </li>
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/about/" class="nav-link" data-text="关于">
+                <span class="link-text">关于</span>
+              </a>
+            </li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var wall = document.getElementById('sidebar-wall');
+    if(btn && wall) {
+      btn.addEventListener('click', function() {
+        wall.classList.toggle('expanded');
+      });
+    }
+  });
+</script>
+
+    
+    <!-- 文章区域 (位于右半部分) -->
+    <main class="main-content">
+      <div class="content-container">
+        <article class="post-card post-detail">
+  <div class="glass-reflection"></div>
+  <div class="card-floor"></div>
+  
+  <div class="post-card-body">
+    <h1 class="post-title">(补)对极限的理解</h1>
+    
+    <div class="post-card-meta">
+      <span class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        2026-01-29
+      </span>
+      
+        <span class="post-categories">
+          <i class="far fa-folder-open"></i>
+          
+            <a href="/categories/%E6%9D%A5%E8%87%AAQQ%E7%A9%BA%E9%97%B4/">来自QQ空间</a>
+          
+        </span>
+      
+      
+        <span class="post-tags">
+          <i class="fas fa-tags"></i>
+          
+            <a href="/tags/QQ%E7%A9%BA%E9%97%B4%E8%BF%81%E7%A7%BB/">QQ空间迁移</a>
+          
+        </span>
+      
+    </div>
+    
+    <div class="post-content">
+      <blockquote>
+</blockquote>
+<p>那天好像没写成日志，复制一下<br>关于极限的理解，我经常看到一些乱七八糟的解释….说极限是一定可以到达的，或者说极限不能等出来……比比皆是。我总觉得有些人理解的有问题……我谈谈我的看法，虽然是否理解这个概念在实际解决问题的时候一点用都没有。<br>明确两个观点<br>1 极限是否可以到达是不一定的<br>2 极限是客观存在的，是一个值，是可以求的精确值（有前提，要有极限。而这个极限有没有，取决于你自己决定的研究对象，下说明）<br>那么极限是什么？为什么会发明一个lim的符号？之前的符号不够用吗？<br>一个具象化的理解像下面这样：<br>在工业的零件生产中，通常会制定一个精度标准作为零件是否合格的参考。现在试图制定一个精度标准，这个标准足够高，以至于超过现有的工业科技水平所的能达到的最大界限（现在按这个标准制造不出来），但是误差不允许超过epslion（但是零件可以在允许的误差范围内近似达到标准）<br>这个精度标准就是零件能生产到合格程度的最大界限&#x2F;极限。<br>现在回到前面的两个问题<br>1 这个精度客观存在和可求吗?（答：可以，是一个具体值，是数字）<br>2 这个精度是否可以真实达到？（答：不一定，可以或者不可以，看客观限制）<br>那如果现在有一个目前达不到又要表示出来的客观存在的值怎么办？即存在且不可达的情况怎么办？<br>比如你要生产一个完全符合圆周率的圆形零件，这是不可能的，因为物理限制，不可能造出来。但是圆周率的确是是一个确定的，精确值。圆周率这个极限客观存在，且可以求。<br>并且人们可以要求一个靠近且不绝对等于圆周率的误差范围，来判定这个圆形零件是否合格。<br>这是一个宏观物理上面的例子，可能不太贴切，因为极限是微观的。你可能会反驳我说，你这是物理上得不到，因为技术限制或者物理规矩限制。那数学上呢？<br>没错数学上也客观存在数学规矩限制也无法得到的东西。<br>比如对于函数 1&#x2F;x 当x取[em]e402650[&#x2F;em]的时候，你不能直接 1&#x2F;[em]e402650[&#x2F;em] &#x3D;  0 即规定0的倒数是无穷大，因为0不能做除数，否则数学规律会乱掉<br>回到这个问题，那如果现在有一个目前达不到又要表示出来的客观存在的值怎么办？<br>答案是发明新的符号，现有的数学符号任何情况下都匹配不了这种情况<br>于是<br>limx→[em]e402650[&#x2F;em] (1&#x2F;x) &#x3D; 0<br>最后的结论是：<br>因为函数值的不可达，所以不能直接<br>1&#x2F;[em]e402650[&#x2F;em]&#x3D;0<br>又因为这个极限客观存在，总得有一个符号能算出它，所以<br>limx→[em]e402650[&#x2F;em] (1&#x2F;x) &#x3D; 0<br>——以上内容可以直接翻译成数学语言<br>设函数 f(x) 在点 x0 的某个去心邻域内有定义&#8232;如果存在一个实数 A（精度标准），使得：&#8232;对任意给定的 epsilon &gt; 0（无论多小），&#8232;都能找到一个 delta &gt; 0，&#8232;使得只要 0 &lt; |x - x0| &lt; delta，就有 |f(x) - A| &lt; epsilon，（误差不超过允许的误差范围范围）<br>那么就称 A 是 f(x) 当 x 趋近于x0 时的极限，<br>——————<br>还是这两个问题<br>1 它是一个可求的，客观存在精确值吗？如果是，就一定可以求出来（等号等出来，用lim）<br>2 能通过函数自变量的改变求出它（因变量）吗？（不一定，看是否是去心领域）</p>
+
+    </div>
+  </div>
+</article>
+
+      </div>
+      <footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 - 2026 0ui0</p>
+    <p class="footer-text">喵宅后院 · 温暖如初</p>
+    <p class="power-by">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> &amp; Theme <a href="#">owo-story</a></p>
+  </div>
+</footer>
+
+    </main>
+  </div>
+  
+
+<nav class="bottom-nav">
+  
+    
+      
+      <a href="/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 2)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,90 20,75 20,45 35,32.5 65,17.5 80,45 80,75" /><polyline points="35,32.5 50,60 80,45" /><line x1="50" y1="60" x2="50" y2="90" /><line x1="20" y1="45" x2="50" y2="60" /></g>
+        </svg>
+        <span class="bottom-nav-text">首页</span>
+      </a>
+    
+      
+      <a href="/archives/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 6)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,80 20,65 20,35 50,50 80,35 80,65" /><line x1="50" y1="80" x2="50" y2="50" /><polyline points="20,35 50,20 80,35" /><polyline points="20,35 5,20 35,5 50,20" /><polyline points="50,20 65,5 95,20 80,35" /></g>
+        </svg>
+        <span class="bottom-nav-text">归档</span>
+      </a>
+    
+      
+      <a href="/about/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 0)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,10 40,15 40,25 50,30 60,25 60,15" /><polyline points="40,15 50,20 60,15" /><line x1="50" y1="20" x2="50" y2="30" /><polygon points="50,35 40,40 40,80 50,85 60,80 60,40" /><polyline points="40,40 50,45 60,40" /><line x1="50" y1="45" x2="50" y2="85" /></g>
+        </svg>
+        <span class="bottom-nav-text">关于</span>
+      </a>
+    
+  
+</nav>
+
+</body>
+</html>

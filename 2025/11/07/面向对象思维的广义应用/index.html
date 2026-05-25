@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>面向对象思维的广义应用 - 喵宅后院</title>
+<meta name="description" content="">
+<meta name="keywords" content="QQ空间迁移">
+
+<!-- Google Fonts Outfit & Noto Sans SC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+  <!-- 3D 内凹墙角 /|\ 架构背景 -->
+  <div class="room-3d-corner">
+    <!-- 右墙正面 (灰色梯形) -->
+    <div class="right-wall-front">
+      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
+      <div class="site-title-container">
+        <a href="/" class="site-title">
+          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
+        </a>
+      </div>
+      <!-- 鲸鱼背景 -->
+      <div class="whale-bg-container"></div>
+    </div>
+    
+    <!-- 左墙正面 (灰色平行四边形) -->
+    <div class="left-wall-front"></div>
+    <!-- 左墙顶部 (蓝色三角形) -->
+    <div class="left-wall-top"></div>
+  </div>
+
+  <div class="isometric-container">
+    <!-- 导航栏区域 (位于左半部分) -->
+    <header class="sidebar-wall" id="sidebar-wall">
+  <div class="sidebar-inner">
+    <!-- 移动端迷你菜单按钮 -->
+    <div class="mobile-menu-btn" id="mobile-menu-btn">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+    
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+      <ul class="nav-list">
+        
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/" class="nav-link" data-text="首页">
+                <span class="link-text">首页</span>
+              </a>
+            </li>
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/archives/" class="nav-link" data-text="归档">
+                <span class="link-text">归档</span>
+              </a>
+            </li>
+          
+            
+            <li class="nav-item ">
+              
+              <a href="/about/" class="nav-link" data-text="关于">
+                <span class="link-text">关于</span>
+              </a>
+            </li>
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var wall = document.getElementById('sidebar-wall');
+    if(btn && wall) {
+      btn.addEventListener('click', function() {
+        wall.classList.toggle('expanded');
+      });
+    }
+  });
+</script>
+
+    
+    <!-- 文章区域 (位于右半部分) -->
+    <main class="main-content">
+      <div class="content-container">
+        <article class="post-card post-detail">
+  <div class="glass-reflection"></div>
+  <div class="card-floor"></div>
+  
+  <div class="post-card-body">
+    <h1 class="post-title">面向对象思维的广义应用</h1>
+    
+    <div class="post-card-meta">
+      <span class="post-date">
+        <i class="far fa-calendar-alt"></i>
+        2025-11-07
+      </span>
+      
+        <span class="post-categories">
+          <i class="far fa-folder-open"></i>
+          
+            <a href="/categories/%E6%9D%A5%E8%87%AAQQ%E7%A9%BA%E9%97%B4/">来自QQ空间</a>
+          
+        </span>
+      
+      
+        <span class="post-tags">
+          <i class="fas fa-tags"></i>
+          
+            <a href="/tags/QQ%E7%A9%BA%E9%97%B4%E8%BF%81%E7%A7%BB/">QQ空间迁移</a>
+          
+        </span>
+      
+    </div>
+    
+    <div class="post-content">
+      <blockquote>
+</blockquote>
+<p>面向对象思维本身是作为计算机程序里的一种程序设计方法，但是在大量的实践经验中我发现，他可以给学习和探索任何一个概念提供一个非常好的途经，以至于我认为它应该被推广开来作为一种普遍的学习方法论。<br>面向对象的基本思维很简单，通俗的说就是用制作蛋糕的模具制作各自各样的蛋糕，达到量产的目的。<br>首先确定研究对象，这里我们的研究对象有2个<br>我们把模具本身叫做——类Class<br>把生成的具体的某一个蛋糕叫做由类生成的——实例instance<br>由类生成的实例，一定具备2个东西<br>其一是属性，比如长度，宽度，高度，面积，体积，好感度，战斗力，生命值，坐标….诸如此类的一系列可以静态描述模具生产的产品的特征的值<br>其二是方法，和属性这种静态的值不同的是，方法是动作，在程序语言里表现出来就是一个函数，这个函数可以把以上的属性作为输入，然后执行某个逻辑后输出一些值。比如一个动作游戏里，所有的角色实例都有【攻击】这个方法，一旦玩家按下攻击键，程序就会调用【攻击】方法，调用攻击双方的生命值和攻击力等属性进行计算，然后重新调整这些属性。<br>注意，属性和方法是在实例这个产品身上的<br>但是是在类这个模具里里面回规定好的，因此才可以用模具量产<br>同时我们还知道，我们有时候需要多个模具。为了偷懒，避免重新定义一遍类，我们允许类和类之间可以继承。如果B类继承了A类，B类就自动具备A类规定的的所有属性和方法。在继承的基础上，我们可以添加新的属性和方法以此来拓展B类。<br>———<br>好了，以上就是基本概念，那么有什么用呢….<br>这个时候我们要重点强调一下【面向对象】，看到任何一个对象，先问自己，这是什么？<br>是类吗？<br>是实例吗？<br>有哪些属性和方法呢？<br>比如你在ps软件里使用的任何一个工具，比如画笔工具，你都可以在属性面板里调节它的属性，比如颜色、线条粗细……等等，它的方法就表现为你使用它这个动作，它在做什么事情……触类旁通可以很快学会所有的工具<br>再比如数学里的加减乘除，很显然是一个实例的方法<br>那这个实例是什么？类又是什么？<br>向量也有加减乘除吧？<br>它们都具有类似的运算方法，那么它们之间有什么关系呢<br>再深入思考一点，它们如果都是继承自某个父类的话，这个具有共同特征的抽象父类又是什么呢？<br>用这种思路来理解抽象的代数系统（集合的元素+运算 -&gt; 新元素）<br>以及群、环、域的继承关系有会相当大的帮助<br>———<br>注意我们现在有2种学习方法，都很具有参考价值<br>一种是我们已经实现知道了“类”的实现，然后直接学习和使用由这个类生产的实例的属性和方法<br>还有一种是我们已经知道并了解学习了实例，但是我们不知道他的“类”是什么，我们需要根据这个实例的特征推测这个类出这个类<br>或者根据多个之类推测出他们的共同父类<br>也就是正向思维和逆向思维，并且我们知道正向和逆向有时候并不是一对一对应的，有时候是可以一对多的，比如 2的平方是4,4开根号是正正负2<br>我们有这种心里准备可以避免一些麻烦<br>这个逆向的过程也是抽象的过程<br>从我们已知的代数运算 抽象出统一理论——代数系统的这个逻辑（也就是推测它的类），可以帮助我们无师自通研究很多问题<br>——<br>关于性质：<br>研究化学物质的时候，我们会经常提到性质的概念，性质是某个物质表现出来的特殊特征<br>“化学是一门研究物质的组成、结构、性质、以及变化规律的科学”<br>但是我们上面可以看到，在面向对象的类是没有性质这种东西的，它只有<br>属性和方法。<br>属性实际上有点类似于物理性质，是一个静态的，可读的值<br>而像可燃性、腐蚀性这种、可以发光这样的用抽象的特征词描述的性质<br>这种实际上靠的是属性和方法的共同作用约束，这个很自由，程序里可以随便用方法函数去约数它能做什么事情</p>
+
+    </div>
+  </div>
+</article>
+
+      </div>
+      <footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 - 2026 0ui0</p>
+    <p class="footer-text">喵宅后院 · 温暖如初</p>
+    <p class="power-by">Powered by <a href="https://hexo.io" target="_blank">Hexo</a> &amp; Theme <a href="#">owo-story</a></p>
+  </div>
+</footer>
+
+    </main>
+  </div>
+  
+
+<nav class="bottom-nav">
+  
+    
+      
+      <a href="/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 2)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,90 20,75 20,45 35,32.5 65,17.5 80,45 80,75" /><polyline points="35,32.5 50,60 80,45" /><line x1="50" y1="60" x2="50" y2="90" /><line x1="20" y1="45" x2="50" y2="60" /></g>
+        </svg>
+        <span class="bottom-nav-text">首页</span>
+      </a>
+    
+      
+      <a href="/archives/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 6)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,80 20,65 20,35 50,50 80,35 80,65" /><line x1="50" y1="80" x2="50" y2="50" /><polyline points="20,35 50,20 80,35" /><polyline points="20,35 5,20 35,5 50,20" /><polyline points="50,20 65,5 95,20 80,35" /></g>
+        </svg>
+        <span class="bottom-nav-text">归档</span>
+      </a>
+    
+      
+      <a href="/about/" class="bottom-nav-item ">
+        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
+          <g transform="translate(0, 0)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,10 40,15 40,25 50,30 60,25 60,15" /><polyline points="40,15 50,20 60,15" /><line x1="50" y1="20" x2="50" y2="30" /><polygon points="50,35 40,40 40,80 50,85 60,80 60,40" /><polyline points="40,40 50,45 60,40" /><line x1="50" y1="45" x2="50" y2="85" /></g>
+        </svg>
+        <span class="bottom-nav-text">关于</span>
+      </a>
+    
+  
+</nav>
+
+</body>
+</html>
