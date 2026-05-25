@@ -613,37 +613,63 @@ a:hover {
 
 .footer {
   padding: 3rem 0;
-  font-size: 0.9rem;
-  color: #777;
-  text-align: left;
+  text-align: center; /* 居中对齐 */
 }
 
-/* 页脚重置与精致排版 */
-.footer-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-  letter-spacing: -0.5px;
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 居中 */
+  justify-content: center;
 }
 
-.footer-title a {
-  color: #222222;
-  transition: color 0.2s ease;
+/* 第一行：带蓝色边框直角矩形 */
+.footer-btn-container {
+  margin-bottom: 0.8rem;
 }
 
-.footer-title a:hover {
+.footer-btn-rect {
+  display: inline-block;
+  padding: 0.4rem 1.4rem;
+  border: 2px solid #0099ff;
   color: #0099ff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+  background-color: transparent;
+  border-radius: 0; /* 纯直角 */
+  box-shadow: 3px 3px 0 rgba(0, 153, 255, 0.1);
 }
 
-.footer-link a {
+.footer-btn-rect:hover {
+  background-color: #0099ff;
+  color: #ffffff;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(0, 153, 255, 0.15);
+}
+
+/* 第二行：喵宅苑 */
+.footer-miao-link {
+  margin-bottom: 0.4rem;
+}
+
+.footer-miao-link a {
   color: #777777;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.footer-link a:hover {
+.footer-miao-link a:hover {
   color: #0099ff;
+}
+
+/* 第三行：自豪地使用 Hexo 构建 */
+.footer-proud {
+  color: #999999;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 /* 7. 文章头部多图九宫格组件 */
