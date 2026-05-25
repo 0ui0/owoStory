@@ -618,6 +618,34 @@ a:hover {
   text-align: left;
 }
 
+/* 页脚重置与精致排版 */
+.footer-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.5px;
+}
+
+.footer-title a {
+  color: #222222;
+  transition: color 0.2s ease;
+}
+
+.footer-title a:hover {
+  color: #0099ff;
+}
+
+.footer-link a {
+  color: #777777;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-link a:hover {
+  color: #0099ff;
+}
+
 /* 7. 文章头部多图九宫格组件 */
 .post-card-thumbs {
   display: grid;
