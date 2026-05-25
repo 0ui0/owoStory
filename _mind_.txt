@@ -51,3 +51,8 @@
 > [时间:2026/05/25 17:30:00][记忆:啦沐达反馈手机端文章字号过大且局促。我修改了 themes/owo-story/source/css/style.css，将手机端 padding 由 2rem 压缩到 1.2rem，将列表标题字号由 2.2rem 缩小为 1.4rem，并相应缩减了元数据和摘要字体，防止折行问题。最后运行 clean & build，并完成线上部署（gh-pages）和源码同步（master, commit: 8b17d9a）。][总任务：1. 优化手机端字体和内边距适配 (已完成)][关注1:文件themes/owo-story/source/css/style.css,代码片段|>.post-card-title { font-size: 1.4rem; }<|,调查情况:移动端样式覆盖完成，视觉展示更舒展，计划修改:无]
 > [时间:2026/05/25 17:43:00][记忆:根据啦沐达的补充反馈，九宫格在手机端需要支持 100
 > [时间:2026/05/25 17:43:00][记忆:根据啦沐达的补充反馈，九宫格在手机端需要支持 100% 宽度自适应铺满卡片，正文大图依旧保留。我创建了 themes/owo-story/layout/partial/post_thumbs.ejs 用于提取前 9 张图片，并在 index.ejs 和 post.ejs 中引入。在 style.css 中使用 CSS Grid 实现了响应式动态列网格。对手机端配置 max-width: 100% 以拉伸铺满，单图限制 200px。全部编译并通过 hexo deploy 发布线上，同步推送源码到 GitHub (commit: e8013f6)。][总任务：1. 新增九宫格多图预览组件 (已完成) 2. 手机端铺满宽度优化 (已完成)][关注1:文件style.css,代码片段|>.post-card-thumbs { max-width: 100% !important; }<|,调查情况:移动端铺满效果良好，多图时自适应分配列宽，计划修改:无]
+
+> [时间:2026/05/25 17:55:00][记忆:啦沐达询问关于页面的 Markdown 链接格式是否有误。经核对，确实错写成了 (文字)[URL] 的形式，导致不能正常解析。我修改了 source/about/index.md，将所有链接修正为规范的 [文字](URL)。随后运行编译部署并推送最新源码到 master (commit: b0d3104)。][总任务：1. 修正关于页面 Markdown 链接格式 (已完成)][关注1:文件source/about/index.md,代码片段|[喵宅苑](https://www.o-o.zone)|,调查情况:链接均已成功修改并已完成发布,计划修改:无]
+
+
+> [时间:2026/05/25 18:05:00][记忆:为了解决页脚在电脑端偏右对齐失调的问题，我修改了 themes/owo-story/layout/layout.ejs，将 footer.ejs 移入到 content-container 容器内部。并在 style.css 中将页脚样式重构为居中对齐、直角线框 3D 悬浮按钮以及微调颜色对比度。已完成一键 clean、build、deploy 并同步至 GitHub master 分支 (commit: 17522c8)。][总任务：1. 重构页脚为居中对齐并移入主容器 (已完成)][关注1:文件layout.ejs,代码片段|<div class="content-container"><%- body %><%- partial("partial/footer") %></div>|,调查情况:页脚移入容器，完美与卡片对齐并居中显示，计划修改:无]
