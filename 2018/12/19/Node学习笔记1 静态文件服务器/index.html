@@ -135,6 +135,16 @@
     
     
 
+  <div class="post-card-thumbs grid-1">
+    
+      <div class="post-thumb-item">
+        <a href="/Node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01" target="_blank" class="post-thumb-link">
+          <img src="/Node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01" alt="thumbnail" />
+        </a>
+      </div>
+    
+  </div>
+
 
     
     <div class="post-content">
@@ -143,9 +153,7 @@
 <p>http &#x3D; require ‘http’<br>urlLib &#x3D; require ‘url’<br>fs &#x3D; require ‘fs’</p>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>JSON.parse(字符串)<br>Json.stringify(对象)<br>urlLib.parse(req.url,true)&#x3D;{<br>    query:<br>    path:<br>}</p>
 <h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p> #本地www目录<br>server&#x3D;http.createServer (req,res)-&gt;<br>    url &#x3D; urlLib.parse req.url<br>    console.log url.path<br>    fs.readFile www+url.path,(err,data)-&gt;<br>        if err<br>            tip &#x3D;<br>                ‘’’<br>                    <!doctype html><br>                    <head><br>                        <title>404 Not Found</title><br>                        <meta ><br>                    </head><br>                    <body><br>                        <div ><br>                            404 Not Found<br>                        </div><br>                        <style><br>                            body{<br>                                text-align:center;<br>                            }<br>                            #404{<br>                                display:inline-block;<br>                                font-size:20px;<br>                            }<br>                        </style><br>                    </body><br>                ‘’’<br>            res.write tip<br>        else<br>            res.write data<br>        res.end()<br>server.listen 80</p>
-
-
-
+<p><img src="/Node%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01" alt="静态文件服务器_0.jpg Node学习笔记1 静态文件服务器"></p>
 
     </div>
   </div>
