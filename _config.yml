@@ -104,3 +104,7 @@ deploy:
   type: git
   repo: git@github.com:0ui0/owoStory.git
   branch: gh-pages
+
+# Markdown Renderer
+marked:
+  postAsset: true

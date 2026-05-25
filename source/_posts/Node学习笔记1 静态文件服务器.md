@@ -50,6 +50,6 @@ server=http.createServer (req,res)->
         res.end()
 server.listen 80
 
-{% asset_img Node学习笔记1 静态文件服务器_0.jpg Node学习笔记1 静态文件服务器 %}
+![静态文件服务器_0.jpg Node学习笔记1 静态文件服务器](Node学习笔记1)
 
 
