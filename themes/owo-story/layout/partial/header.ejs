@@ -6,54 +6,42 @@
       <div class="hamburger-line"></div>
       <div class="hamburger-line"></div>
     </div>
-    
+
     <!-- 导航菜单 -->
     <nav class="nav-menu">
       <ul class="nav-list">
         <% if (theme.menu) { %>
           <% for (var name in theme.menu) { %>
-            <% 
-               var link = theme.menu[name];
-               var isActive = false;
-               if (link === '/' && is_home()) {
-                 isActive = true;
-               } else if (link !== '/') {
-                 var cleanPath = page.path.replace(/index\.html$/, '');
-                 var cleanLink = link.replace(/^\/|\/$/g, '');
-                 if (cleanPath.startsWith(cleanLink)) {
-                   isActive = true;
-                 }
-               }
-            %>
-            <li class="nav-item <%= isActive ? 'active' : '' %>">
-              <% if (isActive) { %>
-                <!-- 内联 SVG 确保 100% 渲染立体三角形，避免被背景色或URL转义影响 -->
-                <div class="nav-3d-wedge-bg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" width="100%" height="100%">
-                    <!-- 蓝色实心正面 (直角三角形 ◣) -->
-                    <polygon points="10,20 10,110 180,110" fill="#0099ff"/>
-                    <!-- 底部蓝色镂空底面 -->
-                    <polyline points="10,110 50,140 220,140 180,110" fill="none" stroke="#0099ff" stroke-width="2"/>
-                  </svg>
-                </div>
+            <% var link=theme.menu[name]; var isActive=false; if (link==='/' && is_home()) { isActive=true; } else if
+              (link !=='/' ) { var cleanPath=page.path.replace(/index\.html$/, '' ); var
+              cleanLink=link.replace(/^\/|\/$/g, '' ); if (cleanPath.startsWith(cleanLink)) { isActive=true; } } %>
+              <li class="nav-item <%= isActive ? 'active' : '' %>">
+                <% if (isActive) { %>
+                  <!-- 内联 SVG 确保 100% 渲染立体三角形，避免被背景色或URL转义影响 -->
+                  <div class="nav-3d-wedge-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" width="100%" height="100%">
+                      <!-- 蓝色实心正面 (直角三角形 ◣) -->
+                      <polygon points="10,20 10,110 180,110" fill="#0099ff" />
+                      <!-- 底部蓝色镂空底面 -->
+                      <polyline points="10,110 50,140 220,140 180,110" fill="none" stroke="#0099ff" stroke-width="2" />
+                    </svg>
+                  </div>
+                  <% } %>
+                    <a href="<%= url_for(link) %>" class="nav-link" data-text="<%= name %>"><span class="link-text"><%= name %></span></a>
+              </li>
               <% } %>
-              <a href="<%= url_for(link) %>" class="nav-link" data-text="<%= name %>">
-                <span class="link-text"><%= name %></span>
-              </a>
-            </li>
-          <% } %>
-        <% } %>
+                <% } %>
       </ul>
     </nav>
   </div>
 </header>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     var btn = document.getElementById('mobile-menu-btn');
     var wall = document.getElementById('sidebar-wall');
-    if(btn && wall) {
-      btn.addEventListener('click', function() {
+    if (btn && wall) {
+      btn.addEventListener('click', function () {
         wall.classList.toggle('expanded');
       });
     }

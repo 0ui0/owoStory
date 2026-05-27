@@ -7,6 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  letter-spacing: 0.15em;
 }
 
 html,
@@ -18,7 +19,7 @@ body {
   font-family: 'Outfit', 'Noto Sans SC', sans-serif;
   /* 背景白色地板 */
   background-color: #ffffff;
-  color: #222222;
+  color: #555555;
   min-height: 100vh;
   line-height: 1.6;
   position: relative;
@@ -53,7 +54,7 @@ a:hover {
   left: 20vw;
   width: 80vw;
   height: 50vh;
-  background: #e2e6ea;
+  background: linear-gradient(135deg, #e9ecef 0%, #d8dee4 100%);
   /* 顶点坐标：左上(0,0)，右上(100%,0)，右下(100%, 100% -> 50vh)，左中(0, 60% -> 30vh) */
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
 }
@@ -76,7 +77,7 @@ a:hover {
   left: 0;
   width: 20vw;
   height: 50vh;
-  background: #dce1e6;
+  background: linear-gradient(135deg, #e2e7ec 0%, #cbd2d9 100%);
   /* 稍微深一点增加折角立体感 */
   /* 右上(100%, 0), 右下(100%, 60% -> 30vh), 左下(0, 100% -> 50vh), 左上(0, 40% -> 20vh) */
   clip-path: polygon(100% 0, 100% 60%, 0 100%, 0 40%);
@@ -140,14 +141,14 @@ a:hover {
 .site-title {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: #333333;
   display: flex;
   align-items: baseline;
   letter-spacing: -1px;
 }
 
 .title-miao {
-  color: #222222;
+  color: #333333;
 }
 
 .title-zhai {
@@ -157,7 +158,7 @@ a:hover {
 }
 
 .title-houyuan {
-  color: #333333;
+  color: #555555;
 }
 
 /* 阶梯导航菜单 */
@@ -196,7 +197,7 @@ a:hover {
 .nav-item:not(.active) .nav-link {
   font-size: 2.5rem;
   font-weight: 900;
-  color: #000000;
+  color: #333333;
   display: inline-block;
   padding: 0;
 }
@@ -243,14 +244,27 @@ a:hover {
   top: 25px;
   /* 放在蓝色三角形内部 */
   left: 25px;
-  color: #000000;
-  /* 设计图黑字 */
+  color: transparent;
+  /* 隐去普通流文字，防止任何基线、换行及空白导致的水平和垂直错位 */
   font-size: 3.2rem;
   font-weight: 900;
   padding: 0;
   display: inline-block;
   z-index: 2;
   /* 确保文字在 SVG 上方 */
+  letter-spacing: -0.02em;
+}
+
+.nav-item.active .nav-link::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #333333;
+  /* 用 absolutely positioned 伪元素对称渲染底层灰色字 */
+  z-index: 2;
+  letter-spacing: inherit;
+  font-weight: inherit;
 }
 
 .nav-item.active .nav-link::after {
@@ -259,13 +273,16 @@ a:hover {
   top: 0;
   left: 0;
   color: #ffffff;
+  /* 用 absolutely positioned 伪元素对称渲染顶层白色字 */
   z-index: 3;
   pointer-events: none;
-  /* 精确匹配蓝色三角形的边界：
+  /* 精确匹配蓝色直角三角形的边界：
      顶点 A(10, 20)  -> 相对于文字(-15px, -5px)
      顶点 B(10, 110) -> 相对于文字(-15px, 85px)
      顶点 C(180, 110)-> 相对于文字(155px, 85px) */
   clip-path: polygon(-15px -5px, -15px 85px, 155px 85px);
+  letter-spacing: inherit;
+  font-weight: inherit;
 }
 
 /* 4. 右侧文章区域 */
@@ -430,7 +447,7 @@ a:hover {
 }
 
 .post-card-title a {
-  color: #111111;
+  color: #333333;
 }
 
 .post-card-title a:hover {
@@ -498,11 +515,12 @@ a:hover {
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
+  color: #333333;
 }
 
 .post-content {
   font-size: 1.1rem;
-  color: #333;
+  color: #555555;
   line-height: 1.8;
 }
 
@@ -511,6 +529,7 @@ a:hover {
   margin: 2.5rem 0 1.2rem;
   border-left: 5px solid #0099ff;
   padding-left: 15px;
+  color: #333333;
 }
 
 .post-content img {
@@ -564,6 +583,7 @@ a:hover {
 .archive-title {
   font-size: 2.2rem;
   margin-bottom: 2rem;
+  color: #333333;
 }
 
 .archive-year {
@@ -587,7 +607,7 @@ a:hover {
 
 .archive-post-title {
   font-size: 1.1rem;
-  color: #222;
+  color: #333333;
   font-weight: 600;
 }
 
@@ -613,13 +633,15 @@ a:hover {
 
 .footer {
   padding: 3rem 0;
-  text-align: center; /* 居中对齐 */
+  text-align: center;
+  /* 居中对齐 */
 }
 
 .footer-inner {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 居中 */
+  align-items: center;
+  /* 居中 */
   justify-content: center;
 }
 
@@ -638,7 +660,8 @@ a:hover {
   font-size: 0.9rem;
   transition: all 0.25s ease;
   background-color: transparent;
-  border-radius: 0; /* 纯直角 */
+  border-radius: 0;
+  /* 纯直角 */
   box-shadow: 3px 3px 0 rgba(0, 153, 255, 0.1);
 }
 
@@ -678,21 +701,25 @@ a:hover {
   gap: 8px;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
-  max-width: 320px; /* PC 端限制宽度，不撑满 */
+  max-width: 320px;
+  /* PC 端限制宽度，不撑满 */
 }
 
 /* 根据图片数量动态调整布局列数 */
 .post-card-thumbs.grid-1 {
   grid-template-columns: 1fr;
 }
+
 .post-card-thumbs.grid-2 {
   grid-template-columns: repeat(2, 1fr);
   max-width: 210px;
 }
+
 .post-card-thumbs.grid-4 {
   grid-template-columns: repeat(2, 1fr);
   max-width: 210px;
 }
+
 .post-card-thumbs.grid-3,
 .post-card-thumbs.grid-5,
 .post-card-thumbs.grid-6,
