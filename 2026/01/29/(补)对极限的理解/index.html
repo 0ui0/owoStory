@@ -51,54 +51,47 @@
       <div class="hamburger-line"></div>
       <div class="hamburger-line"></div>
     </div>
-    
+
     <!-- 导航菜单 -->
     <nav class="nav-menu">
       <ul class="nav-list">
         
           
             
-            <li class="nav-item ">
+              <li class="nav-item ">
+                
+                    <a href="/" class="nav-link" data-text="首页"><span class="link-text">首页</span></a>
+              </li>
               
-              <a href="/" class="nav-link" data-text="首页">
-                <span class="link-text">首页</span>
-              </a>
-            </li>
-          
             
-            <li class="nav-item ">
+              <li class="nav-item ">
+                
+                    <a href="/archives/" class="nav-link" data-text="归档"><span class="link-text">归档</span></a>
+              </li>
               
-              <a href="/archives/" class="nav-link" data-text="归档">
-                <span class="link-text">归档</span>
-              </a>
-            </li>
-          
             
-            <li class="nav-item ">
+              <li class="nav-item ">
+                
+                    <a href="/about/" class="nav-link" data-text="关于"><span class="link-text">关于</span></a>
+              </li>
               
-              <a href="/about/" class="nav-link" data-text="关于">
-                <span class="link-text">关于</span>
-              </a>
-            </li>
-          
-        
+                
       </ul>
     </nav>
   </div>
 </header>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     var btn = document.getElementById('mobile-menu-btn');
     var wall = document.getElementById('sidebar-wall');
-    if(btn && wall) {
-      btn.addEventListener('click', function() {
+    if (btn && wall) {
+      btn.addEventListener('click', function () {
         wall.classList.toggle('expanded');
       });
     }
   });
 </script>
-
     
     <!-- 文章区域 (位于右半部分) -->
     <main class="main-content">
