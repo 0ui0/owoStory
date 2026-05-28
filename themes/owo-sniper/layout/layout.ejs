@@ -2,16 +2,69 @@
 <html lang="<%= config.language %>">
 <head>
   <%- partial('partial/head') %>
+  <% 
+    var themeColor = theme.theme_color || '#2C77AE';
+    var rgb = [44, 119, 174];
+    try {
+      var c = themeColor.replace(/^#/, '');
+      if (c.length === 3) {
+        c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+      }
+      var num = parseInt(c, 16);
+      if (!isNaN(num)) {
+        rgb = [ (num >> 16) & 255, (num >> 8) & 255, num & 255 ];
+      }
+    } catch(e) {}
+  %>
+  <style>
+    :root {
+      --primary-blue: <%= themeColor %> !important;
+      --primary-blue-rgb: <%= rgb.join(',') %> !important;
+      --primary-blue-alpha: rgba(<%= rgb.join(',') %>, 0.7) !important;
+      --border-blue-alpha: rgba(<%= rgb.join(',') %>, 0.2) !important;
+    }
+    <% if (theme.character && theme.character.bg) { %>
+      <% if (theme.character.bg.pc) { %>
+        @media (min-width: 769px) {
+          .sitting-boy-bg {
+            <%= theme.character.bg.pc.left !== undefined ? 'left: ' + theme.character.bg.pc.left + ' !important;' : '' %>
+            <%= theme.character.bg.pc.width !== undefined ? 'width: ' + theme.character.bg.pc.width + ' !important;' : '' %>
+            <%= theme.character.bg.pc.bottom !== undefined ? 'bottom: ' + theme.character.bg.pc.bottom + ' !important;' : '' %>
+            <%= theme.character.bg.pc.opacity !== undefined ? 'opacity: ' + theme.character.bg.pc.opacity + ' !important;' : '' %>
+          }
+        }
+      <% } %>
+      <% if (theme.character.bg.mobile) { %>
+        @media (max-width: 768px) {
+          .sitting-boy-bg {
+            <%= theme.character.bg.mobile.left !== undefined ? 'left: ' + theme.character.bg.mobile.left + ' !important;' : 'left: auto !important;' %>
+            <%= theme.character.bg.mobile.right !== undefined ? 'right: ' + theme.character.bg.mobile.right + ' !important;' : '' %>
+            <%= theme.character.bg.mobile.bottom !== undefined ? 'bottom: ' + theme.character.bg.mobile.bottom + ' !important;' : '' %>
+            <%= theme.character.bg.mobile.width !== undefined ? 'width: ' + theme.character.bg.mobile.width + ' !important;' : '' %>
+            <%= theme.character.bg.mobile.opacity !== undefined ? 'opacity: ' + theme.character.bg.mobile.opacity + ' !important;' : '' %>
+          }
+        }
+      <% } %>
+    <% } %>
+  </style>
 </head>
 <body>
   <!-- 背景插画：坐着的少年 (置于最底层) -->
   <div class="sitting-boy-bg">
-    <img src="<%- url_for('images/sitting-boy.svg') %>" alt="Sitting Boy">
+    <img src="<%- url_for(theme.character && theme.character.background ? theme.character.background : 'images/sitting-boy.svg') %>" alt="Sitting Character">
   </div>
 
   <!-- 前景插画：狙击枪的少年 (独立层叠上下文，不受 sidebar-wall 约束，移动端专用) -->
-  <div class="sniper-boy-fg mobile-only-boy">
-    <img src="<%- url_for('images/sniper-boy.svg') %>" alt="Sniper Boy">
+  <% 
+    var mobileStyle = '';
+    if (theme.character && theme.character.mobile) {
+      if (theme.character.mobile.left !== undefined) mobileStyle += 'left: ' + theme.character.mobile.left + ';';
+      if (theme.character.mobile.height !== undefined) mobileStyle += 'height: ' + theme.character.mobile.height + ';';
+      if (theme.character.mobile.bottom !== undefined) mobileStyle += 'bottom: ' + theme.character.mobile.bottom + ';';
+    }
+  %>
+  <div class="sniper-boy-fg mobile-only-boy" style="<%= mobileStyle %>">
+    <img src="<%- url_for(theme.character && theme.character.foreground ? theme.character.foreground : 'images/sniper-boy.svg') %>" alt="Foreground Character">
   </div>
 
   <!-- 主页面容器 -->

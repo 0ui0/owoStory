@@ -1,7 +1,15 @@
 <header class="sidebar-wall" id="sidebar-wall">
   <!-- PC 端专用人物，与蓝圆共处于同一层叠上下文以实现 mix-blend-mode -->
-  <div class="sniper-boy-fg pc-only-boy">
-    <img src="<%- url_for('images/sniper-boy.svg') %>" alt="Sniper Boy">
+  <% 
+    var pcStyle = '';
+    if (theme.character && theme.character.pc) {
+      if (theme.character.pc.left !== undefined) pcStyle += 'left: ' + theme.character.pc.left + ';';
+      if (theme.character.pc.height !== undefined) pcStyle += 'height: ' + theme.character.pc.height + ';';
+      if (theme.character.pc.bottom !== undefined) pcStyle += 'bottom: ' + theme.character.pc.bottom + ';';
+    }
+  %>
+  <div class="sniper-boy-fg pc-only-boy" style="<%= pcStyle %>">
+    <img src="<%- url_for(theme.character && theme.character.foreground ? theme.character.foreground : 'images/sniper-boy.svg') %>" alt="Foreground Character">
   </div>
   <div class="sidebar-circle-container" id="sidebar-trigger">
     <!-- 大半圆 (PC端不透明+混合模式，移动端半透明) -->

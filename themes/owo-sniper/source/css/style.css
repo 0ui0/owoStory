@@ -5,8 +5,9 @@
 
 :root {
   --primary-blue: #2C77AE;
-  --primary-blue-alpha: rgba(44, 119, 174, 0.7);
-  --border-blue-alpha: rgba(44, 119, 174, 0.2);
+  --primary-blue-rgb: 44, 119, 174;
+  --primary-blue-alpha: rgba(var(--primary-blue-rgb), 0.7);
+  --border-blue-alpha: rgba(var(--primary-blue-rgb), 0.2);
   --text-dark: #333333;
   --text-gray: #555555;
   --bg-light: #ffffff;
@@ -186,7 +187,7 @@ a:hover {
   height: auto;
   aspect-ratio: 1 / 2;
   border-radius: 0 1000px 1000px 0;
-  border: 1.5px solid rgba(44, 119, 174, 0.45);
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.45);
   border-left: none;
 }
 
@@ -195,7 +196,7 @@ a:hover {
   height: auto;
   aspect-ratio: 1 / 2;
   border-radius: 0 1000px 1000px 0;
-  border: 1.5px solid rgba(44, 119, 174, 0.3);
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.3);
   border-left: none;
 }
 
@@ -527,7 +528,7 @@ a:hover {
   right: -16.5px;
   width: 113px;
   height: 56.5px;
-  border: 1.5px solid rgba(44, 119, 174, 0.35);
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.35);
   border-bottom: none;
   /* 底部切平，形成上半圆 */
   border-radius: 56.5px 56.5px 0 0;
@@ -547,7 +548,7 @@ a:hover {
   left: -12.5px;
   width: 85px;
   height: 42.5px;
-  border: 1.5px solid rgba(44, 119, 174, 0.35);
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.35);
   border-top: none;
   /* 顶部切平，形成下半圆 */
   border-radius: 0 0 42.5px 42.5px;
@@ -602,7 +603,7 @@ a:hover {
   overflow: hidden;
   position: relative;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 3px 3px 0 rgba(44, 119, 174, 0.08);
+  box-shadow: 3px 3px 0 rgba(var(--primary-blue-rgb), 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -614,7 +615,7 @@ a:hover {
 
 .post-thumb-item:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 rgba(44, 119, 174, 0.15);
+  box-shadow: 5px 5px 0 rgba(var(--primary-blue-rgb), 0.15);
 }
 
 .post-thumb-item img {
@@ -752,7 +753,7 @@ a:hover {
 
   .post-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(44, 119, 174, 0.06);
+    box-shadow: 0 10px 30px rgba(var(--primary-blue-rgb), 0.06);
   }
 
   /* 移动端插画自适应 */
@@ -828,7 +829,7 @@ a:hover {
     /* 移动端不采用 mix-blend-mode */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(44, 119, 174, 0.3);
+    box-shadow: 0 0 10px rgba(var(--primary-blue-rgb), 0.3);
   }
 
   .border-line-1 {
@@ -836,7 +837,7 @@ a:hover {
     top: 14px;
     width: 40px;
     height: 40px;
-    border: 1.5px solid rgba(44, 119, 174, 0.45);
+    border: 1.5px solid rgba(var(--primary-blue-rgb), 0.45);
     border-radius: 50%;
     transform: none;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -847,7 +848,7 @@ a:hover {
     top: 8px;
     width: 52px;
     height: 52px;
-    border: 1.5px solid rgba(44, 119, 174, 0.3);
+    border: 1.5px solid rgba(var(--primary-blue-rgb), 0.3);
     border-radius: 50%;
     transform: none;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -932,7 +933,7 @@ a:hover {
     width: 320px;
     height: 320px;
     background-color: var(--primary-blue-alpha);
-    box-shadow: 0 4px 20px rgba(44, 119, 174, 0.2);
+    box-shadow: 0 4px 20px rgba(var(--primary-blue-rgb), 0.2);
     border-radius: 50%;
   }
 
