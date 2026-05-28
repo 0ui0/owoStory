@@ -1,0 +1,70 @@
+---
+layout: layout
+---
+<section class="post-list">
+  <% page.posts.each(function(post, i) { %>
+    <article class="post-card <%= i % 2 === 0 ? 'decor-corner-tr' : 'decor-corner-bl' %>">
+      <div class="post-card-body">
+        <h2 class="post-card-title">
+          <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+        </h2>
+        
+        <!-- 标题下方的非标准直线：半六边形部分靠右，独立颜色，末端大圆环 -->
+        <div class="decor-line-wrapper" style="display: flex; align-items: center; width: 100%; max-width: 400px; margin-bottom: 12px; margin-top: 8px;">
+          <!-- 左侧自适应蓝色直线 -->
+          <div style="flex-grow: 1; height: 1.5px; background-color: #2C77AE;"></div>
+          <!-- 右侧靠右独立的半六边形 + 终点大圆环 -->
+          <svg width="95" height="20" viewBox="0 0 95 20" style="flex-shrink: 0; margin-left: -1px;">
+            <path d="M 0 10 L 5 10 L 11 4 L 26 4 L 32 10 L 40 10 L 46 4 L 61 4 L 67 10 L 78.5 10" fill="none" stroke="#E56E4C" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="85" cy="10" r="6" fill="none" stroke="#2C77AE" stroke-width="2" />
+          </svg>
+        </div>
+
+        <!-- 装饰线下面直接是元数据 -->
+        <div class="post-card-meta">
+          <span class="post-date">
+            <i class="far fa-calendar-alt"></i>
+            <%= date(post.date, 'YYYY-MM-DD') %>
+          </span>
+          <% if (post.categories && post.categories.length) { %>
+            <span class="post-categories">
+              <i class="far fa-folder-open"></i>
+              <% post.categories.each(function(cat) { %>
+                <a href="<%= url_for(cat.path) %>"><%= cat.name %></a>
+              <% }) %>
+            </span>
+          <% } %>
+          <% if (post.tags && post.tags.length) { %>
+            <span class="post-tags">
+              <i class="fas fa-tags"></i>
+              <% post.tags.each(function(tag) { %>
+                <a href="<%= url_for(tag.path) %>"><%= tag.name %></a>
+              <% }) %>
+            </span>
+          <% } %>
+        </div>
+        
+        <!-- 缩略图列表 -->
+        <%- partial('partial/post_thumbs', {post: post}) %>
+        
+        <% if (post.excerpt) { %>
+          <div class="post-card-excerpt">
+            <%- post.excerpt %>
+          </div>
+        <% } else if (post.description) { %>
+          <p class="post-card-desc"><%= post.description %></p>
+        <% } else { %>
+          <div class="post-card-excerpt">
+            <%= strip_html(post.content).substring(0, 150) %>...
+          </div>
+        <% } %>
+        
+        <a href="<%= url_for(post.path) %>" class="read-more">
+          「阅读全文」
+        </a>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<%- partial('partial/pagination') %>

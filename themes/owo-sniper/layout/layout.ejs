@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+  <%- partial('partial/head') %>
+</head>
+<body>
+  <!-- 背景插画：坐着的少年 (置于最底层) -->
+  <div class="sitting-boy-bg">
+    <img src="<%- url_for('images/sitting-boy.svg') %>" alt="Sitting Boy">
+  </div>
+
+  <!-- 前景插画：手持狙击枪的少年已移入 header.ejs 以解决 Safari 的层叠上下文隔离问题 -->
+  <!-- 主页面容器 -->
+  <div class="app-container">
+    <!-- 侧边栏/半圆轮盘导航 -->
+    <%- partial('partial/header') %>
+    
+    <!-- 右侧主要内容区域 -->
+    <main class="main-content">
+      <div class="content-container">
+        <%- body %>
+        <%- partial('partial/footer') %>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

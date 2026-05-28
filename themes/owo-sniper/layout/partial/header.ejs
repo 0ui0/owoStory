@@ -1,0 +1,93 @@
+<header class="sidebar-wall" id="sidebar-wall">
+  <!-- 前景插画：放入 header 内部，使其与导航栏、蓝色半圆处于同一个局部层叠上下文，从而让 multiply 正常混色且 boy 居于两者中间！ -->
+  <div class="sniper-boy-fg">
+    <img src="<%- url_for('images/sniper-boy.svg') %>" alt="Sniper Boy">
+  </div>
+
+  <div class="sidebar-circle-container" id="sidebar-trigger">
+    <!-- 大半圆 (PC端不透明+混合模式，移动端半透明) -->
+    <div class="sidebar-circle-main"></div>
+    
+    <!-- 2条环绕边线 -->
+    <div class="sidebar-border-line border-line-1"></div>
+    <div class="sidebar-border-line border-line-2"></div>
+    
+    <!-- 固定在中间刻度的三角形指示器 -->
+    <div class="sidebar-center-indicator">◀</div>
+    
+    <!-- 导航菜单 -->
+    <nav class="nav-menu">
+      <% 
+        var menuItems = [];
+        if (theme.menu) {
+          for (var name in theme.menu) {
+            var link = theme.menu[name];
+            var isActive = false;
+            if (link === '/' && is_home()) {
+              isActive = true;
+            } else if (link !== '/') {
+              var cleanPath = page.path.replace(/index\.html$/, '');
+              var cleanLink = link.replace(/^\/|\/$/g, '');
+              if (cleanPath.startsWith(cleanLink)) {
+                isActive = true;
+              }
+            }
+            menuItems.push({ name: name, link: link, active: isActive });
+          }
+        }
+
+        // 强制把“首页”或者根路径移动到中间（索引1）
+        if (menuItems.length >= 3) {
+          var homeIdx = -1;
+          for (var j = 0; j < menuItems.length; j++) {
+            if (menuItems[j].link === '/' || menuItems[j].name === '首页') {
+              homeIdx = j;
+              break;
+            }
+          }
+          if (homeIdx !== -1 && homeIdx !== 1) {
+            var homeItem = menuItems.splice(homeIdx, 1)[0];
+            menuItems.splice(1, 0, homeItem);
+          }
+        }
+
+        var activeIndex = 0;
+        for (var k = 0; k < menuItems.length; k++) {
+          if (menuItems[k].active) {
+            activeIndex = k;
+            break;
+          }
+        }
+      %>
+      <ul class="nav-list active-index-<%= activeIndex %>">
+        <% for (var i = 0; i < menuItems.length; i++) { %>
+          <li class="nav-item <%= menuItems[i].active ? 'active' : '' %>">
+            <a href="<%= url_for(menuItems[i].link) %>" class="nav-link" data-text="<%= menuItems[i].name %>">
+              <span class="link-text"><%= menuItems[i].name %></span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var trigger = document.getElementById('sidebar-trigger');
+    var wall = document.getElementById('sidebar-wall');
+    if (trigger && wall) {
+      trigger.addEventListener('click', function (e) {
+        // 如果是手机端（屏幕宽度小于等于 768px）
+        if (window.innerWidth <= 768) {
+          // 排除掉直接点击链接的情况
+          if (e.target.tagName.toLowerCase() !== 'a' && !e.target.closest('a')) {
+            e.preventDefault();
+            e.stopPropagation();
+            wall.classList.toggle('expanded');
+          }
+        }
+      });
+    }
+  });
+</script>

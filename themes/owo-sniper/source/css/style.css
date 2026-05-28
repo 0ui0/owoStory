@@ -1,0 +1,944 @@
+/* 
+   owo-sniper theme style system
+   Design Aesthetic: Flat Geometric, Sci-fi 2D layering, Accent Blue.
+*/
+
+:root {
+  --primary-blue: #2C77AE;
+  --primary-blue-alpha: rgba(44, 119, 174, 0.7);
+  --border-blue-alpha: rgba(44, 119, 174, 0.2);
+  --text-dark: #333333;
+  --text-gray: #555555;
+  --bg-light: #ffffff;
+  /* PC端保持白色纯净背景 */
+  --card-bg: #ffffff;
+  --card-border: #eef2f6;
+  --font-family: 'Outfit', 'Noto Sans SC', -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.05em;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-light);
+  color: var(--text-gray);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #1e5a87;
+}
+
+/* ==========================================================================
+   Illustration Layering (插画图层关系)
+   ========================================================================== */
+
+/* 背景插画：坐着的少年 */
+.sitting-boy-bg {
+  position: fixed;
+  left: 32vw;
+  width: 68vw;
+  bottom: 0;
+  opacity: 0.12;
+  z-index: -2;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.sitting-boy-bg img {
+  width: 100%;
+  height: auto;
+}
+
+/* 前景插画：狙击枪的少年 (撑满可视区高度，高大威猛) */
+.sniper-boy-fg {
+  position: fixed;
+  left: 35vh;
+  bottom: 0;
+  top: auto;
+  height: 96vh;
+  /* 显式高度，比可视区高度小一点 */
+  width: auto;
+  /* 处于大半圆(10)的下方，归为底层 */
+  pointer-events: none;
+}
+
+.sniper-boy-fg img {
+  height: 100% !important;
+  width: auto !important;
+  /* 保证原比例自动缩放，枪管极长伸出 */
+  display: block;
+}
+
+/* ==========================================================================
+   Main Layout Structure (主布局结构)
+   ========================================================================== */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 右侧主内容区域 */
+.main-content {
+  position: relative;
+  margin-left: 32vw;
+  /* 适配大半圆宽度 */
+  width: 68vw;
+  padding: 10vh 6vw 8vh 2vw;
+  z-index: 5;
+}
+
+.content-container {
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Sidebar & Interactive Dial Navigation (左侧大半圆)
+   ========================================================================== */
+.sidebar-wall {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 25vw;
+  height: 100vh;
+  /* 
+     下调至 z-index: 4，并为右侧 .main-content (5) 添加定位。
+     这样左侧导航和人物在 4 层，右侧文章在 5 层，枪管延伸过去会被文章内容压在下方，避免遮挡文字。
+  */
+  z-index: 4;
+  pointer-events: none;
+  /* 穿透以防阻碍背景点击 */
+}
+
+/* 核心圆盘容器 */
+.sidebar-circle-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  /* 仅激活圆盘内部点击 */
+}
+
+/* PC端大半圆不透明底色 */
+.sidebar-circle-main {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50vh;
+  height: 100vh;
+  /* 大椭圆弧，高度撑满，向右半圆突出 */
+  border-radius: 0 50vh 50vh 0;
+  background-color: var(--primary-blue);
+  z-index: 10;
+  /* 在少年(5)之上，能够覆盖人物 */
+  mix-blend-mode: plus-lighter;
+  /* 混合模式设为【增加/添加】 */
+}
+
+/* 2条外围环绕的半圆弧线 */
+.sidebar-border-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 15;
+  /* 高于少年的 10，细线从人物身上穿过 */
+}
+
+.border-line-1 {
+  top: -2vh;
+  width: 52vh;
+  height: 104vh;
+  border-radius: 0 52vh 52vh 0;
+  border: 1.5px solid rgba(44, 119, 174, 0.45);
+  border-left: none;
+}
+
+.border-line-2 {
+  top: -4vh;
+  width: 54vh;
+  height: 108vh;
+  border-radius: 0 54vh 54vh 0;
+  border: 1.5px solid rgba(44, 119, 174, 0.3);
+  border-left: none;
+}
+
+/* 固定在中间刻度的三角形指示器 */
+.sidebar-center-indicator {
+  position: absolute;
+  top: 50vh;
+  left: 31vh;
+  /* 位于文字右侧，指向中间 active 项 */
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  z-index: 25;
+  pointer-events: none;
+  display: block;
+}
+
+/* 导航菜单容器 */
+.nav-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* 轮盘的旋转中心（圆心在屏幕左边缘垂直居中处） */
+.nav-list {
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 50vh;
+  width: 0;
+  height: 0;
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 根据 active-index 类名来偏转大轮盘 */
+.nav-list.active-index-0 {
+  transform: rotate(25deg);
+}
+
+.nav-list.active-index-1 {
+  transform: rotate(0deg);
+}
+
+.nav-list.active-index-2 {
+  transform: rotate(-25deg);
+}
+
+/* 轮盘的子菜单项：绝对重合在圆心，并通过 transform 放射偏置出去 */
+.nav-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: left center;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 三个子项在 PC 端下的各自旋转偏置，使其在不转动时上下平衡 */
+.nav-list li:nth-child(1) {
+  transform: rotate(-25deg) translateX(18vh);
+}
+
+.nav-list li:nth-child(2) {
+  transform: rotate(0deg) translateX(18vh);
+}
+
+.nav-list li:nth-child(3) {
+  transform: rotate(25deg) translateX(18vh);
+}
+
+.nav-link {
+  font-size: 1.5rem;
+  font-weight: 100;
+  color: #ffffff;
+  opacity: 0.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transform-origin: left center;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.nav-link:hover .link-text {
+  transform: scale(1.1);
+  color: #e2e8f0;
+}
+
+.link-text {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* 激活项文字最大，且完全不透明 */
+.nav-item.active .nav-link {
+  font-size: 2.2rem;
+  font-weight: 100;
+  opacity: 1;
+}
+
+/* 三个子项中文字的反向旋转矫正及垂直完美居中，保证任意状态下文字永远保持水平正向且对齐圆心 */
+/* 当选中第一项时（大轮盘 0deg） */
+.nav-list.active-index-0 li:nth-child(1) .nav-link { transform: translateY(-50%) rotate(0deg); }
+.nav-list.active-index-0 li:nth-child(2) .nav-link { transform: translateY(-50%) rotate(-25deg); }
+.nav-list.active-index-0 li:nth-child(3) .nav-link { transform: translateY(-50%) rotate(-50deg); }
+
+/* 当选中第二项时（大轮盘 -25deg） */
+.nav-list.active-index-1 li:nth-child(1) .nav-link { transform: translateY(-50%) rotate(25deg); }
+.nav-list.active-index-1 li:nth-child(2) .nav-link { transform: translateY(-50%) rotate(0deg); }
+.nav-list.active-index-1 li:nth-child(3) .nav-link { transform: translateY(-50%) rotate(-25deg); }
+
+/* 当选中第三项时（大轮盘 -50deg） */
+.nav-list.active-index-2 li:nth-child(1) .nav-link { transform: translateY(-50%) rotate(50deg); }
+.nav-list.active-index-2 li:nth-child(2) .nav-link { transform: translateY(-50%) rotate(25deg); }
+.nav-list.active-index-2 li:nth-child(3) .nav-link { transform: translateY(-50%) rotate(0deg); }
+
+/* 活动项小三角 */
+.active-arrow {
+  font-size: 1.2rem;
+  color: #ffffff;
+  animation: pulse-arrow 1.5s infinite alternate;
+}
+
+@keyframes pulse-arrow {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-4px);
+  }
+}
+
+/* ==========================================================================
+   Post Card System (PC下卡片无背景无边框，极简扁平)
+   ========================================================================== */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-card {
+  position: relative;
+  background-color: transparent;
+  /* PC下没有任何背景 */
+  border: none;
+  /* PC下没有任何边框 */
+  box-shadow: none;
+  /* PC下没有任何阴影 */
+  padding: 0;
+  max-width: 650px;
+  /* 限制卡片宽度，使其右侧紧贴内容边缘 */
+  transition: none;
+}
+
+.post-card:nth-child(even) {
+  margin-left: 5vw;
+  /* 偶数卡片缩进 */
+}
+
+.post-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.post-card-body {
+  position: relative;
+  z-index: 2;
+  padding: 15px 0 40px 0;
+}
+
+/* 标题样式 */
+.post-card-title,
+.post-title,
+.archive-title,
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.post-card-title a {
+  color: var(--text-dark);
+}
+
+.post-card-title a:hover {
+  color: var(--primary-blue);
+}
+
+/* 标题下方的非标准直线 */
+.decor-line-wrapper {
+  width: 100%;
+  max-width: 400px;
+  height: 20px;
+  margin-bottom: 12px;
+}
+
+.decor-line-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 装饰框：三个并排空心正方形 */
+.title-squares {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.decor-square {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #d1d9e0;
+  border-radius: 2px;
+}
+
+/* 文章元数据 */
+.post-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #888888;
+  margin-bottom: 20px;
+}
+
+.post-card-meta i {
+  margin-right: 5px;
+  color: var(--primary-blue-alpha);
+}
+
+.post-card-meta a {
+  color: #666666;
+}
+
+.post-card-meta a:hover {
+  color: var(--primary-blue);
+}
+
+/* 限制文章卡片内容高度，参考旧主题 */
+.post-card-excerpt {
+  max-height: 150px;
+  overflow: hidden;
+  position: relative;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.post-card-desc,
+.post-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 25px;
+  word-wrap: break-word;
+}
+
+/* 限制卡片内的图片最大宽度，防止横向溢出 */
+.post-card-excerpt img,
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.post-content h2,
+.post-content h3 {
+  font-weight: 400;
+  color: var(--text-dark);
+  margin: 30px 0 15px 0;
+}
+
+.post-content p {
+  margin-bottom: 18px;
+}
+
+/* 统一的代码高亮容器防止溢出 */
+.post-content pre,
+.post-content .highlight {
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  margin: 20px 0;
+  padding: 15px;
+}
+
+/* 阅读全文 */
+.read-more {
+  display: block;
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-blue);
+  transition: transform 0.2s ease;
+  margin-top: 15px;
+}
+
+.read-more:hover {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Geometric Small Circles Decoration (卡片小半圆装饰 - 抽象组件)
+   ========================================================================== */
+
+/* 组件类：右上角半圆线圈 */
+.decor-corner-tr::before {
+  content: "";
+  position: absolute;
+  top: -16.5px;
+  right: -16.5px;
+  width: 113px;
+  height: 56.5px;
+  border: 1.5px solid rgba(44, 119, 174, 0.35);
+  border-bottom: none;
+  /* 底部切平，形成上半圆 */
+  border-radius: 56.5px 56.5px 0 0;
+  background: transparent !important;
+  pointer-events: none;
+  z-index: 1;
+  transform: rotate(45deg);
+  /* 旋转45度使底边（斜边）重合 */
+  transform-origin: center bottom;
+}
+
+/* 组件类：左下角较小的半圆线圈 */
+.decor-corner-bl::after {
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  left: -12.5px;
+  width: 85px;
+  height: 42.5px;
+  border: 1.5px solid rgba(44, 119, 174, 0.35);
+  border-top: none;
+  /* 顶部切平，形成下半圆 */
+  border-radius: 0 0 42.5px 42.5px;
+  background: transparent !important;
+  pointer-events: none;
+  z-index: 1;
+  transform: rotate(45deg);
+  /* 旋转45度使底边（斜边）重合 */
+  transform-origin: center top;
+}
+
+/* ==========================================================================
+   Grid Thumbs (九宫格缩略图，参考旧主题)
+   ========================================================================== */
+.post-card-thumbs {
+  display: grid;
+  gap: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 320px;
+  /* 限制九宫格最大宽度 */
+}
+
+.post-card-thumbs.grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.post-card-thumbs.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 210px;
+}
+
+.post-card-thumbs.grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 210px;
+}
+
+.post-card-thumbs.grid-3,
+.post-card-thumbs.grid-5,
+.post-card-thumbs.grid-6,
+.post-card-thumbs.grid-7,
+.post-card-thumbs.grid-8,
+.post-card-thumbs.grid-9 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.post-thumb-item {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border: 2px solid var(--primary-blue);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 3px 3px 0 rgba(44, 119, 174, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 单张图限宽高度 */
+.post-card-thumbs.grid-1 .post-thumb-item {
+  width: 150px;
+  height: 150px;
+}
+
+.post-thumb-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(44, 119, 174, 0.15);
+}
+
+.post-thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   Archive & Pagination System (归档与分页)
+   ========================================================================== */
+.archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.archive-year {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--primary-blue);
+  margin-top: 20px;
+}
+
+.archive-item {
+  display: flex;
+  gap: 20px;
+  font-size: 1.05rem;
+  align-items: center;
+}
+
+.archive-date {
+  color: #999999;
+}
+
+.archive-post-title {
+  color: var(--text-gray);
+}
+
+.archive-post-title:hover {
+  color: var(--primary-blue);
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  background: var(--card-bg);
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--card-border);
+}
+
+.pagination a,
+.pagination span {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #666666;
+}
+
+.pagination .current {
+  background: var(--primary-blue);
+  color: #ffffff;
+}
+
+/* 页脚 */
+.footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--card-border);
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999999;
+}
+
+.footer-btn-container {
+  margin-bottom: 12px;
+}
+
+.footer-btn-rect {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1.5px solid var(--primary-blue);
+  color: var(--primary-blue);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.footer-btn-rect:hover {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+.footer-miao-link {
+  margin-bottom: 6px;
+}
+
+.footer-miao-link a {
+  color: #777777;
+}
+
+/* ==========================================================================
+   Responsive Adaptations (移动端媒体查询适配)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* 移动端下卡片拥有白色背景与边框阴影 */
+  .post-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    margin-bottom: 2rem;
+  }
+
+  .post-card-body {
+    padding: 25px 20px;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(44, 119, 174, 0.06);
+  }
+
+  /* 移动端插画自适应 */
+  .sitting-boy-bg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85vw;
+    opacity: 0.13;
+  }
+
+  .sniper-boy-fg {
+    position: absolute;
+    left: -10vw;
+    top: 50px;
+    width: 120vw;
+    height: auto;
+    max-width: none;
+    z-index: 8;
+  }
+
+  .sniper-boy-fg img {
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  /* 右侧主要内容区域 */
+  .main-content {
+    margin-left: 0;
+    width: 100vw;
+    padding: 180px 20px 40px 20px;
+  }
+
+  .post-card-title {
+    font-size: 1.6rem;
+  }
+
+  /* 移动端轮盘收缩 */
+  .sidebar-wall {
+    width: 100vw;
+    height: 100px;
+    pointer-events: none;
+    z-index: 15;
+    /* 确保移动端控制按钮依然在最上层 */
+  }
+
+  .sidebar-circle-container {
+    pointer-events: auto;
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
+  /* 默认收缩的圆点 */
+  .sidebar-circle-main {
+    left: 20px;
+    top: 20px;
+    width: 28px;
+    height: 28px;
+    transform: none;
+    border-radius: 50%;
+    background-color: var(--primary-blue-alpha);
+    mix-blend-mode: normal;
+    /* 移动端不采用 mix-blend-mode */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(44, 119, 174, 0.3);
+  }
+
+  .border-line-1 {
+    left: 14px;
+    top: 14px;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(44, 119, 174, 0.45);
+    border-radius: 50%;
+    transform: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .border-line-2 {
+    left: 8px;
+    top: 8px;
+    width: 52px;
+    height: 52px;
+    border: 1.5px solid rgba(44, 119, 174, 0.3);
+    border-radius: 50%;
+    transform: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .sidebar-center-indicator {
+    display: none;
+  }
+
+  .nav-menu {
+    right: auto;
+    left: -200px;
+    top: -200px;
+    width: auto;
+    height: auto;
+    transform: none;
+    transition: all 0.4s ease;
+  }
+
+  .nav-list,
+  .nav-list.active-index-0,
+  .nav-list.active-index-1,
+  .nav-list.active-index-2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+  }
+
+  /* 移动端未展开时，强制消除 PC 端的 translateX 偏置，防止其重叠漂移至右边 */
+  .nav-list li:nth-child(1),
+  .nav-list li:nth-child(2),
+  .nav-list li:nth-child(3) {
+    transform: none !important;
+  }
+
+  .nav-link {
+    font-size: 1.3rem !important;
+    color: #ffffff;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .nav-item.active .nav-link {
+    font-size: 1.3rem !important;
+  }
+
+  /* 展开状态 */
+  .sidebar-wall.expanded .sidebar-circle-container {
+    width: 320px;
+    height: 320px;
+  }
+
+  .sidebar-wall.expanded .sidebar-circle-main {
+    left: -100px;
+    top: -100px;
+    width: 320px;
+    height: 320px;
+    background-color: var(--primary-blue-alpha);
+    box-shadow: 0 4px 20px rgba(44, 119, 174, 0.2);
+    border-radius: 50%;
+  }
+
+  .sidebar-wall.expanded .border-line-1 {
+    left: -110px;
+    top: -110px;
+    width: 340px;
+    height: 340px;
+    transform: none;
+    border-radius: 50%;
+  }
+
+  .sidebar-wall.expanded .border-line-2 {
+    left: -120px;
+    top: -120px;
+    width: 360px;
+    height: 360px;
+    transform: none;
+    border-radius: 50%;
+  }
+
+  .sidebar-wall.expanded .nav-menu {
+    left: 20px;
+    top: 20px;
+  }
+
+  .sidebar-wall.expanded .nav-list {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+
+  /* 移动端展开时的放射定位（通过 !important 覆盖 PC 端的 translateX 偏置） */
+  .sidebar-wall.expanded .nav-list li:nth-child(1) {
+    transform: translate(120px, 15px) rotate(-35deg) !important;
+  }
+
+  .sidebar-wall.expanded .nav-list li:nth-child(2) {
+    transform: translate(65px, 45px) rotate(-15deg) !important;
+  }
+
+  .sidebar-wall.expanded .nav-list li:nth-child(3) {
+    transform: translate(5px, 80px) rotate(5deg) !important;
+  }
+}
