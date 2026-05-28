@@ -88,13 +88,23 @@ a:hover {
 
 /* 响应式控制两套人物，解决混合模式与层叠上下文冲突 */
 @media (min-width: 769px) {
-  .mobile-only-boy { display: none !important; }
-  .pc-only-boy { display: flex; }
+  .mobile-only-boy {
+    display: none !important;
+  }
+
+  .pc-only-boy {
+    display: flex;
+  }
 }
 
 @media (max-width: 768px) {
-  .pc-only-boy { display: none !important; }
-  .mobile-only-boy { display: flex; }
+  .pc-only-boy {
+    display: none !important;
+  }
+
+  .mobile-only-boy {
+    display: flex;
+  }
 }
 
 /* ==========================================================================
@@ -309,19 +319,43 @@ a:hover {
 
 /* 三个子项中文字的反向旋转矫正及垂直完美居中，保证任意状态下文字永远保持水平正向且对齐圆心 */
 /* 当选中第一项时（大轮盘 0deg） */
-.nav-list.active-index-0 li:nth-child(1) .nav-link { transform: translateY(-50%) rotate(0deg); }
-.nav-list.active-index-0 li:nth-child(2) .nav-link { transform: translateY(-50%) rotate(-25deg); }
-.nav-list.active-index-0 li:nth-child(3) .nav-link { transform: translateY(-50%) rotate(-50deg); }
+.nav-list.active-index-0 li:nth-child(1) .nav-link {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.nav-list.active-index-0 li:nth-child(2) .nav-link {
+  transform: translateY(-50%) rotate(-25deg);
+}
+
+.nav-list.active-index-0 li:nth-child(3) .nav-link {
+  transform: translateY(-50%) rotate(-50deg);
+}
 
 /* 当选中第二项时（大轮盘 -25deg） */
-.nav-list.active-index-1 li:nth-child(1) .nav-link { transform: translateY(-50%) rotate(25deg); }
-.nav-list.active-index-1 li:nth-child(2) .nav-link { transform: translateY(-50%) rotate(0deg); }
-.nav-list.active-index-1 li:nth-child(3) .nav-link { transform: translateY(-50%) rotate(-25deg); }
+.nav-list.active-index-1 li:nth-child(1) .nav-link {
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.nav-list.active-index-1 li:nth-child(2) .nav-link {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.nav-list.active-index-1 li:nth-child(3) .nav-link {
+  transform: translateY(-50%) rotate(-25deg);
+}
 
 /* 当选中第三项时（大轮盘 -50deg） */
-.nav-list.active-index-2 li:nth-child(1) .nav-link { transform: translateY(-50%) rotate(50deg); }
-.nav-list.active-index-2 li:nth-child(2) .nav-link { transform: translateY(-50%) rotate(25deg); }
-.nav-list.active-index-2 li:nth-child(3) .nav-link { transform: translateY(-50%) rotate(0deg); }
+.nav-list.active-index-2 li:nth-child(1) .nav-link {
+  transform: translateY(-50%) rotate(50deg);
+}
+
+.nav-list.active-index-2 li:nth-child(2) .nav-link {
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.nav-list.active-index-2 li:nth-child(3) .nav-link {
+  transform: translateY(-50%) rotate(0deg);
+}
 
 /* 活动项小三角 */
 .active-arrow {
@@ -733,17 +767,22 @@ a:hover {
    ========================================================================== */
 @media (max-width: 768px) {
 
+  .content-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 3rem;
+  }
+
   /* 移动端偶数卡片保持缩进效果 */
   .post-card:nth-child(even) {
     margin-left: 5vw !important;
   }
 
   .post-card {
-    background: rgba(255, 255, 255, 0.7);
+    /*     background: rgba(255, 255, 255, 0.7);
     border: 1.5px solid rgba(229, 110, 76, 0.3);
     border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); */
     padding: 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
   }
 
@@ -753,7 +792,8 @@ a:hover {
 
   .post-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(var(--primary-blue-rgb), 0.06);
+    /* box-shadow: 0 10px 30px rgba(var(--primary-blue-rgb), 0.06) */
+    ;
   }
 
   /* 移动端插画自适应 */
@@ -798,7 +838,8 @@ a:hover {
   /* 移动端恢复 fixed 脱离文档流 */
   .sidebar-wall {
     position: fixed;
-    top: 0;
+    top: auto;
+    bottom: 0;
     left: 0;
     width: 100vw;
     height: 100px;
@@ -811,7 +852,8 @@ a:hover {
     pointer-events: auto;
     width: 100px;
     height: 100px;
-    top: 0;
+    top: auto;
+    bottom: 0;
     left: 0;
     transform: none;
   }
@@ -819,7 +861,8 @@ a:hover {
   /* 默认收缩的圆点 */
   .sidebar-circle-main {
     left: 20px;
-    top: 20px;
+    top: auto;
+    bottom: 20px;
     width: 28px;
     height: 28px;
     transform: none;
@@ -834,7 +877,8 @@ a:hover {
 
   .border-line-1 {
     left: 14px;
-    top: 14px;
+    top: auto;
+    bottom: 14px;
     width: 40px;
     height: 40px;
     border: 1.5px solid rgba(var(--primary-blue-rgb), 0.45);
@@ -845,7 +889,8 @@ a:hover {
 
   .border-line-2 {
     left: 8px;
-    top: 8px;
+    top: auto;
+    bottom: 8px;
     width: 52px;
     height: 52px;
     border: 1.5px solid rgba(var(--primary-blue-rgb), 0.3);
@@ -858,20 +903,23 @@ a:hover {
     display: none;
   }
 
-  /* 展开时显示三角形指示器 */
+  /* 展开时显示三角形指示器（固定在 1/4 圆弧的中线 -45° 处） */
   .sidebar-wall.expanded .sidebar-center-indicator {
     display: block;
-    top: 0;
+    top: auto;
+    bottom: 0;
     left: 0;
-    font-size: 1rem;
-    transform-origin: 0 50%;
-    transform: rotate(45deg) translateX(170px) translateY(-50%);
+    font-size: 1.2rem;
+    transform-origin: 50% 50%;
+    /* 原点在屏幕左下角(0,0)，中线角度45度，距离外侧往内约60px(总半径约245-60=185px)，指尖自然指向原点 */
+    transform: rotate(-45deg) translateX(180px) translateY(0px);
   }
 
   .nav-menu {
     right: auto;
     left: -200px;
-    top: -200px;
+    top: auto;
+    bottom: -200px;
     width: auto;
     height: auto;
     transform: none;
@@ -884,7 +932,8 @@ a:hover {
   .nav-list.active-index-2 {
     position: absolute;
     left: 0;
-    top: 0;
+    top: auto;
+    bottom: 0;
     width: auto;
     height: auto;
     opacity: 0;
@@ -899,17 +948,12 @@ a:hover {
   .nav-item {
     position: absolute;
     left: 0;
-    top: 0;
-    margin-top: 0;
+    top: auto;
+    bottom: 0;
+    margin-bottom: 0;
   }
 
-  /* 移动端未展开时，强制消除 PC 端的 translateX 偏置，防止其重叠漂移至右边 */
-  .nav-list li:nth-child(1),
-  .nav-list li:nth-child(2),
-  .nav-list li:nth-child(3) {
-    transform: none !important;
-  }
-
+  /* 移动端极坐标体系由 JS 计算并直接注入内联样式，移除原有的 !important 限制 */
   .nav-link {
     font-size: 1.3rem !important;
     color: #ffffff;
@@ -929,7 +973,8 @@ a:hover {
 
   .sidebar-wall.expanded .sidebar-circle-main {
     left: -100px;
-    top: -100px;
+    top: auto;
+    bottom: -100px;
     width: 320px;
     height: 320px;
     background-color: var(--primary-blue-alpha);
@@ -939,7 +984,8 @@ a:hover {
 
   .sidebar-wall.expanded .border-line-1 {
     left: -110px;
-    top: -110px;
+    top: auto;
+    bottom: -110px;
     width: 340px;
     height: 340px;
     transform: none;
@@ -948,56 +994,51 @@ a:hover {
 
   .sidebar-wall.expanded .border-line-2 {
     left: -120px;
-    top: -120px;
+    top: auto;
+    bottom: -120px;
     width: 360px;
     height: 360px;
     transform: none;
     border-radius: 50%;
   }
 
-  /* 展开时 nav-menu 定位到圆心(0,0)，即可视区左上角 */
+  /* 展开时 nav-menu 必须定位到紫色背景圆的视觉中心！
+     .sidebar-circle-main 的左下角是 -100px，宽高 320px，所以中心在 60px。 */
   .sidebar-wall.expanded .nav-menu {
-    left: 0;
-    top: 0;
+    left: 60px;
+    top: auto;
+    bottom: 60px;
   }
 
   .sidebar-wall.expanded .nav-list {
-    opacity: 1;
-    pointer-events: auto;
-    transform: none !important;
+    top: 260px;
+    bottom: auto;
   }
 
-  /* 移动端展开时的表盘扇形极坐标定位
-     圆心 O = (0,0) (可视区左上角)
-     使用 rotate + translateX 进行定位，使文字不仅沿着弧线排布，还具备指向圆心的倾斜效果
-     半径 r=80px，角度分配：1/4 圆弧(0-90°)，均分3段，取中点：15°, 45°, 75° */
-  
-  .sidebar-wall.expanded .nav-list li {
-    transform-origin: 0 50% !important;
+  .sidebar-wall.expanded .nav-list {
+    transform: none !important;
+    /* 保证极坐标系初始状态为正向 */
     left: 0 !important;
     top: 0 !important;
+    bottom: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
-  /* 归档 (15°) */
-  .sidebar-wall.expanded .nav-list li:nth-child(1) {
-    transform: rotate(15deg) translateX(80px) translateY(-50%) !important;
+  .sidebar-wall.expanded .nav-list li {
+    position: absolute !important;
+    transform-origin: 0 50% !important;
+    /* 将旋转基点设为左侧中点，配合 translateY(-50%) 实现完美几何对齐 */
+    left: 0 !important;
+    top: 0 !important;
+    bottom: auto !important;
   }
 
-  /* 首页 (45°) */
-  .sidebar-wall.expanded .nav-list li:nth-child(2) {
-    transform: rotate(45deg) translateX(80px) translateY(-50%) !important;
-  }
-
-  /* 关于 (75°) */
-  .sidebar-wall.expanded .nav-list li:nth-child(3) {
-    transform: rotate(75deg) translateX(80px) translateY(-50%) !important;
-  }
-  
   .sidebar-wall.expanded .nav-link {
-    font-size: 2rem !important;
     transform: none !important;
   }
+
   .sidebar-wall.expanded .nav-item.active .nav-link {
-    font-size: 2.4rem !important;
+    font-size: 1.6rem !important;
   }
 }

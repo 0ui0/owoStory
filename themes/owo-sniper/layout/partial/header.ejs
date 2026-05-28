@@ -83,11 +83,49 @@
   document.addEventListener('DOMContentLoaded', function () {
     var trigger = document.getElementById('sidebar-trigger');
     var wall = document.getElementById('sidebar-wall');
+    
+    // --- 新增：动态计算手机端导航扇形排版 ---
+    function updateMobileNav() {
+      if (window.innerWidth <= 768) {
+        var navList = document.querySelector('.nav-list');
+        var items = navList ? navList.querySelectorAll('.nav-item') : [];
+        var n = items.length;
+        if (n > 0) {
+          var alpha = 90 / n;
+          var R = 160 * (2 / 3); // 虚拟圆半径为实际圆半径(160)的2/3
+
+          items.forEach(function(item, i) {
+            // 切割扇形，取中线角度 (基于水平0度到垂直90度)
+            var angle = (i + 0.5) * alpha;
+            var rad = angle * Math.PI / 180;
+            
+            // 屏幕左下角(0,0)为原点的绝对坐标
+            var x_screen = R * Math.cos(rad);
+            var y_screen = R * Math.sin(rad);
+            
+            // 转换到 .nav-list 本地坐标 (基于屏幕 60,60 的偏移)
+            var tx = x_screen - 60;
+            var ty = 60 - y_screen; // CSS 中 Y轴向下为正
+            
+            // 平移到交点，由于 CSS 已设置 transform-origin: 0 50%，translateY(-50%) 会精确定位左侧中点
+            item.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) translateY(-50%) rotate(' + (-angle) + 'deg)';
+          });
+        }
+      } else {
+        // PC端清除内联样式
+        document.querySelectorAll('.nav-item').forEach(function(item) {
+          item.style.transform = '';
+        });
+      }
+    }
+    
+    updateMobileNav();
+    window.addEventListener('resize', updateMobileNav);
+    // ----------------------------------------
+
     if (trigger && wall) {
       trigger.addEventListener('click', function (e) {
-        // 如果是手机端（屏幕宽度小于等于 768px）
         if (window.innerWidth <= 768) {
-          // 排除掉直接点击链接的情况
           if (e.target.tagName.toLowerCase() !== 'a' && !e.target.closest('a')) {
             e.preventDefault();
             e.stopPropagation();

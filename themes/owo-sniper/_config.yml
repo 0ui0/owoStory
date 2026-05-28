@@ -5,15 +5,16 @@ menu:
 
 # 页面主题主色调蓝色
 #theme_color: '#2C77AE'
-theme_color: '#9169AF'
+#theme_color: '#9169AF'
+theme_color: '#746FDF'
 
 # 导航栏悬浮角色立绘与背景淡影立绘配置
 character:
-  foreground: images/scaramouche-fg2.png     # 前景悬浮角色立绘
+  foreground: images/scaramouche-fg3.png     # 前景悬浮角色立绘
   background: images/scaramouche-bg.png     # 背景淡影角色立绘
   # PC端前景立绘的定位与大小参数 (请包含单位 vh, px, vw 等)
   pc:
-    left: 25vh      # 往左移使其缩入大蓝圆内，以防挡住右侧卡片内容 (默认 35vh)
+    left: 30vh      # 往左移使其缩入大蓝圆内，以防挡住右侧卡片内容 (默认 35vh)
     height: 95vh    # 稍微调整高度，以防太逼近可视区上下边缘 (默认 96vh)
     bottom: 0px
   # 移动端前景立绘的定位与大小参数
