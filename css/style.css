@@ -1,490 +1,506 @@
 /* 
-  owo-story - 100% Exact 3D Inward Corner Theme
-  Created by Antigravity (MikaKa) for Lambda
+   owo-sniper theme style system
+   Design Aesthetic: Flat Geometric, Sci-fi 2D layering, Accent Blue.
 */
 
+:root {
+  --primary-blue: #2C77AE;
+  --primary-blue-rgb: 44, 119, 174;
+  --primary-blue-alpha: rgba(var(--primary-blue-rgb), 0.7);
+  --border-blue-alpha: rgba(var(--primary-blue-rgb), 0.2);
+  --text-dark: #333333;
+  --text-gray: #555555;
+  --bg-light: #ffffff;
+  /* PC端保持白色纯净背景 */
+  --card-bg: #ffffff;
+  --card-border: #eef2f6;
+  --font-family: 'Outfit', 'Noto Sans SC', -apple-system, sans-serif;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.05em;
 }
 
-html,
 body {
+  font-family: var(--font-family);
+  background-color: var(--bg-light);
+  color: var(--text-gray);
   overflow-x: hidden;
-}
-
-body {
-  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
-  /* 背景白色地板 */
-  background-color: #ffffff;
-  color: #555555;
   min-height: 100vh;
-  line-height: 1.6;
-  position: relative;
 }
 
 a {
-  color: #0099ff;
+  color: var(--primary-blue);
   text-decoration: none;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #0077cc;
+  color: #1e5a87;
 }
 
-/* 1. 3D 内凹墙角架构 /|\ (固定背景) */
-.room-3d-corner {
+/* ==========================================================================
+   Illustration Layering (插画图层关系)
+   ========================================================================== */
+
+/* 背景插画：坐着的少年 */
+.sitting-boy-bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 0;
+  left: 32vw;
+  width: 68vw;
+  bottom: 0;
+  opacity: 0.12;
+  z-index: -2;
   pointer-events: none;
-}
-
-/* 右墙正面 (灰色梯形) */
-/* 交点在中轴线 X=20vw, Y=30vh 处。向右下方延伸 \ */
-.right-wall-front {
-  position: absolute;
-  top: 0;
-  left: 20vw;
-  width: 80vw;
-  height: 50vh;
-  background: linear-gradient(135deg, #e9ecef 0%, #d8dee4 100%);
-  /* 顶点坐标：左上(0,0)，右上(100%,0)，右下(100%, 100% -> 50vh)，左中(0, 60% -> 30vh) */
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
-}
-
-.whale-bg-container {
-  position: absolute;
-  top: 5vh;
-  right: 5vw;
-  width: 50vw;
-  height: 35vh;
-  background: url('../images/bg-whale.svg') no-repeat right center;
-  background-size: contain;
-}
-
-/* 左墙正面 (灰色平行四边形) */
-/* 从交点 (X=20vw, Y=30vh) 向左下方延伸 / */
-.left-wall-front {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20vw;
-  height: 50vh;
-  background: linear-gradient(135deg, #e2e7ec 0%, #cbd2d9 100%);
-  /* 稍微深一点增加折角立体感 */
-  /* 右上(100%, 0), 右下(100%, 60% -> 30vh), 左下(0, 100% -> 50vh), 左上(0, 40% -> 20vh) */
-  clip-path: polygon(100% 0, 100% 60%, 0 100%, 0 40%);
-}
-
-/* 左墙顶部 (蓝色三角形) */
-/* 完美衔接在左墙正面的上方，构成完整的 3D 墙壁厚度 */
-.left-wall-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20vw;
-  height: 20vh;
-  /* 正好衔接到左墙正面的左上角 20vh 处 */
-  background: #0099ff;
-  /* 蓝色的 ◤ 三角形: 左上(0,0), 右上(100%, 0), 左下(0, 100%) */
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-
-/* 2. 等距透视内容容器 */
-.isometric-container {
-  position: relative;
-  z-index: 1;
+  transition: opacity 0.3s ease;
   display: flex;
-  min-height: 100vh;
-}
-
-/* 3. 左侧导航区域 (在左边 20vw 的区域内) */
-.sidebar-wall {
-  width: 20vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  /* 垂直居中 */
-  align-items: flex-end;
-  /* 未选中的靠右排列 */
-  padding-right: 2vw;
-  /* 距离中线一点距离 */
-  z-index: 10;
-  /* 确保不被右侧文章区域遮挡 */
 }
 
-/* 右墙面上的 Logo (在鲸鱼的左侧) */
-.site-title-container {
-  position: absolute;
-  top: 10vh;
-  /* 与导航差不多高度 */
-  left: 2vw;
-  /* 距离右墙的左边缘 */
-  z-index: 10;
-  /* 文字透视，与右侧墙面底边 \ 的倾斜度一致 */
-  /* 右墙底边 slope: dy=20vh, dx=80vw. 约 8度角 */
-  transform: rotate(8deg) skewX(-15deg);
-  transform-origin: left top;
-}
-
-.site-title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #333333;
-  display: flex;
-  align-items: baseline;
-  letter-spacing: -1px;
-}
-
-.title-miao {
-  color: #333333;
-}
-
-.title-zhai {
-  color: #0099ff;
-  font-size: 4.0rem;
-  margin: 0 4px;
-}
-
-.title-houyuan {
-  color: #555555;
-}
-
-/* 阶梯导航菜单 */
-.nav-menu {
-  position: relative;
+.sitting-boy-bg img {
   width: 100%;
+  height: auto;
 }
 
-.nav-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  /* 整体靠右 */
-  width: 100%;
-}
-
-.nav-item {
-  position: relative;
-  margin-bottom: 2.5rem;
-}
-
-/* ----------------未选中状态 (排在右侧，无修饰)---------------- */
-.nav-item:not(.active) {
-  margin-right: 2vw;
-  /* 右侧留一点空隙 */
-  transition: transform 0.3s ease;
-}
-
-.nav-item:not(.active):hover {
-  transform: translateX(-10px);
-}
-
-
-
-.nav-item:not(.active) .nav-link {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #333333;
-  display: inline-block;
-  padding: 0;
-}
-
-.nav-item:not(.active) .nav-link:hover {
-  color: #0099ff;
-}
-
-/* ----------------选中状态 (居左变大，完整 SVG 3D 楔形底座)---------------- */
-@keyframes slideIn3D {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.nav-item.active {
-  align-self: flex-start;
-  /* 靠左排列 */
-  width: 250px;
-  height: 150px;
-  margin-left: 2vw;
-  /* 左侧留一点空隙 */
-  animation: slideIn3D 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.nav-3d-wedge-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  /* 在文字下方 */
-}
-
-.nav-item.active .nav-link {
-  position: absolute;
-  top: 25px;
-  /* 放在蓝色三角形内部 */
-  left: 25px;
-  color: transparent;
-  /* 隐去普通流文字，防止任何基线、换行及空白导致的水平和垂直错位 */
-  font-size: 3.2rem;
-  font-weight: 900;
-  padding: 0;
-  display: inline-block;
-  z-index: 2;
-  /* 确保文字在 SVG 上方 */
-  letter-spacing: -0.02em;
-}
-
-.nav-item.active .nav-link::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #333333;
-  /* 用 absolutely positioned 伪元素对称渲染底层灰色字 */
-  z-index: 2;
-  letter-spacing: inherit;
-  font-weight: inherit;
-}
-
-.nav-item.active .nav-link::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #ffffff;
-  /* 用 absolutely positioned 伪元素对称渲染顶层白色字 */
+/* 前景插画：狙击枪的少年 (撑满可视区高度，高大威猛) */
+.sniper-boy-fg {
+  position: fixed;
+  left: 35vh;
+  bottom: 0;
+  top: auto;
+  height: 96vh;
+  /* 显式高度，比可视区高度小一点 */
+  width: auto;
   z-index: 3;
+  /* 在 sidebar-wall(4) 和 main-content(5) 之下，确保不遮挡任何内容 */
   pointer-events: none;
-  /* 精确匹配蓝色直角三角形的边界：
-     顶点 A(10, 20)  -> 相对于文字(-15px, -5px)
-     顶点 B(10, 110) -> 相对于文字(-15px, 85px)
-     顶点 C(180, 110)-> 相对于文字(155px, 85px) */
-  clip-path: polygon(-15px -5px, -15px 85px, 155px 85px);
-  letter-spacing: inherit;
-  font-weight: inherit;
 }
 
-/* 4. 右侧文章区域 */
+.sniper-boy-fg img {
+  height: 100% !important;
+  width: auto !important;
+  /* 保证原比例自动缩放，枪管极长伸出 */
+  display: block;
+}
+
+/* 响应式控制两套人物，解决混合模式与层叠上下文冲突 */
+@media (min-width: 769px) {
+  .mobile-only-boy {
+    display: none !important;
+  }
+
+  .pc-only-boy {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .pc-only-boy {
+    display: none !important;
+  }
+
+  .mobile-only-boy {
+    display: flex;
+  }
+}
+
+/* ==========================================================================
+   Main Layout Structure (主布局结构)
+   ========================================================================== */
+.app-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Sidebar & Interactive Dial Navigation (左侧大半圆)
+   ========================================================================== */
+.sidebar-wall {
+  position: sticky;
+  top: 0;
+  flex: 0 0 35vw;
+  /* 严格限制左侧导航墙为 35vw 宽 */
+  height: 100vh;
+  /* 
+     恢复 z-index: 4 创建层叠上下文，并将内部的 pc-only-boy 和 sidebar-circle-main 一起包裹
+     从而实现混色，同时避免人物遮挡文章。
+  */
+  z-index: 4;
+  pointer-events: none;
+  /* 穿透以防阻碍背景点击 */
+}
+
+/* 右侧主内容区域 */
 .main-content {
-  flex: 1;
-  margin-left: 20vw;
-  /* 距离顶部一段距离，让卡片悬浮在右墙的下方边界处交错 */
-  padding: 30vh 5vw 10vh 5vw;
   position: relative;
+  flex: 1;
+  /* 占据剩余空间 */
+  width: 100%;
+  padding: 10vh 4vw 8vh 0;
   z-index: 5;
 }
 
 .content-container {
+  max-width: 780px;
   width: 100%;
-  max-width: 850px;
+  margin: 0 auto;
 }
 
-/* 5. 3D 玻璃展柜卡片 */
+/* 核心圆盘容器 */
+.sidebar-circle-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  /* 仅激活圆盘内部点击 */
+}
+
+/* PC端大半圆不透明底色 */
+.sidebar-circle-main {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(50vh, 100%);
+  height: auto;
+  aspect-ratio: 1 / 2;
+  /* 大椭圆弧，使用极大值圆角，保证在宽高缩放时始终是完美的半圆形态 */
+  border-radius: 0 1000px 1000px 0;
+  background-color: var(--primary-blue);
+  z-index: 10;
+  /* 在少年(5)之上，能够覆盖人物 */
+  mix-blend-mode: plus-lighter;
+  /* 混合模式设为【增加/添加】 */
+}
+
+/* 2条外围环绕的半圆弧线 */
+.sidebar-border-line {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  pointer-events: none;
+  z-index: 15;
+  /* 高于少年的 10，细线从人物身上穿过 */
+}
+
+.border-line-1 {
+  width: calc(min(50vh, 100%) + 2vh);
+  height: auto;
+  aspect-ratio: 1 / 2;
+  border-radius: 0 1000px 1000px 0;
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.45);
+  border-left: none;
+}
+
+.border-line-2 {
+  width: calc(min(50vh, 100%) + 4vh);
+  height: auto;
+  aspect-ratio: 1 / 2;
+  border-radius: 0 1000px 1000px 0;
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.3);
+  border-left: none;
+}
+
+/* 固定在中间刻度的三角形指示器 */
+.sidebar-center-indicator {
+  position: absolute;
+  top: 50vh;
+  left: calc(min(50vh, 100%) - 19vh);
+  /* 位于文字右侧，指向中间 active 项，距离半圆边缘保持约19vh距离 */
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  z-index: 25;
+  pointer-events: none;
+  display: block;
+}
+
+/* 导航菜单容器 */
+.nav-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* 轮盘的旋转中心（圆心在屏幕左边缘垂直居中处） */
+.nav-list {
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 50vh;
+  width: 0;
+  height: 0;
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 根据 active-index 类名来偏转大轮盘 */
+.nav-list.active-index-0 {
+  transform: rotate(25deg);
+}
+
+.nav-list.active-index-1 {
+  transform: rotate(0deg);
+}
+
+.nav-list.active-index-2 {
+  transform: rotate(-25deg);
+}
+
+/* 轮盘的子菜单项：绝对重合在圆心，并通过 transform 放射偏置出去 */
+.nav-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: left center;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 三个子项在 PC 端下的各自旋转偏置，使其在不转动时上下平衡 */
+.nav-list li:nth-child(1) {
+  transform: rotate(-25deg) translateX(18vh);
+}
+
+.nav-list li:nth-child(2) {
+  transform: rotate(0deg) translateX(18vh);
+}
+
+.nav-list li:nth-child(3) {
+  transform: rotate(25deg) translateX(18vh);
+}
+
+.nav-link {
+  font-size: 1.5rem;
+  font-weight: 100;
+  color: #ffffff;
+  opacity: 0.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transform-origin: left center;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.nav-link:hover .link-text {
+  transform: scale(1.1);
+  color: #e2e8f0;
+}
+
+.link-text {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* 激活项文字最大，且完全不透明 */
+.nav-item.active .nav-link {
+  font-size: 2.2rem;
+  font-weight: 100;
+  opacity: 1;
+}
+
+/* 三个子项中文字的反向旋转矫正及垂直完美居中，保证任意状态下文字永远保持水平正向且对齐圆心 */
+/* 当选中第一项时（大轮盘 0deg） */
+.nav-list.active-index-0 li:nth-child(1) .nav-link {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.nav-list.active-index-0 li:nth-child(2) .nav-link {
+  transform: translateY(-50%) rotate(-25deg);
+}
+
+.nav-list.active-index-0 li:nth-child(3) .nav-link {
+  transform: translateY(-50%) rotate(-50deg);
+}
+
+/* 当选中第二项时（大轮盘 -25deg） */
+.nav-list.active-index-1 li:nth-child(1) .nav-link {
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.nav-list.active-index-1 li:nth-child(2) .nav-link {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.nav-list.active-index-1 li:nth-child(3) .nav-link {
+  transform: translateY(-50%) rotate(-25deg);
+}
+
+/* 当选中第三项时（大轮盘 -50deg） */
+.nav-list.active-index-2 li:nth-child(1) .nav-link {
+  transform: translateY(-50%) rotate(50deg);
+}
+
+.nav-list.active-index-2 li:nth-child(2) .nav-link {
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.nav-list.active-index-2 li:nth-child(3) .nav-link {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+/* 活动项小三角 */
+.active-arrow {
+  font-size: 1.2rem;
+  color: #ffffff;
+  animation: pulse-arrow 1.5s infinite alternate;
+}
+
+@keyframes pulse-arrow {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-4px);
+  }
+}
+
+/* ==========================================================================
+   Post Card System (PC下卡片无背景无边框，极简扁平)
+   ========================================================================== */
 .post-list {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .post-card {
   position: relative;
-  /* 完全透明，去除模糊，仅靠高光表现镜面材质 */
   background-color: transparent;
-  padding: 2rem;
-  margin-bottom: 4rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-left: 20px;
-}
-
-/* 锐利的镜面反光条纹 */
-.post-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* 带有陡峭边缘的锐利线性渐变，模拟镜面反光 */
-  background: linear-gradient(105deg,
-      transparent 0%,
-      transparent 30%,
-      rgba(255, 255, 255, 0.05) 30%,
-      rgba(255, 255, 255, 0.3) 35%,
-      rgba(255, 255, 255, 0) 35.1%,
-      /* 锐利边缘突变 */
-      transparent 37%,
-      rgba(255, 255, 255, 0.05) 37.1%,
-      /* 锐利边缘突变 */
-      rgba(255, 255, 255, 0.15) 39%,
-      rgba(255, 255, 255, 0) 39.1%,
-      /* 锐利边缘突变 */
-      transparent 100%);
-  z-index: 1;
-  /* 在文字（z-index: 2）下方 */
-  pointer-events: none;
-}
-
-/* 用伪元素绘制玻璃边框，z-index: 1 确保它在桌面梯形上方 */
-.post-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 3px solid #0099ff;
-  z-index: 1;
-  pointer-events: none;
-  /* 穿透点击 */
-}
-
-.post-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 15px 15px 0 rgba(0, 153, 255, 0.08);
-}
-
-.post-card:nth-child(odd) {
-  margin-left: 0;
+  /* PC下没有任何背景 */
+  border: none;
+  /* PC下没有任何边框 */
+  box-shadow: none;
+  /* PC下没有任何阴影 */
+  padding: 0;
+  max-width: 650px;
+  /* 限制卡片宽度，使其右侧紧贴内容边缘 */
+  transition: none;
 }
 
 .post-card:nth-child(even) {
   margin-left: 5vw;
+  /* 偶数卡片缩进 */
 }
 
-/* 玻璃展柜内部的白色地板！ */
-/* 右墙底边是向右下 \ 倾斜的，所以这里的地板顶边必须向右下倾斜！ */
-/* 使用 transform: skewY(正角度) 可以完美产生向右下的斜面 */
-.card-floor {
-  position: absolute;
-  /* 恢复自由多边形，扩展容器以绘制超出边界的形状 */
-  top: 0;
-  bottom: -30px;
-  left: -100px;
-  right: -200px;
-  background: #f0f2f5;
-  /* 灰色梯形桌面 */
-  /*
-    使用距底部的固定高度，避免过长文章拉伸：
-    假定桌面深度 (高度) 为 160px。
-    Top-Left Y = calc(100% - 160px)
-    Top-Right Y 下沉 50px = calc(100% - 110px)
-  */
-  clip-path: polygon(60px 100%,
-      300px calc(100% - 160px),
-      calc(100% - 120px) calc(100% - 110px),
-      calc(100% - 160px) 100%);
-  z-index: 0;
+.post-card:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-/* 玻璃反光线 */
-.glass-reflection {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  width: 60px;
-  height: 60px;
-  z-index: 2;
-  /* 确保在边框和桌面之上 */
-  pointer-events: none;
-}
-
-.glass-reflection::before,
-.glass-reflection::after {
-  content: '';
-  position: absolute;
-  background-color: #0099ff;
-  border-radius: 2px;
-  transform: rotate(-40deg);
-  /* 倾斜角度稍微平缓一点 */
-}
-
-/* 左侧长反光线 */
-.glass-reflection::before {
-  top: 0;
-  right: 25px;
-  width: 4px;
-  height: 40px;
-}
-
-/* 右侧短反光线 */
-.glass-reflection::after {
-  top: 15px;
-  right: 5px;
-  width: 4px;
-  height: 20px;
-}
-
-/* 6. 文章内容排版 */
 .post-card-body {
   position: relative;
   z-index: 2;
+  padding: 15px 0 40px 0;
 }
 
-.post-card-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+/* 标题样式 */
+.post-card-title,
+.post-title,
+.archive-title,
+.page-title {
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 5px;
 }
 
 .post-card-title a {
-  color: #333333;
+  color: var(--text-dark);
 }
 
 .post-card-title a:hover {
-  color: #0099ff;
+  color: var(--primary-blue);
 }
 
+/* 标题下方的非标准直线 */
+.decor-line-wrapper {
+  width: 100%;
+  max-width: 400px;
+  height: 20px;
+  margin-bottom: 12px;
+}
+
+.decor-line-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 装饰框：三个并排空心正方形 */
+.title-squares {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.decor-square {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #d1d9e0;
+  border-radius: 2px;
+}
+
+/* 文章元数据 */
 .post-card-meta {
   display: flex;
-  gap: 1.5rem;
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #888888;
+  margin-bottom: 20px;
 }
 
 .post-card-meta i {
-  color: #0099ff;
   margin-right: 5px;
+  color: var(--primary-blue-alpha);
 }
 
 .post-card-meta a {
-  color: #666;
+  color: #666666;
 }
 
-.post-card-excerpt,
-.post-card-desc {
-  font-size: 1.05rem;
-  color: #444;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  text-align: justify;
+.post-card-meta a:hover {
+  color: var(--primary-blue);
 }
 
-/* 限制首页文章卡片的高度，并隐藏溢出，防止图片和长文撑爆卡片 */
+/* 限制文章卡片内容高度，参考旧主题 */
 .post-card-excerpt {
   max-height: 150px;
   overflow: hidden;
   position: relative;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.post-card-desc,
+.post-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 25px;
+  word-wrap: break-word;
 }
 
 /* 限制卡片内的图片最大宽度，防止横向溢出 */
@@ -496,216 +512,100 @@ a:hover {
   margin: 0 auto;
 }
 
-.read-more {
-  font-weight: 800;
-  color: #0099ff;
+.post-content h2,
+.post-content h3 {
+  font-weight: 400;
+  color: var(--text-dark);
+  margin: 30px 0 15px 0;
 }
 
-.read-more-arrow {
-  display: inline-block;
-  transition: transform 0.2s;
+.post-content p {
+  margin-bottom: 18px;
 }
 
-.read-more:hover .read-more-arrow {
-  transform: translateX(5px);
-}
-
-/* Markdown 页面 */
-.post-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: #333333;
-}
-
-.post-content {
-  font-size: 1.1rem;
-  color: #555555;
-  line-height: 1.8;
-}
-
-.post-content h2 {
-  font-size: 1.8rem;
-  margin: 2.5rem 0 1.2rem;
-  border-left: 5px solid #0099ff;
-  padding-left: 15px;
-  color: #333333;
-}
-
-.post-content img {
-  max-width: 100%;
-  border: 2px solid #0099ff;
-  margin: 1.5rem 0;
-}
-
+/* 统一的代码高亮容器防止溢出 */
 .post-content pre,
 .post-content .highlight {
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(0, 153, 255, 0.3);
-  padding: 1.5rem;
-  overflow-x: auto;
-  margin: 1.5rem 0;
   max-width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  margin: 20px 0;
+  padding: 15px;
 }
 
-.post-content .highlight table {
-  margin: 0;
-  width: auto;
-  border: none;
-}
-
-.post-content .highlight td {
-  border: none;
-  padding: 0;
-}
-
-.post-content .highlight .gutter {
-  user-select: none;
-  padding-right: 15px;
-  border-right: 1px solid rgba(0, 153, 255, 0.2);
-  color: #999;
+/* 阅读全文 */
+.read-more {
+  display: block;
   text-align: right;
-}
-
-.post-content .highlight .code {
-  padding-left: 15px;
-}
-
-.post-content .highlight pre {
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  overflow: visible;
-}
-
-/* 归档分页 */
-.archive-title {
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  color: #333333;
-}
-
-.archive-year {
-  font-size: 1.6rem;
-  margin: 2rem 0 1rem;
-  color: #0099ff;
-  font-weight: 700;
-}
-
-.archive-item {
-  margin: 1.5rem 0;
-  display: flex;
-  align-items: center;
-}
-
-.archive-date {
-  font-size: 0.95rem;
-  color: #666;
-  margin-right: 1.5rem;
-}
-
-.archive-post-title {
-  font-size: 1.1rem;
-  color: #333333;
-  font-weight: 600;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 4rem;
-}
-
-.pagination a,
-.pagination span {
-  padding: 0.5rem 1rem;
-  border: 2px solid #0099ff;
-  color: #0099ff;
-  font-weight: 700;
-}
-
-.pagination span.current {
-  background: #0099ff;
-  color: white;
-}
-
-.footer {
-  padding: 3rem 0;
-  text-align: center;
-  /* 居中对齐 */
-}
-
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* 居中 */
-  justify-content: center;
-}
-
-/* 第一行：带蓝色边框直角矩形 */
-.footer-btn-container {
-  margin-bottom: 0.8rem;
-}
-
-.footer-btn-rect {
-  display: inline-block;
-  padding: 0.4rem 1.4rem;
-  border: 2px solid #0099ff;
-  color: #0099ff;
-  font-weight: 700;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.25s ease;
-  background-color: transparent;
-  border-radius: 0;
-  /* 纯直角 */
-  box-shadow: 3px 3px 0 rgba(0, 153, 255, 0.1);
-}
-
-.footer-btn-rect:hover {
-  background-color: #0099ff;
-  color: #ffffff;
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 rgba(0, 153, 255, 0.15);
-}
-
-/* 第二行：喵宅苑 */
-.footer-miao-link {
-  margin-bottom: 0.4rem;
-}
-
-.footer-miao-link a {
-  color: #777777;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  color: var(--primary-blue);
+  transition: transform 0.2s ease;
+  margin-top: 15px;
 }
 
-.footer-miao-link a:hover {
-  color: #0099ff;
+.read-more:hover {
+  transform: translateX(4px);
 }
 
-/* 第三行：自豪地使用 Hexo 构建 */
-.footer-proud {
-  color: #999999;
-  font-size: 0.8rem;
-  font-weight: 400;
+/* ==========================================================================
+   Geometric Small Circles Decoration (卡片小半圆装饰 - 抽象组件)
+   ========================================================================== */
+
+/* 组件类：右上角半圆线圈 */
+.decor-corner-tr::before {
+  content: "";
+  position: absolute;
+  top: -16.5px;
+  right: -16.5px;
+  width: 113px;
+  height: 56.5px;
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.35);
+  border-bottom: none;
+  /* 底部切平，形成上半圆 */
+  border-radius: 56.5px 56.5px 0 0;
+  background: transparent !important;
+  pointer-events: none;
+  z-index: 1;
+  transform: rotate(45deg);
+  /* 旋转45度使底边（斜边）重合 */
+  transform-origin: center bottom;
 }
 
-/* 7. 文章头部多图九宫格组件 */
+/* 组件类：左下角较小的半圆线圈 */
+.decor-corner-bl::after {
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  left: -12.5px;
+  width: 85px;
+  height: 42.5px;
+  border: 1.5px solid rgba(var(--primary-blue-rgb), 0.35);
+  border-top: none;
+  /* 顶部切平，形成下半圆 */
+  border-radius: 0 0 42.5px 42.5px;
+  background: transparent !important;
+  pointer-events: none;
+  z-index: 1;
+  transform: rotate(45deg);
+  /* 旋转45度使底边（斜边）重合 */
+  transform-origin: center top;
+}
+
+/* ==========================================================================
+   Grid Thumbs (九宫格缩略图，参考旧主题)
+   ========================================================================== */
 .post-card-thumbs {
   display: grid;
   gap: 8px;
   margin-top: 1rem;
   margin-bottom: 1.5rem;
   max-width: 320px;
-  /* PC 端限制宽度，不撑满 */
+  /* 限制九宫格最大宽度 */
 }
 
-/* 根据图片数量动态调整布局列数 */
 .post-card-thumbs.grid-1 {
   grid-template-columns: 1fr;
 }
@@ -729,20 +629,19 @@ a:hover {
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* 3D 玻璃风格缩略图 */
 .post-thumb-item {
   aspect-ratio: 1 / 1;
   width: 100%;
-  border: 2px solid #0099ff;
+  border: 2px solid var(--primary-blue);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 3px 3px 0 rgba(0, 153, 255, 0.08);
+  box-shadow: 3px 3px 0 rgba(var(--primary-blue-rgb), 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* 1张图时适中的尺寸 */
+/* 单张图限宽高度 */
 .post-card-thumbs.grid-1 .post-thumb-item {
   width: 150px;
   height: 150px;
@@ -750,7 +649,7 @@ a:hover {
 
 .post-thumb-item:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 rgba(0, 153, 255, 0.15);
+  box-shadow: 5px 5px 0 rgba(var(--primary-blue-rgb), 0.15);
 }
 
 .post-thumb-item img {
@@ -760,213 +659,386 @@ a:hover {
   display: block;
 }
 
-/* =========================================
-   响应式设计与交互
-========================================= */
-
-/* 移动端菜单按钮 (默认隐藏，仅手机端显示) */
-.mobile-menu-btn {
-  display: none;
+/* ==========================================================================
+   Archive & Pagination System (归档与分页)
+   ========================================================================== */
+.archive-list {
+  display: flex;
   flex-direction: column;
-  gap: 6px;
-  cursor: pointer;
-  padding: 15px;
-  margin-top: 15px;
+  gap: 15px;
+  margin-top: 25px;
 }
 
-.hamburger-line {
-  width: 30px;
-  height: 4px;
-  background: #0099ff;
-  border-radius: 2px;
+.archive-year {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--primary-blue);
+  margin-top: 20px;
 }
 
-.bottom-nav {
-  display: none;
+.archive-item {
+  display: flex;
+  gap: 20px;
+  font-size: 1.05rem;
+  align-items: center;
 }
 
-@media screen and (max-width: 768px) {
-  .isometric-container {
-    flex-direction: column;
-    /* 手机端改回垂直排列 */
+.archive-date {
+  color: #999999;
+}
+
+.archive-post-title {
+  color: var(--text-gray);
+}
+
+.archive-post-title:hover {
+  color: var(--primary-blue);
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  background: var(--card-bg);
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--card-border);
+}
+
+.pagination a,
+.pagination span {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #666666;
+}
+
+.pagination .current {
+  background: var(--primary-blue);
+  color: #ffffff;
+}
+
+/* 页脚 */
+.footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--card-border);
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999999;
+}
+
+.footer-btn-container {
+  margin-bottom: 12px;
+}
+
+.footer-btn-rect {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1.5px solid var(--primary-blue);
+  color: var(--primary-blue);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.footer-btn-rect:hover {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+.footer-miao-link {
+  margin-bottom: 6px;
+}
+
+.footer-miao-link a {
+  color: #777777;
+}
+
+/* ==========================================================================
+   Responsive Adaptations (移动端媒体查询适配)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  .content-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 3rem;
   }
 
-  /* 隐藏左侧侧边栏和按钮 */
-  .sidebar-wall,
-  .mobile-menu-btn {
-    display: none !important;
-  }
-
-  /* 3D 墙角适配：隐藏左墙，保留并铺满整个屏幕宽度 */
-  .left-wall-front,
-  .left-wall-top {
-    display: none;
-  }
-
-  .right-wall-front {
-    left: 0;
-    width: 100%;
-    /* 恢复墙壁底部的正确高度，防止内部元素被过度裁切 */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
-  }
-
-  /* 调整 Logo 在右墙面上的位置 */
-  .site-title-container {
-    top: 12vh;
-    /* 向上移动一点，确保在可视区 */
-    left: 20px;
-    /* 相对于 right-wall-front 的左边缘 */
-    transform: rotate(8deg) skewX(-15deg) scale(0.7);
-    transform-origin: left top;
-  }
-
-  .whale-bg-container {
-    left: auto;
-    right: 5vw;
-    /* 靠右对齐 */
-    top: 5vh;
-    width: 65vw;
-    height: 35vh;
-    transform: scale(0.7);
-    transform-origin: right top;
-  }
-
-  /* 文章主区域占满屏幕宽度，并在底部留出给底栏的 padding */
-  .main-content {
-    flex: 1;
-    margin-left: 0;
-    padding: 25vh 5vw 120px 5vw;
+  /* 移动端偶数卡片保持缩进效果 */
+  .post-card:nth-child(even) {
+    margin-left: 5vw !important;
   }
 
   .post-card {
-    margin-left: 0 !important;
-    padding: 1.2rem;
-    background: transparent;
+    /*     background: rgba(255, 255, 255, 0.7);
+    border: 1.5px solid rgba(229, 110, 76, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); */
+    padding: 0;
+    margin-bottom: 2rem;
   }
 
-  .post-card::before {
-    display: none;
+  .post-card-body {
+    padding: 25px 20px;
   }
 
-  /* 在手机端保留桌面效果，但缩小左侧 X 坐标防止过于侵占屏幕 */
-  .card-floor {
-    clip-path: polygon(80px 100%,
-        180px calc(100% - 120px),
-        calc(100% - 120px) calc(100% - 80px),
-        calc(100% - 160px) 100%);
+  .post-card:hover {
+    transform: translateY(-4px);
+    /* box-shadow: 0 10px 30px rgba(var(--primary-blue-rgb), 0.06) */
+    ;
   }
 
-  .glass-reflection {
-    display: none;
+  /* 移动端插画自适应 */
+  .sitting-boy-bg {
+    position: fixed;
+    bottom: -5vh;
+    right: -15vw;
+    left: auto;
+    transform: none;
+    width: 90vw;
+    opacity: 0.15;
   }
 
-  /* 移动端字体自适应精致调优 */
+  .sniper-boy-fg {
+    position: fixed;
+    left: 0;
+    /* 与可视区左边界对齐 */
+    top: 0;
+    width: auto;
+    height: 100vh;
+    max-width: none;
+    z-index: 1;
+    /* 独立层叠上下文，人物在文章下方 */
+  }
+
+  .sniper-boy-fg img {
+    height: 100vh !important;
+    width: auto !important;
+  }
+
+  /* 右侧主要内容区域 */
+  .main-content {
+    margin-left: 0;
+    width: 100vw;
+    padding: 180px 20px 40px 20px;
+  }
+
   .post-card-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.4;
-  }
-
-  .post-card-meta {
-    gap: 1rem;
-    font-size: 0.85rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .post-card-excerpt,
-  .post-card-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.2rem;
-  }
-
-  .post-title {
-    font-size: 1.7rem;
-  }
-
-  .post-content {
-    font-size: 1.0rem;
-    line-height: 1.7;
-  }
-
-  .archive-title {
     font-size: 1.6rem;
   }
 
-  .archive-year {
-    font-size: 1.3rem;
-  }
-
-  .post-card-thumbs {
-    gap: 6px;
-    margin-bottom: 1.2rem;
-    max-width: 100% !important;
-  }
-
-  .post-card-thumbs.grid-2,
-  .post-card-thumbs.grid-4 {
-    max-width: 100% !important;
-  }
-
-  .post-card-thumbs.grid-1 .post-thumb-item {
-    width: 200px;
-    height: 200px;
-  }
-
-  /* 移动端底部导航栏样式 */
-  .bottom-nav {
-    display: flex;
+  /* 移动端恢复 fixed 脱离文档流 */
+  .sidebar-wall {
     position: fixed;
+    top: auto;
     bottom: 0;
     left: 0;
-    right: 0;
-    height: 49px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-    z-index: 999;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: env(safe-area-inset-bottom);
+    width: 100vw;
+    height: 100px;
+    pointer-events: none;
+    z-index: 15;
+    /* 确保移动端控制按钮依然在最上层 */
   }
 
-  @supports (padding-bottom: env(safe-area-inset-bottom)) {
-    .bottom-nav {
-      height: calc(49px + env(safe-area-inset-bottom));
-    }
+  .sidebar-circle-container {
+    pointer-events: auto;
+    width: 100px;
+    height: 100px;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    transform: none;
   }
 
-  .bottom-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    height: 100%;
-    color: #888888;
-    text-decoration: none;
-    font-size: 0.65rem;
-    transition: all 0.2s ease;
-  }
-
-  .bottom-nav-icon {
+  /* 默认收缩的圆点 */
+  .sidebar-circle-main {
+    left: 20px;
+    top: auto;
+    bottom: 20px;
     width: 28px;
     height: 28px;
-    margin-bottom: 1px;
-    transition: transform 0.2s ease;
+    transform: none;
+    border-radius: 50%;
+    background-color: var(--primary-blue-alpha);
+    mix-blend-mode: normal;
+    /* 移动端不采用 mix-blend-mode */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(var(--primary-blue-rgb), 0.3);
   }
 
-  .bottom-nav-text {
-    font-weight: 500;
+  .border-line-1 {
+    left: 14px;
+    top: auto;
+    bottom: 14px;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(var(--primary-blue-rgb), 0.45);
+    border-radius: 50%;
+    transform: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  .bottom-nav-item.active {
-    color: #0099ff;
+  .border-line-2 {
+    left: 8px;
+    top: auto;
+    bottom: 8px;
+    width: 52px;
+    height: 52px;
+    border: 1.5px solid rgba(var(--primary-blue-rgb), 0.3);
+    border-radius: 50%;
+    transform: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  .bottom-nav-item.active .bottom-nav-icon {
-    transform: translateY(-2px);
+  .sidebar-center-indicator {
+    display: none;
+  }
+
+  /* 展开时显示三角形指示器（固定在 1/4 圆弧的中线 -45° 处） */
+  .sidebar-wall.expanded .sidebar-center-indicator {
+    display: block;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    font-size: 1.2rem;
+    transform-origin: 50% 50%;
+    /* 原点在屏幕左下角(0,0)，中线角度45度，距离外侧往内约60px(总半径约245-60=185px)，指尖自然指向原点 */
+    transform: rotate(-45deg) translateX(180px) translateY(0px);
+  }
+
+  .nav-menu {
+    right: auto;
+    left: -200px;
+    top: auto;
+    bottom: -200px;
+    width: auto;
+    height: auto;
+    transform: none;
+    transition: all 0.4s ease;
+  }
+
+  .nav-list,
+  .nav-list.active-index-0,
+  .nav-list.active-index-1,
+  .nav-list.active-index-2 {
+    position: absolute;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-item {
+    position: absolute;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    margin-bottom: 0;
+  }
+
+  /* 移动端极坐标体系由 JS 计算并直接注入内联样式，移除原有的 !important 限制 */
+  .nav-link {
+    font-size: 1.3rem !important;
+    color: #ffffff;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .nav-item.active .nav-link {
+    font-size: 1.3rem !important;
+  }
+
+  /* 展开状态 */
+  .sidebar-wall.expanded .sidebar-circle-container {
+    width: 320px;
+    height: 320px;
+  }
+
+  .sidebar-wall.expanded .sidebar-circle-main {
+    left: -100px;
+    top: auto;
+    bottom: -100px;
+    width: 320px;
+    height: 320px;
+    background-color: var(--primary-blue-alpha);
+    box-shadow: 0 4px 20px rgba(var(--primary-blue-rgb), 0.2);
+    border-radius: 50%;
+  }
+
+  .sidebar-wall.expanded .border-line-1 {
+    left: -110px;
+    top: auto;
+    bottom: -110px;
+    width: 340px;
+    height: 340px;
+    transform: none;
+    border-radius: 50%;
+  }
+
+  .sidebar-wall.expanded .border-line-2 {
+    left: -120px;
+    top: auto;
+    bottom: -120px;
+    width: 360px;
+    height: 360px;
+    transform: none;
+    border-radius: 50%;
+  }
+
+  /* 展开时 nav-menu 必须定位到紫色背景圆的视觉中心！
+     .sidebar-circle-main 的左下角是 -100px，宽高 320px，所以中心在 60px。 */
+  .sidebar-wall.expanded .nav-menu {
+    left: 60px;
+    top: auto;
+    bottom: 60px;
+  }
+
+  .sidebar-wall.expanded .nav-list {
+    top: 260px;
+    bottom: auto;
+  }
+
+  .sidebar-wall.expanded .nav-list {
+    transform: none !important;
+    /* 保证极坐标系初始状态为正向 */
+    left: 0 !important;
+    top: 0 !important;
+    bottom: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .sidebar-wall.expanded .nav-list li {
+    position: absolute !important;
+    transform-origin: 0 50% !important;
+    /* 将旋转基点设为左侧中点，配合 translateY(-50%) 实现完美几何对齐 */
+    left: 0 !important;
+    top: 0 !important;
+    bottom: auto !important;
+  }
+
+  .sidebar-wall.expanded .nav-link {
+    transform: none !important;
+  }
+
+  .sidebar-wall.expanded .nav-item.active .nav-link {
+    font-size: 1.6rem !important;
   }
 }

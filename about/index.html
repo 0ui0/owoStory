@@ -17,75 +17,94 @@
 
 
 
-
-
+  
+  <style>
+    :root {
+      --primary-blue: #746FDF !important;
+      --primary-blue-rgb: 116,111,223 !important;
+      --primary-blue-alpha: rgba(116,111,223, 0.7) !important;
+      --border-blue-alpha: rgba(116,111,223, 0.2) !important;
+    }
+    
+      
+        @media (min-width: 769px) {
+          .sitting-boy-bg {
+            left: 32vw !important;
+            width: 68vw !important;
+            bottom: 0px !important;
+            opacity: 0.12 !important;
+          }
+        }
+      
+      
+        @media (max-width: 768px) {
+          .sitting-boy-bg {
+            left: 0vw !important;
+            right: 0vw !important;
+            bottom: -5vh !important;
+            width: 100vw !important;
+            opacity: 0.15 !important;
+          }
+        }
+      
+    
+  </style>
 <meta name="generator" content="Hexo 8.1.2"></head>
 <body>
-  <!-- 3D 内凹墙角 /|\ 架构背景 -->
-  <div class="room-3d-corner">
-    <!-- 右墙正面 (灰色梯形) -->
-    <div class="right-wall-front">
-      <!-- 网站 Logo 放在右墙面上，鲸鱼的左侧 -->
-      <div class="site-title-container">
-        <a href="/" class="site-title">
-          <span class="title-miao">喵</span><span class="title-zhai">宅</span><span class="title-houyuan">后院</span>
-        </a>
-      </div>
-      <!-- 鲸鱼背景 -->
-      <div class="whale-bg-container"></div>
-    </div>
-    
-    <!-- 左墙正面 (灰色平行四边形) -->
-    <div class="left-wall-front"></div>
-    <!-- 左墙顶部 (蓝色三角形) -->
-    <div class="left-wall-top"></div>
+  <!-- 背景插画：坐着的少年 (置于最底层) -->
+  <div class="sitting-boy-bg">
+    <img src="/images/scaramouche-bg.png" alt="Sitting Character">
   </div>
 
-  <div class="isometric-container">
-    <!-- 导航栏区域 (位于左半部分) -->
-    <header class="sidebar-wall" id="sidebar-wall">
-  <div class="sidebar-inner">
-    <!-- 移动端迷你菜单按钮 -->
-    <div class="mobile-menu-btn" id="mobile-menu-btn">
-      <div class="hamburger-line"></div>
-      <div class="hamburger-line"></div>
-      <div class="hamburger-line"></div>
-    </div>
+  <!-- 前景插画：狙击枪的少年 (独立层叠上下文，不受 sidebar-wall 约束，移动端专用) -->
+  
+  <div class="sniper-boy-fg mobile-only-boy" style="left: 0vh;height: 100vh;bottom: 0px;">
+    <img src="/images/scaramouche-fg3.png" alt="Foreground Character">
+  </div>
 
+  <!-- 主页面容器 -->
+  <div class="app-container">
+    <!-- 侧边栏/半圆轮盘导航 -->
+    <header class="sidebar-wall" id="sidebar-wall">
+  <!-- PC 端专用人物，与蓝圆共处于同一层叠上下文以实现 mix-blend-mode -->
+  
+  <div class="sniper-boy-fg pc-only-boy" style="left: 30vh;height: 95vh;bottom: 0px;">
+    <img src="/images/scaramouche-fg3.png" alt="Foreground Character">
+  </div>
+  <div class="sidebar-circle-container" id="sidebar-trigger">
+    <!-- 大半圆 (PC端不透明+混合模式，移动端半透明) -->
+    <div class="sidebar-circle-main"></div>
+    
+    <!-- 2条环绕边线 -->
+    <div class="sidebar-border-line border-line-1"></div>
+    <div class="sidebar-border-line border-line-2"></div>
+    
+    <!-- 固定在中间刻度的三角形指示器 -->
+    <div class="sidebar-center-indicator">◀</div>
+    
     <!-- 导航菜单 -->
     <nav class="nav-menu">
-      <ul class="nav-list">
+      
+      <ul class="nav-list active-index-2">
         
-          
-            
-              <li class="nav-item ">
-                
-                    <a href="/" class="nav-link" data-text="首页"><span class="link-text">首页</span></a>
-              </li>
-              
-            
-              <li class="nav-item ">
-                
-                    <a href="/archives/" class="nav-link" data-text="归档"><span class="link-text">归档</span></a>
-              </li>
-              
-            
-              <li class="nav-item active">
-                
-                  <!-- 内联 SVG 确保 100% 渲染立体三角形，避免被背景色或URL转义影响 -->
-                  <div class="nav-3d-wedge-bg">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 150" width="100%" height="100%">
-                      <!-- 蓝色实心正面 (直角三角形 ◣) -->
-                      <polygon points="10,20 10,110 180,110" fill="#0099ff" />
-                      <!-- 底部蓝色镂空底面 -->
-                      <polyline points="10,110 50,140 220,140 180,110" fill="none" stroke="#0099ff" stroke-width="2" />
-                    </svg>
-                  </div>
-                  
-                    <a href="/about/" class="nav-link" data-text="关于"><span class="link-text">关于</span></a>
-              </li>
-              
-                
+          <li class="nav-item ">
+            <a href="/archives" class="nav-link" data-text="归档">
+              <span class="link-text">归档</span>
+            </a>
+          </li>
+        
+          <li class="nav-item ">
+            <a href="/" class="nav-link" data-text="首页">
+              <span class="link-text">首页</span>
+            </a>
+          </li>
+        
+          <li class="nav-item active">
+            <a href="/about" class="nav-link" data-text="关于">
+              <span class="link-text">关于</span>
+            </a>
+          </li>
+        
       </ul>
     </nav>
   </div>
@@ -93,25 +112,81 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var btn = document.getElementById('mobile-menu-btn');
+    var trigger = document.getElementById('sidebar-trigger');
     var wall = document.getElementById('sidebar-wall');
-    if (btn && wall) {
-      btn.addEventListener('click', function () {
-        wall.classList.toggle('expanded');
+    
+    // --- 新增：动态计算手机端导航扇形排版 ---
+    function updateMobileNav() {
+      if (window.innerWidth <= 768) {
+        var navList = document.querySelector('.nav-list');
+        var items = navList ? navList.querySelectorAll('.nav-item') : [];
+        var n = items.length;
+        if (n > 0) {
+          var alpha = 90 / n;
+          var R = 160 * (2 / 3); // 虚拟圆半径为实际圆半径(160)的2/3
+
+          items.forEach(function(item, i) {
+            // 切割扇形，取中线角度 (基于水平0度到垂直90度)
+            var angle = (i + 0.5) * alpha;
+            var rad = angle * Math.PI / 180;
+            
+            // 屏幕左下角(0,0)为原点的绝对坐标
+            var x_screen = R * Math.cos(rad);
+            var y_screen = R * Math.sin(rad);
+            
+            // 转换到 .nav-list 本地坐标 (基于屏幕 60,60 的偏移)
+            var tx = x_screen - 60;
+            var ty = 60 - y_screen; // CSS 中 Y轴向下为正
+            
+            // 平移到交点，由于 CSS 已设置 transform-origin: 0 50%，translateY(-50%) 会精确定位左侧中点
+            item.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) translateY(-50%) rotate(' + (-angle) + 'deg)';
+          });
+        }
+      } else {
+        // PC端清除内联样式
+        document.querySelectorAll('.nav-item').forEach(function(item) {
+          item.style.transform = '';
+        });
+      }
+    }
+    
+    updateMobileNav();
+    window.addEventListener('resize', updateMobileNav);
+    // ----------------------------------------
+
+    if (trigger && wall) {
+      trigger.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+          if (e.target.tagName.toLowerCase() !== 'a' && !e.target.closest('a')) {
+            e.preventDefault();
+            e.stopPropagation();
+            wall.classList.toggle('expanded');
+          }
+        }
       });
     }
   });
 </script>
+
     
-    <!-- 文章区域 (位于右半部分) -->
+    <!-- 右侧主要内容区域 -->
     <main class="main-content">
       <div class="content-container">
-        <article class="post-card page-detail">
-  <div class="glass-reflection"></div>
-  <div class="card-floor"></div>
-  
+        <article class="post-card page-detail decor-corner-tr decor-corner-bl">
   <div class="post-card-body">
     <h1 class="page-title">关于</h1>
+    
+    <!-- 标题下方的非标准直线：半六边形部分靠右，独立颜色，末端大圆环 -->
+    <div class="decor-line-wrapper" style="display: flex; align-items: center; width: 100%; max-width: 400px; margin-bottom: 12px; margin-top: 8px;">
+      <!-- 左侧自适应蓝色直线 -->
+      <div style="flex-grow: 1; height: 1.5px; background-color: #2C77AE;"></div>
+      <!-- 右侧靠右独立的半六边形 + 终点大圆环 -->
+      <svg width="95" height="20" viewBox="0 0 95 20" style="flex-shrink: 0; margin-left: -1px;">
+        <path d="M 0 10 L 5 10 L 11 4 L 26 4 L 32 10 L 40 10 L 46 4 L 61 4 L 67 10 L 78.5 10" fill="none" stroke="#E56E4C" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="85" cy="10" r="6" fill="none" stroke="#2C77AE" stroke-width="2" />
+      </svg>
+    </div>
+
     <div class="post-content">
       <p>这里是<a target="_blank" rel="noopener" href="https://www.o-o.zone/">喵宅苑</a>的后院<br>如果你对这里感兴趣，也许你也会对喵宅苑感兴趣~<br>欢迎来喵宅苑玩耍</p>
 <p><a target="_blank" rel="noopener" href="https://ai.o-o.zone/">宅喵AI终端&#x2F;AIOS</a><br><a target="_blank" rel="noopener" href="https://miao.o-o.zone/">喵空间社区程序</a><br><a target="_blank" rel="noopener" href="https://study.o-o.zone/">高中数学</a><br><a target="_blank" rel="noopener" href="https://hi.o-o.zone/">技术宅社区档案馆</a></p>
@@ -135,37 +210,5 @@
       </div>
     </main>
   </div>
-  
-
-<nav class="bottom-nav">
-  
-    
-      
-      <a href="/" class="bottom-nav-item ">
-        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
-          <g transform="translate(0, 2)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,90 20,75 20,45 35,32.5 65,17.5 80,45 80,75" /><polyline points="35,32.5 50,60 80,45" /><line x1="50" y1="60" x2="50" y2="90" /><line x1="20" y1="45" x2="50" y2="60" /></g>
-        </svg>
-        <span class="bottom-nav-text">首页</span>
-      </a>
-    
-      
-      <a href="/archives/" class="bottom-nav-item ">
-        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
-          <g transform="translate(0, 6)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,80 20,65 20,35 50,50 80,35 80,65" /><line x1="50" y1="80" x2="50" y2="50" /><polyline points="20,35 50,20 80,35" /><polyline points="20,35 5,20 35,5 50,20" /><polyline points="50,20 65,5 95,20 80,35" /></g>
-        </svg>
-        <span class="bottom-nav-text">归档</span>
-      </a>
-    
-      
-      <a href="/about/" class="bottom-nav-item active">
-        <svg class="bottom-nav-icon" viewBox="0 0 100 100" fill="none" stroke="none">
-          <g transform="translate(0, 0)" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><polygon points="50,10 40,15 40,25 50,30 60,25 60,15" /><polyline points="40,15 50,20 60,15" /><line x1="50" y1="20" x2="50" y2="30" /><polygon points="50,35 40,40 40,80 50,85 60,80 60,40" /><polyline points="40,40 50,45 60,40" /><line x1="50" y1="45" x2="50" y2="85" /></g>
-        </svg>
-        <span class="bottom-nav-text">关于</span>
-      </a>
-    
-  
-</nav>
-
 </body>
 </html>
