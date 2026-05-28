@@ -1,9 +1,8 @@
 <header class="sidebar-wall" id="sidebar-wall">
-  <!-- 前景插画：放入 header 内部，使其与导航栏、蓝色半圆处于同一个局部层叠上下文，从而让 multiply 正常混色且 boy 居于两者中间！ -->
-  <div class="sniper-boy-fg">
+  <!-- PC 端专用人物，与蓝圆共处于同一层叠上下文以实现 mix-blend-mode -->
+  <div class="sniper-boy-fg pc-only-boy">
     <img src="<%- url_for('images/sniper-boy.svg') %>" alt="Sniper Boy">
   </div>
-
   <div class="sidebar-circle-container" id="sidebar-trigger">
     <!-- 大半圆 (PC端不透明+混合模式，移动端半透明) -->
     <div class="sidebar-circle-main"></div>

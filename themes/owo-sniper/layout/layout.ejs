@@ -9,7 +9,11 @@
     <img src="<%- url_for('images/sitting-boy.svg') %>" alt="Sitting Boy">
   </div>
 
-  <!-- 前景插画：手持狙击枪的少年已移入 header.ejs 以解决 Safari 的层叠上下文隔离问题 -->
+  <!-- 前景插画：狙击枪的少年 (独立层叠上下文，不受 sidebar-wall 约束，移动端专用) -->
+  <div class="sniper-boy-fg mobile-only-boy">
+    <img src="<%- url_for('images/sniper-boy.svg') %>" alt="Sniper Boy">
+  </div>
+
   <!-- 主页面容器 -->
   <div class="app-container">
     <!-- 侧边栏/半圆轮盘导航 -->
