@@ -1042,3 +1042,30 @@ a:hover {
     font-size: 1.6rem !important;
   }
 }
+
+/* ==========================================================================
+   Image Previewer System (Viewer.js 定制毛玻璃样式)
+   ========================================================================== */
+.viewer-backdrop {
+  background-color: rgba(10, 15, 25, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.viewer-button {
+  background-color: rgba(var(--primary-blue-rgb), 0.5) !important;
+  transition: background-color 0.25s ease !important;
+}
+
+.viewer-button:hover {
+  background-color: var(--primary-blue) !important;
+}
+
+.viewer-toolbar > ul > li {
+  background-color: rgba(var(--primary-blue-rgb), 0.3) !important;
+  transition: background-color 0.25s ease !important;
+}
+
+.viewer-toolbar > ul > li:hover {
+  background-color: var(--primary-blue) !important;
+}

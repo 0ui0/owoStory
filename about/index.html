@@ -18,6 +18,9 @@
 
 
   
+<link rel="stylesheet" href="/css/viewer.min.css">
+
+  
   <style>
     :root {
       --primary-blue: #746FDF !important;
@@ -210,5 +213,51 @@
       </div>
     </main>
   </div>
+
+  <script src="/js/viewer.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 拦截九宫格 <a> 标签的默认在新窗口打开大图行为，改为触发内部图片的 click 激活 Viewer.js
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('.post-thumb-link');
+        if (link) {
+          e.preventDefault();
+          var img = link.querySelector('img');
+          if (img) {
+            img.click();
+          }
+        }
+      });
+
+      // 初始化 Viewer.js
+      var containers = document.querySelectorAll('.post-content, .post-card-excerpt, .post-card-thumbs');
+      containers.forEach(function(container) {
+        new Viewer(container, {
+          // 仅过滤出文章内容或摘要中的大图，排除立绘与背景小图标
+          filter: function(image) {
+            return !image.closest('.sniper-boy-fg') && !image.closest('.sitting-boy-bg');
+          },
+          // 适应屏幕模式
+          viewMode: 1, 
+          // 允许放大至 10 倍，便于看清长图小字
+          maxZoomRatio: 10,
+          minZoomRatio: 0.1,
+          // 工具栏配置：显示全部实用的缩放、旋转和翻转功能
+          toolbar: {
+            zoomIn: 1,
+            zoomOut: 1,
+            oneToOne: 1,
+            reset: 1,
+            prev: 1,
+            next: 1,
+            rotateLeft: 1,
+            rotateRight: 1,
+            flipHorizontal: 1,
+            flipVertical: 1
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
