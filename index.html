@@ -52,7 +52,119 @@
       
     
   </style>
-<meta name="generator" content="Hexo 8.1.2"></head>
+<meta name="generator" content="Hexo 8.1.2"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 <body>
   <!-- 背景插画：坐着的少年 (置于最底层) -->
   <div class="sitting-boy-bg">
@@ -180,6 +292,68 @@
     <article class="post-card decor-corner-tr">
       <div class="post-card-body">
         <h2 class="post-card-title">
+          <a href="/2026/10/14/%E5%87%BD%E6%95%B0%E5%90%8D%E5%8F%AA%E6%98%AF%E4%BB%A3%E5%8F%B7-%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0%E4%B8%8E%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99/">函数名只是代号：复合函数与链式法则</a>
+        </h2>
+        
+        <!-- 标题下方的非标准直线：半六边形部分靠右，独立颜色，末端大圆环 -->
+        <div class="decor-line-wrapper" style="display: flex; align-items: center; width: 100%; max-width: 400px; margin-bottom: 12px; margin-top: 8px;">
+          <!-- 左侧自适应蓝色直线 -->
+          <div style="flex-grow: 1; height: 1.5px; background-color: var(--primary-blue);"></div>
+          <!-- 右侧靠右独立的半六边形 + 终点大圆环 -->
+          <svg width="95" height="20" viewBox="0 0 95 20" style="flex-shrink: 0; margin-left: -1px;">
+            <path d="M 0 10 L 5 10 L 11 4 L 26 4 L 32 10 L 40 10 L 46 4 L 61 4 L 67 10 L 78.5 10" fill="none" stroke="#E56E4C" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="85" cy="10" r="6" fill="none" stroke="var(--primary-blue)" stroke-width="2" />
+          </svg>
+        </div>
+
+        <!-- 装饰线下面直接是元数据 -->
+        <div class="post-card-meta">
+          <span class="post-date">
+            <i class="far fa-calendar-alt"></i>
+            2026-10-14
+          </span>
+          
+            <span class="post-categories">
+              <i class="far fa-folder-open"></i>
+              
+                <a href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+              
+            </span>
+          
+          
+            <span class="post-tags">
+              <i class="fas fa-tags"></i>
+              
+                <a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/">微积分</a>
+              
+                <a href="/tags/%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0/">复合函数</a>
+              
+                <a href="/tags/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99/">链式法则</a>
+              
+            </span>
+          
+        </div>
+        
+        <!-- 缩略图列表 -->
+        
+
+
+        
+        
+          <div class="post-card-excerpt">
+            我们明确2个概念函数定义，必须写成  的形式，其中  是自变量参数，这里  可以换成任何字母函数求值（函数运行） 必须写成 的形式，其中  是参数， 会输出一个具体的值，我们如果把它记作 这里的  和 ，名字上没有任何联系，你哪怕把  写成 ，也不是定义处的那个参数 函数只认位置，只要你把参数写在相...
+          </div>
+        
+        
+        <a href="/2026/10/14/%E5%87%BD%E6%95%B0%E5%90%8D%E5%8F%AA%E6%98%AF%E4%BB%A3%E5%8F%B7-%E5%A4%8D%E5%90%88%E5%87%BD%E6%95%B0%E4%B8%8E%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99/" class="read-more">
+          「阅读全文」
+        </a>
+      </div>
+    </article>
+  
+    <article class="post-card decor-corner-bl">
+      <div class="post-card-body">
+        <h2 class="post-card-title">
           <a href="/2026/07/02/%E5%85%B3%E4%BA%8E%E5%8C%BB%E9%99%A2%E7%9A%84%E6%A3%80%E6%9F%A5/">关于医院的检查</a>
         </h2>
         
@@ -236,7 +410,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-bl">
+    <article class="post-card decor-corner-tr">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2026/05/26/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E8%AE%B0%E5%BF%86%E4%BA%94%E7%BA%BF%E8%B0%B1/">如何快速记忆五线谱</a>
@@ -310,7 +484,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-tr">
+    <article class="post-card decor-corner-bl">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2026/05/06/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86%E5%9B%BE/">二项式定理图</a>
@@ -380,7 +554,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-bl">
+    <article class="post-card decor-corner-tr">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2026/03/04/%E8%BF%99%E9%81%93%E6%95%B0%E5%AD%A6%E9%A2%98%E8%A2%AB%E6%88%91%E6%8C%96%E5%9D%9F%E4%BA%86%E6%97%A0%E6%95%B0%E6%AC%A1/">这道数学题被我挖坟了无数次</a>
@@ -451,7 +625,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-tr">
+    <article class="post-card decor-corner-bl">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2026/03/03/%E5%85%B3%E4%BA%8E%E8%BF%87%E5%8E%BB%E6%88%91%E5%AF%B9%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9A%84%E7%8C%9C%E6%B5%8B/">关于过去我对人工智能的猜测</a>
@@ -511,7 +685,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-bl">
+    <article class="post-card decor-corner-tr">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2026/01/29/(%E8%A1%A5)%E5%AF%B9%E6%9E%81%E9%99%90%E7%9A%84%E7%90%86%E8%A7%A3/">(补)对极限的理解</a>
@@ -571,7 +745,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-tr">
+    <article class="post-card decor-corner-bl">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2026/01/09/%E5%85%B3%E4%BA%8E%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E7%9A%84%E6%80%9D%E7%BB%B4%E8%B7%AF%E7%BA%BF/">关于高等数学的思维路线</a>
@@ -670,7 +844,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-bl">
+    <article class="post-card decor-corner-tr">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2025/12/29/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E8%A7%89%E5%BE%97%E4%B8%AD%E5%8C%BB%E6%B2%A1%E7%94%A8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E5%8F%88%E8%A7%89%E5%BE%97%E4%B8%AD%E5%8C%BB%E6%9C%89%E7%94%A8/">为什么你觉得中医没用，为什么你又觉得中医有用</a>
@@ -730,7 +904,7 @@
       </div>
     </article>
   
-    <article class="post-card decor-corner-tr">
+    <article class="post-card decor-corner-bl">
       <div class="post-card-body">
         <h2 class="post-card-title">
           <a href="/2025/11/07/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E7%BB%B4%E7%9A%84%E5%B9%BF%E4%B9%89%E5%BA%94%E7%94%A8/">面向对象思维的广义应用</a>
@@ -785,66 +959,6 @@
         
         
         <a href="/2025/11/07/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E7%BB%B4%E7%9A%84%E5%B9%BF%E4%B9%89%E5%BA%94%E7%94%A8/" class="read-more">
-          「阅读全文」
-        </a>
-      </div>
-    </article>
-  
-    <article class="post-card decor-corner-bl">
-      <div class="post-card-body">
-        <h2 class="post-card-title">
-          <a href="/2025/10/22/%E5%8F%8D%E5%A4%8D%E6%A2%A6%E5%88%B0%E7%9A%84%E5%9C%BA%E6%99%AF/">反复梦到的场景</a>
-        </h2>
-        
-        <!-- 标题下方的非标准直线：半六边形部分靠右，独立颜色，末端大圆环 -->
-        <div class="decor-line-wrapper" style="display: flex; align-items: center; width: 100%; max-width: 400px; margin-bottom: 12px; margin-top: 8px;">
-          <!-- 左侧自适应蓝色直线 -->
-          <div style="flex-grow: 1; height: 1.5px; background-color: var(--primary-blue);"></div>
-          <!-- 右侧靠右独立的半六边形 + 终点大圆环 -->
-          <svg width="95" height="20" viewBox="0 0 95 20" style="flex-shrink: 0; margin-left: -1px;">
-            <path d="M 0 10 L 5 10 L 11 4 L 26 4 L 32 10 L 40 10 L 46 4 L 61 4 L 67 10 L 78.5 10" fill="none" stroke="#E56E4C" stroke-width="1.5" stroke-linejoin="round"/>
-            <circle cx="85" cy="10" r="6" fill="none" stroke="var(--primary-blue)" stroke-width="2" />
-          </svg>
-        </div>
-
-        <!-- 装饰线下面直接是元数据 -->
-        <div class="post-card-meta">
-          <span class="post-date">
-            <i class="far fa-calendar-alt"></i>
-            2025-10-22
-          </span>
-          
-            <span class="post-categories">
-              <i class="far fa-folder-open"></i>
-              
-                <a href="/categories/%E6%9D%A5%E8%87%AAQQ%E7%A9%BA%E9%97%B4/">来自QQ空间</a>
-              
-            </span>
-          
-          
-            <span class="post-tags">
-              <i class="fas fa-tags"></i>
-              
-                <a href="/tags/QQ%E7%A9%BA%E9%97%B4%E8%BF%81%E7%A7%BB/">QQ空间迁移</a>
-              
-            </span>
-          
-        </div>
-        
-        <!-- 缩略图列表 -->
-        
-
-
-        
-        
-          <div class="post-card-excerpt">
-            
-
-又梦见那栋诡异的房子了看起来是个简单的娱乐会所，通过电梯前往不同的楼层，有很多部奇怪的电梯其中1楼是接待大厅2到6楼是各种正常的商业设施和客房12楼是总办公室……正常的电梯能直达1到6楼，以及12楼楼梯只能前往1到6楼但是如果因为某种原因不小心前往了地下一楼这里是炼狱，从踏入的一刻起就被关在里面...
-          </div>
-        
-        
-        <a href="/2025/10/22/%E5%8F%8D%E5%A4%8D%E6%A2%A6%E5%88%B0%E7%9A%84%E5%9C%BA%E6%99%AF/" class="read-more">
           「阅读全文」
         </a>
       </div>
